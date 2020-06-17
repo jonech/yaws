@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json;
+
+namespace Shared.Entity
+{
+    public class Arbitration
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("expiry")]
+        public DateTime Expiry { get; set; }
+
+        [JsonProperty("activation")]
+        public DateTime Activation { get; set; }
+
+        [JsonProperty("enemy")]
+        public string Enemy { get; set; }
+
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+        [JsonProperty("archwing")]
+        public bool IsArchwing { get; set; }
+
+        [JsonProperty("sharkwing")]
+        public bool IsSharkwing { get; set; }
+
+        [JsonProperty("node")]
+        public string Node { get; set; }
+    }
+}
