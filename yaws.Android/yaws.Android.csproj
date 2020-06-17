@@ -129,11 +129,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Service.csproj">
+    <ProjectReference Include="..\Service\Service.csproj">
       <Project>{bb0d557b-4a2b-403c-a757-8787c8ac2a2d}</Project>
       <Name>Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\yaws\Core.csproj">
+    <ProjectReference Include="..\Core\Core.csproj">
       <Project>{5734de58-8007-4ce6-9e7b-951d7ee7614a}</Project>
       <Name>Core</Name>
     </ProjectReference>
