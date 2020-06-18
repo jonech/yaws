@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Service.Entity
 {
-    public class SentientOutpost
+    public class SentientOutpost : IExpirable
     {
         [JsonProperty("id")]
         public string Id { get; set; }

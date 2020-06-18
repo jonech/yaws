@@ -18,38 +18,38 @@ namespace Core.ViewModel
 
         public string Id { get; set; }
 
-        public DateTime Expiry { get; set; }
+        //public DateTime Expiry { get; set; }
 
-        public DateTime Activation { get; set; }
+        //public DateTime Activation { get; set; }
 
-        public IObservable<TimeSpan> TimeLeftObservable { get; private set; }
-        private BehaviorSubject<TimeSpan> timeLeftSubject;
+        //public IObservable<TimeSpan> TimeLeftObservable { get; private set; }
+        //private BehaviorSubject<TimeSpan> timeLeftSubject;
 
-        protected Timer Timer { get; private set; }
+        //protected Timer Timer { get; private set; }
 
-        protected void InitialiseTimer()
-        {
-            Timer = new Timer();
-            Timer.Interval = 1000;
-            Timer.Elapsed += TimerElapsed;
+        //protected void InitialiseTimer()
+        //{
+        //    Timer = new Timer();
+        //    Timer.Interval = 1000;
+        //    Timer.Elapsed += TimerElapsed;
 
-            timeLeftSubject = new BehaviorSubject<TimeSpan>(Expiry - DateTime.UtcNow);
-            TimeLeftObservable = timeLeftSubject.AsObservable();
+        //    timeLeftSubject = new BehaviorSubject<TimeSpan>(Expiry - DateTime.UtcNow);
+        //    TimeLeftObservable = timeLeftSubject.AsObservable();
 
-            Timer.Start();
-        }
+        //    Timer.Start();
+        //}
 
-        private void TimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            timeLeftSubject.OnNext(Expiry - DateTime.UtcNow);
-        }
+        //private void TimerElapsed(object sender, ElapsedEventArgs e)
+        //{
+        //    timeLeftSubject.OnNext(Expiry - DateTime.UtcNow);
+        //}
 
-        public void Dispose()
-        {
-            if (Timer != null)
-                Timer.Dispose();
+        //public void Dispose()
+        //{
+        //    if (Timer != null)
+        //        Timer.Dispose();
 
-            Timer = null;
-        }
+        //    Timer = null;
+        //}
     }
 }

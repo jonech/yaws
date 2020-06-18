@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Service.Entity
 {
-    public class EarthCycle
+    public class EarthCycle : IExpirable
     {
         [JsonProperty("id")]
         public string Id { get; set; }

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Service.Entity
 {
-    public class Invasion
+    public class Invasion : IActivatable
     {
         [JsonProperty("id")]
         public string Id { get; set; }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Service.Entity
 {
-    public class Sortie
+    public class Sortie : IExpirable
     {
         [JsonProperty("id")]
         public string Id { get; set; }

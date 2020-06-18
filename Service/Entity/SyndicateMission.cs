@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Service.Entity
 {
-    public class SyndicateMission
+    public class SyndicateMission : IExpirable
     {
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -32,7 +32,7 @@ namespace Service.Entity
         public List<string> Nodes { get; set; }
 
         [JsonProperty("jobs")]
-        public SyndicateMissionJob Jobs { get; set; }
+        public List<SyndicateMissionJob> Jobs { get; set; }
     }
 
     public class SyndicateMissionJob

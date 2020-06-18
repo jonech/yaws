@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Core.ViewModel
 {
-    public class CetusCycleViewModel : ViewModelBase
+    public class CetusCycleViewModel : ExpirableViewModel
     {
         public override StatType Type => StatType.Cetus;
 
@@ -19,17 +19,14 @@ namespace Core.ViewModel
         public string TimeLeft { get; set; }
 
 
-        public CetusCycleViewModel(CetusCycle cetusCycle)
+        public CetusCycleViewModel(CetusCycle cetusCycle) : base(cetusCycle)
         {
             Id = cetusCycle.Id;
-            Activation = cetusCycle.Activation;
-            Expiry = cetusCycle.Expiry;
-
             IsDay = cetusCycle.IsDay;
             State = cetusCycle.State;
             TimeLeft = cetusCycle.TimeLeft;
 
-            InitialiseTimer();
+            StartTimer();
         }
     }
 }

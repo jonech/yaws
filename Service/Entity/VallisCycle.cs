@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Service.Entity
 {
-    public class VallisCycle
+    public class VallisCycle : IExpirable
     {
         [JsonProperty("id")]
         public string Id { get; set; }

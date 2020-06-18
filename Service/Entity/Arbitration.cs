@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Service.Entity
 {
-    public class Arbitration
+    public class Arbitration : IExpirable
     {
         [JsonProperty("id")]
         public string Id { get; set; }

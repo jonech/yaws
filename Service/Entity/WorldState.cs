@@ -21,5 +21,21 @@ namespace Service.Entity
 
         [JsonProperty("vallisCycle")]
         public VallisCycle VallisCycle { get; set; }
+
+        [JsonProperty("sortie")]
+        public Sortie Sortie { get; set; }
+
+        [JsonProperty("syndicateMissions")]
+        public List<SyndicateMission> SyndicateMissions { get; set; }
+
+        [JsonProperty("fissures")]
+        public List<Fissure> Fissures { get; set; }
+
+        [JsonProperty("invasions")]
+        public List<Invasion> Invasions { get; set; }
+
+        [JsonProperty("nightwave")]
+        public Nightwave Nightwave { get; set; }
+
     }
 }

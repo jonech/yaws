@@ -46,11 +46,11 @@ namespace yaws.Android.Source.Dashboard
 
         public override void Bind(ViewModelBase item)
         {
-            if (item is CetusCycleViewModel)
+            if (item is CetusCycleViewModel model)
             {
                 ClearDisposable();
 
-                viewModel = (CetusCycleViewModel)item;
+                viewModel = model;
 
                 title.Text = "Cetus Cycle";
                 status.Text = viewModel.IsDay ? "Day" : "Night";
