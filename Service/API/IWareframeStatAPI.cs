@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Refit;
-using Shared.Entity;
+using Service.Entity;
 
-namespace Shared.API
+namespace Service.API
 {
     public interface IWareframeStatAPI
     {

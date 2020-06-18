@@ -1,11 +1,11 @@
-﻿using Shared.API;
-using Shared.Entity;
+﻿using Service.API;
+using Service.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DataSource
+namespace Service.DataSource
 {
     public class WorldStateDataSource
     {

@@ -10,8 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Autofac;
-using Shared.DataSource;
-using Shared.API;
+using Service.DataSource;
+using Service.API;
 using Core;
 
 namespace yaws.Android
