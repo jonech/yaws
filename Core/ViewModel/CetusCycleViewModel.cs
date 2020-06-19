@@ -10,7 +10,7 @@ namespace Core.ViewModel
 {
     public class CetusCycleViewModel : ExpirableViewModel
     {
-        public override StatType Type => StatType.Cetus;
+        public override StatType StatType => StatType.CetusCycle;
 
         public bool IsDay { get; set; }
 

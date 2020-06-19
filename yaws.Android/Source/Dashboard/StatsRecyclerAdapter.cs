@@ -11,6 +11,7 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using Core.ViewModel;
+using yaws.Android.Source.Dashboard.ViewHolder;
 
 namespace yaws.Android.Source.Dashboard
 {
@@ -44,6 +45,8 @@ namespace yaws.Android.Source.Dashboard
             {
                 case Resource.Layout.item_cetus_cycle:
                     return new CetusCycleViewHolder(view);
+                case Resource.Layout.item_arbitration:
+                    return new ArbitrationViewHolder(view);
                 default:
                     throw new InvalidOperationException("This type of layout is not supported");
             }
@@ -51,11 +54,13 @@ namespace yaws.Android.Source.Dashboard
 
         public override int GetItemViewType(int position)
         {
-            var type = ItemSource[position].Type;
+            var type = ItemSource[position].StatType;
             switch (type)
             {
-                case StatType.Cetus:
+                case StatType.CetusCycle:
                     return Resource.Layout.item_cetus_cycle;
+                case StatType.Arbitration:
+                    return Resource.Layout.item_arbitration;
                 default:
                     return 0;
             }

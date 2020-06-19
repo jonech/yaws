@@ -62,8 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\ArbitrationViewHolder.cs" />
     <Compile Include="Source\Dashboard\StatsRecyclerAdapter.cs" />
-    <Compile Include="Source\Dashboard\StatViewHolder.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\StatViewHolder.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Source\Dashboard\DashboardFragment.cs" />
     <Compile Include="MainViewPagerAdapter.cs" />
@@ -167,6 +168,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icons8_refresh_24dp.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_arbitration.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Reactive.Linq;
 
 using Android.Support.V4.App;
@@ -14,12 +13,13 @@ using Android.Widget;
 using Android.Support.V7.Widget;
 using Autofac;
 using ReactiveUI;
-
 using Core;
 using Core.ViewModel;
+using yaws.Android.Source.Util;
 
 using System.Reactive;
 using Android.Support.V4.Widget;
+using System.Reactive.Threading.Tasks;
 
 namespace yaws.Android.Source.Dashboard
 {
@@ -31,8 +31,6 @@ namespace yaws.Android.Source.Dashboard
         WorldStateRepository wsRepo;
         IDisposable Disposable;
 
-        private ReactiveCommand<Unit, Unit> fetchWorldState;
-
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -42,24 +40,6 @@ namespace yaws.Android.Source.Dashboard
             }
 
             statsRecyclerAdapter = new StatsRecyclerAdapter();
-
-            fetchWorldState = ReactiveCommand.CreateFromTask(async _ =>
-            {
-                try
-                {
-                    var worldState = await wsRepo.GetWorldState();
-                    statsRecyclerAdapter.SetItems(new List<ViewModelBase>
-                    {
-                        worldState.CetusCycle
-                    });
-                }
-                catch (Exception err)
-                {
-                    Toast.MakeText(this.Context, err.ToString(), ToastLength.Short).Show();
-                }
-            });
-
-
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -75,18 +55,13 @@ namespace yaws.Android.Source.Dashboard
             refreshLayout = view.FindViewById<SwipeRefreshLayout>(Resource.Id.swipe_refresh_dashboard);
             refreshLayout.SetOnRefreshListener(this);
 
-            fetchWorldState.IsExecuting.Subscribe(executing =>
-            {
-                refreshLayout.Refreshing = executing;
-            });
-
             return view;
         }
 
         public override void OnStart()
         {
             base.OnStart();
-            fetchWorldState.Execute().Subscribe();
+            FetchData();
         }
 
         public override void OnDestroy()
@@ -97,9 +72,31 @@ namespace yaws.Android.Source.Dashboard
 
         public void OnRefresh()
         {
-            fetchWorldState.Execute().Subscribe();
+            FetchData();
         }
 
-
+        private void FetchData()
+        {
+            refreshLayout.Refreshing = true;
+            Disposable = wsRepo.GetWorldState()
+                .ToObservable()
+                .DoOnBackgroundThenHandleOnUI()
+                .Subscribe((worldState) =>
+                {
+                    statsRecyclerAdapter.SetItems(new List<ViewModelBase>
+                    {
+                        worldState.CetusCycle,
+                        worldState.Arbitration
+                    });
+                },
+                err =>
+                {
+                    Toast.MakeText(this.Context, err.ToString(), ToastLength.Short).Show();
+                },
+                () =>
+                {
+                    refreshLayout.Refreshing = false;
+                });
+        }
     }
 }

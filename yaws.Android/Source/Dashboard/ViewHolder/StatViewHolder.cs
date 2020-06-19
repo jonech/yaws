@@ -13,9 +13,9 @@ using Android.Views;
 using Android.Widget;
 using Core.ViewModel;
 using System.Reactive.Linq;
-using System.Reactive.Concurrency;
+using yaws.Android.Source.Util;
 
-namespace yaws.Android.Source.Dashboard
+namespace yaws.Android.Source.Dashboard.ViewHolder
 {
 
     public abstract class StatViewHolder : RecyclerView.ViewHolder
@@ -35,7 +35,7 @@ namespace yaws.Android.Source.Dashboard
         private readonly TextView status;
 
         private CetusCycleViewModel viewModel;
-        IDisposable Disposable;
+        private IDisposable Disposable;
 
         public CetusCycleViewHolder(View itemView) : base(itemView)
         {
@@ -55,10 +55,12 @@ namespace yaws.Android.Source.Dashboard
                 title.Text = "Cetus Cycle";
                 status.Text = viewModel.IsDay ? "Day" : "Night";
 
-                Disposable = viewModel.TimeLeftObservable.Subscribe(timeLeft =>
-                {
-                    this.timeLeft.Text = $"{timeLeft.Hours}h {timeLeft.Minutes}m {timeLeft.Seconds}s";
-                });
+                Disposable = viewModel.TimeLeftObservable
+                    .DoOnBackgroundThenHandleOnUI()
+                    .Subscribe(timeLeft =>
+                    {
+                        this.timeLeft.Text = $"{timeLeft.Hours}h {timeLeft.Minutes}m {timeLeft.Seconds}s";
+                    });
             }
         }
 
