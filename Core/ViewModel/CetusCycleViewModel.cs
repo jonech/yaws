@@ -11,6 +11,7 @@ namespace Core.ViewModel
     public class CetusCycleViewModel : ExpirableViewModel
     {
         public override StatType StatType => StatType.CetusCycle;
+        public override string Name => "Cetus Cycle";
 
         public bool IsDay { get; set; }
 
@@ -26,7 +27,7 @@ namespace Core.ViewModel
             State = cetusCycle.State;
             TimeLeft = cetusCycle.TimeLeft;
 
-            StartTimer();
+            //StartTimer();
         }
     }
 }

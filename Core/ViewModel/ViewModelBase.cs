@@ -25,6 +25,7 @@ namespace Core.ViewModel
     public abstract class ViewModelBase
     {
         public abstract StatType StatType { get; }
+        public abstract string Name { get; }
 
         public string Id { get; set; }
     }

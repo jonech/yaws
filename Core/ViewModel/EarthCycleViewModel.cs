@@ -8,6 +8,8 @@ namespace Core.ViewModel
     public class EarthCycleViewModel : ExpirableViewModel
     {
         public override StatType StatType => StatType.EarthCycle;
+        public override string Name => "Earth Cycle";
+
         public bool IsDay { get; set; }
         public string State { get; set; }
         public string TimeLeft { get; set; }
@@ -18,8 +20,6 @@ namespace Core.ViewModel
             IsDay = model.IsDay;
             State = model.State;
             TimeLeft = model.TimeLeft;
-
-            StartTimer();
         }
 
     }

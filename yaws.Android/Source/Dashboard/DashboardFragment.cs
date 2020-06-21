@@ -85,8 +85,11 @@ namespace yaws.Android.Source.Dashboard
                 {
                     statsRecyclerAdapter.SetItems(new List<ViewModelBase>
                     {
+                        worldState.EarthCycle,
                         worldState.CetusCycle,
-                        worldState.Arbitration
+                        worldState.VallisCycle,
+                        worldState.Arbitration,
+                        worldState.SentientOutpost
                     });
                 },
                 err =>

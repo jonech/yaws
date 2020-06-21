@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Android.Database;
 using Android.OS;
 using Java.Lang;
+using ReactiveUI;
 
 namespace yaws.Android.Source.Util
 {
@@ -24,6 +25,18 @@ namespace yaws.Android.Source.Util
                 .SubscribeOn(new TaskPoolScheduler(new TaskFactory()))
                 .ObserveOn(new UIThreadScheduler(new Handler(), Thread.CurrentThread().Id));
         }
+
+        /// <summary>
+        /// ObserveOn RxApp.MainThreadScheduler (from ReactiveUI).
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obs"></param>
+        /// <returns></returns>
+        public static IObservable<T> RunOnUI<T>(this IObservable<T> obs)
+        {
+            return obs
+                .ObserveOn(RxApp.MainThreadScheduler);
+        }
     }
 
 
@@ -31,8 +44,11 @@ namespace yaws.Android.Source.Util
     /// HandlerScheduler is a scheduler that schedules items on a running 
     /// Activity's main thread. This is the moral equivalent of 
     /// DispatcherScheduler.
-    /// Source code obtained from https://github.com/jetruby/xamarin-android-ios-example/blob/master/Droid/UiThreadScheduler.cs
     /// </summary>
+    /// <remarks>
+    /// Source code obtained from https://github.com/jetruby/xamarin-android-ios-example/blob/master/Droid/UiThreadScheduler.cs.
+    /// Or possibly from https://github.com/reactiveui/ReactiveUI/blob/main/src/ReactiveUI/Platforms/android/HandlerScheduler.cs.
+    /// </remarks>
     public class UIThreadScheduler : IScheduler
     {
         public static IScheduler MainThreadScheduler = new UIThreadScheduler(new Handler(Looper.MainLooper), Looper.MainLooper.Thread.Id);

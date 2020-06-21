@@ -10,63 +10,40 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Core.ViewModel;
-using yaws.Android.Source.Util;
 
 namespace yaws.Android.Source.Dashboard.ViewHolder
 {
-    public class ArbitrationViewHolder : StatViewHolder
+    public class ArbitrationViewHolder : ExpirableStatViewHolder
     {
-        private readonly TextView title;
-        private readonly TextView timeLeft;
-        private readonly TextView node;
-        private readonly TextView enemy;
-        private readonly TextView type;
-
+        protected TextView NodeTextView;
+        protected TextView EnemyTextView;
+        protected TextView TypeTextView;
 
         private ArbitrationViewModel viewModel;
-        private IDisposable Disposable;
 
         public ArbitrationViewHolder(View itemView) : base(itemView)
         {
-            title = itemView.FindViewById<TextView>(Resource.Id.text_arbi_title);
-            timeLeft = itemView.FindViewById<TextView>(Resource.Id.text_arbi_time_left);
-            node = itemView.FindViewById<TextView>(Resource.Id.text_arbi_node);
-            enemy = itemView.FindViewById<TextView>(Resource.Id.text_arbi_enemy);
-            type = itemView.FindViewById<TextView>(Resource.Id.text_arbi_type);
+            TitleTextView = itemView.FindViewById<TextView>(Resource.Id.text_arbi_title);
+            TimeLeftTextView = itemView.FindViewById<TextView>(Resource.Id.text_arbi_time_left);
+            NodeTextView = itemView.FindViewById<TextView>(Resource.Id.text_arbi_node);
+            EnemyTextView = itemView.FindViewById<TextView>(Resource.Id.text_arbi_enemy);
+            TypeTextView = itemView.FindViewById<TextView>(Resource.Id.text_arbi_type);
         }
 
         public override void Bind(ViewModelBase item)
         {
+            base.Bind(item);
+
             if (item is ArbitrationViewModel model)
             {
-                ClearDisposable();
-
                 viewModel = model;
 
-                title.Text = "Arbitration";
-                node.Text = viewModel.Node;
-                enemy.Text = viewModel.Enemy;
-                type.Text = viewModel.Type;
-
-                Disposable = viewModel.TimeLeftObservable
-                    .DoOnBackgroundThenHandleOnUI()
-                    .Subscribe(timeLeft =>
-                    {
-                        this.timeLeft.Text = $"{timeLeft.Hours}h {timeLeft.Minutes}m {timeLeft.Seconds}s";
-                    });
+                TitleTextView.Text = "Arbitration";
+                NodeTextView.Text = viewModel.Node;
+                EnemyTextView.Text = viewModel.Enemy;
+                TypeTextView.Text = viewModel.Type;
             }
         }
 
-        private void ClearDisposable()
-        {
-            if (viewModel != null)
-                viewModel.Dispose();
-
-            if (Disposable != null)
-            {
-                Disposable.Dispose();
-                Disposable = null;
-            }
-        }
     }
 }

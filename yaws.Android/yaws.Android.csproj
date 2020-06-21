@@ -64,12 +64,16 @@
     <Compile Include="App.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\ArbitrationViewHolder.cs" />
     <Compile Include="Source\Dashboard\StatsRecyclerAdapter.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\CetusCycleViewHolder.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\EarthCycleViewHolder.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\SentientOutpostViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\StatViewHolder.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Source\Dashboard\DashboardFragment.cs" />
     <Compile Include="MainViewPagerAdapter.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\VallisCycleViewHolder.cs" />
     <Compile Include="Source\Setting\SettingFragment.cs" />
     <Compile Include="Source\Util\UIThreadScheduler.cs" />
   </ItemGroup>
@@ -171,6 +175,21 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\item_arbitration.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_vallis_cycle.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_earth_cycle.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_sentient_outpost.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

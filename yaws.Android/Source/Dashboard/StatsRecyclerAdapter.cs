@@ -47,6 +47,12 @@ namespace yaws.Android.Source.Dashboard
                     return new CetusCycleViewHolder(view);
                 case Resource.Layout.item_arbitration:
                     return new ArbitrationViewHolder(view);
+                case Resource.Layout.item_earth_cycle:
+                    return new EarthCycleViewHolder(view);
+                case Resource.Layout.item_vallis_cycle:
+                    return new VallisCycleViewHolder(view);
+                case Resource.Layout.item_sentient_outpost:
+                    return new SentientOutpostViewHolder(view);
                 default:
                     throw new InvalidOperationException("This type of layout is not supported");
             }
@@ -61,6 +67,12 @@ namespace yaws.Android.Source.Dashboard
                     return Resource.Layout.item_cetus_cycle;
                 case StatType.Arbitration:
                     return Resource.Layout.item_arbitration;
+                case StatType.VallisCycle:
+                    return Resource.Layout.item_vallis_cycle;
+                case StatType.EarthCycle:
+                    return Resource.Layout.item_earth_cycle;
+                case StatType.SentientOutpost:
+                    return Resource.Layout.item_sentient_outpost;
                 default:
                     return 0;
             }

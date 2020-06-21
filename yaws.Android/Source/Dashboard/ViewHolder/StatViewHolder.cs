@@ -20,6 +20,8 @@ namespace yaws.Android.Source.Dashboard.ViewHolder
 
     public abstract class StatViewHolder : RecyclerView.ViewHolder
     {
+        public TextView TitleTextView { get; protected set; }
+
         protected StatViewHolder(View itemView) : base(itemView)
         {
         }
@@ -27,48 +29,42 @@ namespace yaws.Android.Source.Dashboard.ViewHolder
         public abstract void Bind(ViewModelBase item);
     }
 
-
-    public class CetusCycleViewHolder : StatViewHolder
+    public class ExpirableStatViewHolder : StatViewHolder
     {
-        private readonly TextView title;
-        private readonly TextView timeLeft;
-        private readonly TextView status;
+        public TextView TimeLeftTextView { get; protected set; }
+        protected IDisposable Disposable;
 
-        private CetusCycleViewModel viewModel;
-        private IDisposable Disposable;
-
-        public CetusCycleViewHolder(View itemView) : base(itemView)
+        public ExpirableStatViewHolder(View itemView) : base(itemView)
         {
-            title = itemView.FindViewById<TextView>(Resource.Id.text_cetus);
-            timeLeft = itemView.FindViewById<TextView>(Resource.Id.text_cetus_time_left);
-            status = itemView.FindViewById<TextView>(Resource.Id.text_cetus_status);
         }
 
         public override void Bind(ViewModelBase item)
         {
-            if (item is CetusCycleViewModel model)
+            if (item is ExpirableViewModel model)
             {
-                ClearDisposable();
+                if (TitleTextView != null)
+                {
+                    TitleTextView.Text = model.Name;
+                }
 
-                viewModel = model;
+                if (TimeLeftTextView != null)
+                {
+                    ClearDisposable();
 
-                title.Text = "Cetus Cycle";
-                status.Text = viewModel.IsDay ? "Day" : "Night";
+                    this.TimeLeftTextView.Text = model.CurrentTimeLeft.ToString("h'h 'm'm 's's'");
 
-                Disposable = viewModel.TimeLeftObservable
-                    .DoOnBackgroundThenHandleOnUI()
-                    .Subscribe(timeLeft =>
-                    {
-                        this.timeLeft.Text = $"{timeLeft.Hours}h {timeLeft.Minutes}m {timeLeft.Seconds}s";
-                    });
+                    Disposable = model.TimeLeftObservable
+                        .RunOnUI()
+                        .Subscribe(timeLeft =>
+                        {
+                            this.TimeLeftTextView.Text = timeLeft.ToString("h'h 'm'm 's's'");
+                        });
+                }
             }
         }
 
         private void ClearDisposable()
         {
-            if (viewModel != null)
-                viewModel.Dispose();
-
             if (Disposable != null)
             {
                 Disposable.Dispose();

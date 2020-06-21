@@ -8,6 +8,7 @@ namespace Core.ViewModel
     public class ArbitrationViewModel : ExpirableViewModel
     {
         public override StatType StatType => StatType.Arbitration;
+        public override string Name => "Arbitration";
 
         public string Enemy { get; set; }
         public string Type { get; set; }
@@ -23,8 +24,6 @@ namespace Core.ViewModel
             IsArchwing = model.IsArchwing;
             IsSharkwing = model.IsSharkwing;
             Node = model.Node;
-
-            StartTimer();
         }
 
     }

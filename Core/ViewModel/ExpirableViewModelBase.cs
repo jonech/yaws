@@ -8,27 +8,23 @@ using System.Timers;
 
 namespace Core.ViewModel
 {
-    public abstract class ExpirableViewModel : TimerViewModel
+    public abstract class ExpirableViewModel : ViewModelBase
     {
         public DateTime Expiry { get; set; }
 
         public DateTime Activation { get; set; }
 
-        private BehaviorSubject<TimeSpan> timeLeftSubject;
         public IObservable<TimeSpan> TimeLeftObservable { get; private set; }
+        public TimeSpan CurrentTimeLeft => Expiry - DateTime.UtcNow;
 
         public ExpirableViewModel(IExpirable model) : base()
         {
             Activation = model.Activation;
             Expiry = model.Expiry;
 
-            timeLeftSubject = new BehaviorSubject<TimeSpan>(Expiry - DateTime.UtcNow);
-            TimeLeftObservable = timeLeftSubject.AsObservable();
+            TimeLeftObservable = Observable.Interval(TimeSpan.FromSeconds(1))
+                                           .Select(p => CurrentTimeLeft);
         }
 
-        public override void TimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            timeLeftSubject.OnNext(Expiry - DateTime.UtcNow);
-        }
     }
 }

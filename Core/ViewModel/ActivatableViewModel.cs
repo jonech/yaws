@@ -8,24 +8,18 @@ using System.Timers;
 
 namespace Core.ViewModel
 {
-    public abstract class ActivatableViewModel : TimerViewModel
+    public abstract class ActivatableViewModel : ViewModelBase
     {
         public DateTime Activation { get; set; }
-
-        private BehaviorSubject<TimeSpan> TimeSinceActivateSubject;
         public IObservable<TimeSpan> TimeSinceActivateObservable { get; private set; }
+        public TimeSpan CurrentTimeSinceActivated => DateTime.UtcNow - Activation;
 
         public ActivatableViewModel(IActivatable model) : base()
         {
             Activation = model.Activation;
 
-            TimeSinceActivateSubject = new BehaviorSubject<TimeSpan>(DateTime.UtcNow - Activation);
-            TimeSinceActivateObservable = TimeSinceActivateSubject.AsObservable();
-        }
-
-        public override void TimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            TimeSinceActivateSubject.OnNext(DateTime.UtcNow - Activation);
+            TimeSinceActivateObservable = Observable.Interval(TimeSpan.FromSeconds(1))
+                                                    .Select(p => CurrentTimeSinceActivated);
         }
     }
 }

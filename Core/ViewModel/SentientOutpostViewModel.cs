@@ -8,6 +8,7 @@ namespace Core.ViewModel
     public class SentientOutpostViewModel : ExpirableViewModel
     {
         public override StatType StatType => StatType.SentientOutpost;
+        public override string Name => "Sentient Outpost";
 
         public string Node { get; set; }
         public string Faction { get; set; }
@@ -22,7 +23,7 @@ namespace Core.ViewModel
                 Type = model.Mission.Type;
             }
 
-            StartTimer();
+            //StartTimer();
         }
     }
 }
