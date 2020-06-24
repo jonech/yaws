@@ -12,8 +12,7 @@
         android:elevation="@dimen/design_appbar_elevation"
         android:textAlignment="center"
         android:layout_alignParentTop="true"
-        android:foregroundTint="@color/white"
-        style="?attr/toolbarStyle"/>
+        app:theme="?attr/toolbarTheme"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager_main_dashboard"
@@ -23,6 +22,7 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_main_dashboard"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            style="?attr/topTabStyle"/>
     </android.support.v4.view.ViewPager>
 </RelativeLayout>

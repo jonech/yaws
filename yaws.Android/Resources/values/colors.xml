@@ -11,7 +11,8 @@
     <color name="card_background_dark">#2F3A4F</color>
     <color name="activity_background_dark">#232C3D</color>
     <color name="bottom_nav_dark">#293346</color>
-    
+    <color name="tab_background_dark">#293346</color>
+
     <color name="item_selected">#64FF6C</color>
     <color name="white">#ffffff</color>
 

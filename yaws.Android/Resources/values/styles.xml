@@ -3,6 +3,8 @@
     <attr format="reference" name="cardStyle"/>
     <attr format="reference" name="bottomNavigationStyle"/>
     <attr format="reference" name="toolbarStyle"/>
+    <attr format="reference" name="toolbarTheme"/>
+    <attr format="reference" name="topTabStyle"/>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -17,6 +19,8 @@
         <item name="cardStyle">@style/CardStyle.Dark</item>
         <item name="bottomNavigationStyle">@style/BottomNavigationStyle.Dark</item>
         <item name="toolbarStyle">@style/ToolbarStyle.Dark</item>
+        <item name="toolbarTheme">@style/ToolbarTheme.Dark</item>
+        <item name="topTabStyle">@style/TopTabStyle.Dark</item>
     </style>
 
     <style name="CardStyle" parent="CardView">
@@ -26,6 +30,13 @@
         <item name="cardBackgroundColor">@color/card_background_dark</item>
     </style>
 
+    <style name="TopTabStyle.Dark" parent="Widget.Design.TabLayout">
+        <item name="android:background">@color/tab_background_dark</item>
+        <item name="tabTextColor">@color/white</item>
+        <item name="tabIndicatorColor">@color/item_selected</item>
+        <item name="tabSelectedTextColor">@color/item_selected</item>
+    </style>
+    
     <style name="BottomNavigationStyle.Dark" parent="Widget.Design.BottomNavigationView">
         <item name="android:background">@color/bottom_nav_dark</item>
         <item name="itemIconTint">@color/bottom_nav_item_selector</item>
@@ -37,5 +48,15 @@
         <item name="android:paddingLeft">32dp</item>
         <item name="android:paddingRight">10dp</item>
         <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">#62ff00</item>
     </style>
+    <style name="ToolbarTheme.Dark" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <!--<item name="android:textColorSecondary">#62ff00</item>-->
+        <item name="iconTint">@color/item_selected</item>
+    </style>
+
 </resources>
