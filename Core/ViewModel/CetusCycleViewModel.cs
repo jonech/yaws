@@ -26,8 +26,6 @@ namespace Core.ViewModel
             IsDay = cetusCycle.IsDay;
             State = cetusCycle.State;
             TimeLeft = cetusCycle.TimeLeft;
-
-            //StartTimer();
         }
     }
 }

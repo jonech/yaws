@@ -12,15 +12,17 @@ namespace Service.DataSource
         private IWareframeStatAPI api;
         private string platform;
 
+        private WorldState cachedData;
+
         public WorldStateDataSource(IWareframeStatAPI api)
         {
             this.api = api;
             this.platform = "pc";
         }
 
-        public Task<WorldState> FetchWorldState()
+        public async Task<WorldState> FetchWorldState()
         {
-            return api.FetchWorldState(platform);
+            return await api.FetchWorldState(platform);
         }
     }
 }

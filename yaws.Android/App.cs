@@ -13,6 +13,7 @@ using Autofac;
 using Service.DataSource;
 using Service.API;
 using Core;
+using yaws.Android.Source;
 
 namespace yaws.Android
 {
@@ -39,6 +40,10 @@ namespace yaws.Android
 
             builder.RegisterType<WorldStateRepository>()
                    .AsSelf();
+
+            builder.RegisterType<WorldStateService>()
+                   .AsSelf()
+                   .SingleInstance();
 
             builder.RegisterType<AppHttpClientHandler>()
                    .AsSelf();

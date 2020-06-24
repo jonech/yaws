@@ -22,6 +22,11 @@ namespace Core.ViewModel
             Activation = model.Activation;
             Expiry = model.Expiry;
 
+//#if DEBUG
+//            var random = new Random();
+//            Expiry = DateTime.UtcNow + TimeSpan.FromSeconds(random.Next(5, 21));
+//#endif
+
             TimeLeftObservable = Observable.Interval(TimeSpan.FromSeconds(1))
                                            .Select(p => CurrentTimeLeft);
         }

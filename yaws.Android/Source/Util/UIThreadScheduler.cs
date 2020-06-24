@@ -23,7 +23,7 @@ namespace yaws.Android.Source.Util
         {
             return obs
                 .SubscribeOn(new TaskPoolScheduler(new TaskFactory()))
-                .ObserveOn(new UIThreadScheduler(new Handler(), Thread.CurrentThread().Id));
+                .ObserveOn(new HandlerScheduler(new Handler(), Thread.CurrentThread().Id));
         }
 
         /// <summary>

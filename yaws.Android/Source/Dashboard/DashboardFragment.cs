@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reactive.Linq;
 
 using Android.Support.V4.App;
+using Android.Support.V4.View;
+using Android.Support.V4.Widget;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -17,29 +19,22 @@ using Core;
 using Core.ViewModel;
 using yaws.Android.Source.Util;
 
-using System.Reactive;
-using Android.Support.V4.Widget;
 using System.Reactive.Threading.Tasks;
+using Android.Support.Design.Widget;
 
 namespace yaws.Android.Source.Dashboard
 {
-    public class DashboardFragment : Fragment, SwipeRefreshLayout.IOnRefreshListener
+    public class DashboardFragment : Fragment, ViewPager.IOnPageChangeListener
     {
-        RecyclerView statsRecyclerView;
-        StatsRecyclerAdapter statsRecyclerAdapter;
-        SwipeRefreshLayout refreshLayout;
-        WorldStateRepository wsRepo;
-        IDisposable Disposable;
+        ViewPager dashboardPager;
+
+        CommonStatsFragment commonFragment;
+        CetusStatsFragment cetusFragment;
+        VallisStatsFragment vallisFragment;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            using (var scope = App.Container.BeginLifetimeScope())
-            {
-                wsRepo = scope.Resolve<WorldStateRepository>();
-            }
-
-            statsRecyclerAdapter = new StatsRecyclerAdapter();
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -48,58 +43,56 @@ namespace yaws.Android.Source.Dashboard
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             var view = inflater.Inflate(Resource.Layout.fragment_dashboard, container, false);
 
-            statsRecyclerView = view.FindViewById<RecyclerView>(Resource.Id.recycler_stats);
-            statsRecyclerView.SetAdapter(statsRecyclerAdapter);
-            statsRecyclerView.SetLayoutManager(new LinearLayoutManager(view.Context));
+            commonFragment = new CommonStatsFragment();
+            cetusFragment = new CetusStatsFragment();
+            vallisFragment = new VallisStatsFragment();
 
-            refreshLayout = view.FindViewById<SwipeRefreshLayout>(Resource.Id.swipe_refresh_dashboard);
-            refreshLayout.SetOnRefreshListener(this);
+            dashboardPager = view.FindViewById<ViewPager>(Resource.Id.pager_dashboard);
+            var pagerAdapter = new DashboardPagerAdapter(
+                new List<StatsFragment>()
+                {
+                    commonFragment,
+                    cetusFragment,
+                    vallisFragment
+                },
+                Activity.SupportFragmentManager);
+            dashboardPager.Adapter = pagerAdapter;
+            dashboardPager.AddOnPageChangeListener(pagerAdapter);
+
+            var tab = view.FindViewById<TabLayout>(Resource.Id.tab_dashboard);
+            tab.SetupWithViewPager(dashboardPager);
 
             return view;
         }
 
-        public override void OnStart()
-        {
-            base.OnStart();
-            FetchData();
-        }
+        //public override void OnStart()
+        //{
+        //    base.OnStart();
+        //}
 
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
-            Disposable.Dispose();
-        }
+        //public override void OnDestroy()
+        //{
+        //    base.OnDestroy();
+        //}
 
         public void OnRefresh()
         {
-            FetchData();
         }
 
-        private void FetchData()
+
+        public void OnPageScrollStateChanged(int state)
         {
-            refreshLayout.Refreshing = true;
-            Disposable = wsRepo.GetWorldState()
-                .ToObservable()
-                .DoOnBackgroundThenHandleOnUI()
-                .Subscribe((worldState) =>
-                {
-                    statsRecyclerAdapter.SetItems(new List<ViewModelBase>
-                    {
-                        worldState.EarthCycle,
-                        worldState.CetusCycle,
-                        worldState.VallisCycle,
-                        worldState.Arbitration,
-                        worldState.SentientOutpost
-                    });
-                },
-                err =>
-                {
-                    Toast.MakeText(this.Context, err.ToString(), ToastLength.Short).Show();
-                },
-                () =>
-                {
-                    refreshLayout.Refreshing = false;
-                });
+            //throw new NotImplementedException();
+        }
+
+        public void OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void OnPageSelected(int position)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

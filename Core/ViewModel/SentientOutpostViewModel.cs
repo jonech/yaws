@@ -22,8 +22,6 @@ namespace Core.ViewModel
                 Faction = model.Mission.Faction;
                 Type = model.Mission.Type;
             }
-
-            //StartTimer();
         }
     }
 }

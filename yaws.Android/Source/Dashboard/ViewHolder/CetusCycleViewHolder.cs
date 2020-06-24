@@ -21,7 +21,7 @@ namespace yaws.Android.Source.Dashboard.ViewHolder
 
         public CetusCycleViewHolder(View itemView) : base(itemView)
         {
-            TitleTextView = itemView.FindViewById<TextView>(Resource.Id.text_cetus);
+            TitleTextView = itemView.FindViewById<TextView>(Resource.Id.text_cetus_title);
             TimeLeftTextView = itemView.FindViewById<TextView>(Resource.Id.text_cetus_time_left);
             StatusTextView = itemView.FindViewById<TextView>(Resource.Id.text_cetus_status);
         }

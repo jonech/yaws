@@ -7,4 +7,10 @@
         android:icon="@drawable/icons8_refresh_24dp"
         android:title="@string/refresh"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_setting"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/refresh"
+        app:showAsAction="always" />
 </menu>

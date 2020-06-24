@@ -80,6 +80,21 @@ namespace yaws.Android.Source.Dashboard
             throw new NotImplementedException();
         }
 
+        public override void OnDetachedFromRecyclerView(RecyclerView recyclerView)
+        {
+            base.OnDetachedFromRecyclerView(recyclerView);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+        }
+
+        public override void OnViewDetachedFromWindow(Java.Lang.Object holder)
+        {
+            base.OnViewDetachedFromWindow(holder);
+        }
+
         public void AddItems(List<ViewModelBase> items)
         {
             var insertedPos = ItemCount;

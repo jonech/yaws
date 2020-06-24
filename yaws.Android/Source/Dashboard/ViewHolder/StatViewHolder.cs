@@ -54,10 +54,15 @@ namespace yaws.Android.Source.Dashboard.ViewHolder
                     this.TimeLeftTextView.Text = model.CurrentTimeLeft.ToString("h'h 'm'm 's's'");
 
                     Disposable = model.TimeLeftObservable
+                        .TakeUntil(time => time < TimeSpan.Zero)
                         .RunOnUI()
                         .Subscribe(timeLeft =>
                         {
                             this.TimeLeftTextView.Text = timeLeft.ToString("h'h 'm'm 's's'");
+                        },
+                        () =>
+                        {
+                            this.TimeLeftTextView.Text = "EXPIRED";
                         });
                 }
             }
@@ -70,6 +75,12 @@ namespace yaws.Android.Source.Dashboard.ViewHolder
                 Disposable.Dispose();
                 Disposable = null;
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            ClearDisposable();
         }
     }
 }
