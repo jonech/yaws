@@ -1,6 +1,7 @@
 ﻿using Service.Entity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Core.ViewModel
@@ -13,6 +14,10 @@ namespace Core.ViewModel
         public EarthCycleViewModel EarthCycle { get; set; }
         public SentientOutpostViewModel SentientOutpost { get; set; }
         public VallisCycleViewModel VallisCycle { get; set; }
+
+        public BountyViewModel CetusBounty { get; set; }
+        public BountyViewModel VallisBounty { get; set; }
+        public List<FactionMissionViewModel> FactionMissions { get; set; }
 
         public WorldStateViewModel(WorldState worldState)
         {
@@ -30,6 +35,22 @@ namespace Core.ViewModel
 
             if (worldState.VallisCycle != null)
                 VallisCycle = new VallisCycleViewModel(worldState.VallisCycle);
+
+            FactionMissions = new List<FactionMissionViewModel>();
+            if (worldState.SyndicateMissions != null)
+            {
+                foreach (var mission in worldState.SyndicateMissions)
+                {
+                    if (mission.Syndicate == Syndicate.Ostrons)
+                        CetusBounty = new BountyViewModel(mission);
+
+                    else if (mission.Syndicate == Syndicate.SolarisUnited)
+                        VallisBounty = new BountyViewModel(mission);
+
+                    else if (Syndicate.Factions.Contains(mission.Syndicate))
+                        FactionMissions.Add(new FactionMissionViewModel(mission));
+                }
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Disposables;
 using System.Text;
 
 using Android.App;
@@ -17,6 +18,7 @@ namespace yaws.Android.Source.Dashboard
 {
     public class StatsRecyclerAdapter : RecyclerView.Adapter
     {
+        private CompositeDisposable timeSubscriptions;
         public List<ViewModelBase> ItemSource { get; private set; }
 
         public StatsRecyclerAdapter()
@@ -33,6 +35,7 @@ namespace yaws.Android.Source.Dashboard
                 var viewHolder = holder as StatViewHolder;
                 viewHolder.Bind(ItemSource[position]);
             }
+
         }
 
 
@@ -53,6 +56,11 @@ namespace yaws.Android.Source.Dashboard
                     return new VallisCycleViewHolder(view);
                 case Resource.Layout.item_sentient_outpost:
                     return new SentientOutpostViewHolder(view);
+
+                case Resource.Layout.item_bounty:
+                    return new BountyViewHolder(view);
+                case Resource.Layout.item_bounty_job:
+                    return new BountyJobViewHolder(view);
                 default:
                     throw new InvalidOperationException("This type of layout is not supported");
             }
@@ -73,6 +81,13 @@ namespace yaws.Android.Source.Dashboard
                     return Resource.Layout.item_earth_cycle;
                 case StatType.SentientOutpost:
                     return Resource.Layout.item_sentient_outpost;
+
+                case StatType.CetusBounty:
+                case StatType.VallisBounty:
+                    return Resource.Layout.item_bounty;
+
+                case StatType.BountyJob:
+                    return Resource.Layout.item_bounty_job;
                 default:
                     return 0;
             }

@@ -67,8 +67,11 @@
     <Compile Include="Source\Dashboard\StatsFragment.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\ArbitrationViewHolder.cs" />
     <Compile Include="Source\Dashboard\StatsRecyclerAdapter.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\BountyJobViewHolder.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\BountyViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\CetusCycleViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\EarthCycleViewHolder.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\ExpirableStatViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\SentientOutpostViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\StatViewHolder.cs" />
     <Compile Include="MainActivity.cs" />
@@ -78,6 +81,7 @@
     <Compile Include="Source\Dashboard\ViewHolder\VallisCycleViewHolder.cs" />
     <Compile Include="Source\Setting\SettingActivity.cs" />
     <Compile Include="Source\Setting\SettingFragment.cs" />
+    <Compile Include="Source\Util\TimeSpanExtension.cs" />
     <Compile Include="Source\Util\UIThreadScheduler.cs" />
     <Compile Include="Source\WorldStateService.cs" />
   </ItemGroup>
@@ -209,6 +213,21 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_dashboard.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_bounty.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_bounty_job.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_simple_chip.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

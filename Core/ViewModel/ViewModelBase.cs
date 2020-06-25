@@ -17,9 +17,10 @@ namespace Core.ViewModel
         Nightwave,
         SentientOutpost,
         Sortie,
-        SyndicateMission,
+        FactionMission,
         VallisBounty,
-        VallisCycle
+        VallisCycle,
+        BountyJob
     }
 
     public abstract class ViewModelBase

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="5dp">
+    <TextView
+        android:id="@+id/text_bounty_job_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/text_bounty_job_enemy_lvls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/text_bounty_job_standings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <android.support.design.chip.ChipGroup
+        android:id="@+id/chip_group_bounty_job_rewards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

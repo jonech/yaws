@@ -159,7 +159,8 @@ namespace yaws.Android.Source.Dashboard
         {
             StatsRecyclerAdapter.SetItems(new List<ViewModelBase>
             {
-                worldState.CetusCycle
+                worldState.CetusCycle,
+                worldState.CetusBounty
             });
         }
     }
@@ -172,7 +173,8 @@ namespace yaws.Android.Source.Dashboard
         {
             StatsRecyclerAdapter.SetItems(new List<ViewModelBase>
             {
-                worldState.VallisCycle
+                worldState.VallisCycle,
+                worldState.VallisBounty
             });
         }
     }

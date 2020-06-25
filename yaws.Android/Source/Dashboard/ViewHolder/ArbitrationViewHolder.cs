@@ -38,7 +38,6 @@ namespace yaws.Android.Source.Dashboard.ViewHolder
             {
                 viewModel = model;
 
-                TitleTextView.Text = "Arbitration";
                 NodeTextView.Text = viewModel.Node;
                 EnemyTextView.Text = viewModel.Enemy;
                 TypeTextView.Text = viewModel.Type;
