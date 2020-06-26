@@ -44,7 +44,8 @@ namespace yaws.Android.Source.Dashboard
                 {
                     new CommonStatsFragment(),
                     new CetusStatsFragment(),
-                    new VallisStatsFragment()
+                    new VallisStatsFragment(),
+                    new FissureStatsFragment()
                 },
                 SupportFragmentManager);
             dashboardPager.Adapter = pagerAdapter;

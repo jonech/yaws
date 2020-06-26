@@ -15,10 +15,5 @@ namespace Core.ViewModel
         public int MaxEnemyLevel { get; set; }
         public int MinMR { get; set; }
         public List<string> RewardPool { get; set; }
-
-        public BountyJobViewModel()
-        {
-
-        }
     }
 }

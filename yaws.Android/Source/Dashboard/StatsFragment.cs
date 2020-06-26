@@ -101,7 +101,7 @@ namespace yaws.Android.Source.Dashboard
                 .RunOnUI()
                 .Subscribe((worldState) =>
                 {
-                    OnFetchDataCompleted(worldState);
+                    OnWorldStateDataChanged(worldState);
                 },
                 err =>
                 {
@@ -112,6 +112,7 @@ namespace yaws.Android.Source.Dashboard
         private void subscribeToRefresh()
         {
             refreshSubscription = worldStateService.RefreshingObservable
+                .Delay(TimeSpan.FromSeconds(1))
                 .RunOnUI()
                 .Subscribe(refresh => refreshLayout.Refreshing = refresh);
         }
@@ -129,10 +130,13 @@ namespace yaws.Android.Source.Dashboard
                 refreshSubscription.Dispose();
                 refreshSubscription = null;
             }
+
+            if (StatsRecyclerAdapter != null)
+                StatsRecyclerAdapter.DisposeSubscriptions();
         }
 
 
-        protected abstract void OnFetchDataCompleted(WorldStateViewModel worldState);
+        protected abstract void OnWorldStateDataChanged(WorldStateViewModel worldState);
     }
 
 
@@ -140,7 +144,7 @@ namespace yaws.Android.Source.Dashboard
     {
         public override string Title => "Common";
 
-        protected override void OnFetchDataCompleted(WorldStateViewModel worldState)
+        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
         {
             StatsRecyclerAdapter.SetItems(new List<ViewModelBase>
             {
@@ -155,7 +159,7 @@ namespace yaws.Android.Source.Dashboard
     {
         public override string Title => "Cetus";
 
-        protected override void OnFetchDataCompleted(WorldStateViewModel worldState)
+        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
         {
             StatsRecyclerAdapter.SetItems(new List<ViewModelBase>
             {
@@ -169,13 +173,33 @@ namespace yaws.Android.Source.Dashboard
     {
         public override string Title => "Vallis";
 
-        protected override void OnFetchDataCompleted(WorldStateViewModel worldState)
+        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
         {
             StatsRecyclerAdapter.SetItems(new List<ViewModelBase>
             {
                 worldState.VallisCycle,
                 worldState.VallisBounty
             });
+        }
+    }
+
+    public class FissureStatsFragment : StatsFragment
+    {
+        public override string Title => "Fissure";
+
+        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
+        {
+            StatsRecyclerAdapter.SetItems(worldState.Fissures.Cast<ViewModelBase>().ToList());
+        }
+    }
+
+    public class InvasionStatsFragment : StatsFragment
+    {
+        public override string Title => "Invasion";
+
+        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
+        {
+            StatsRecyclerAdapter.SetItems(worldState.Fissures.Cast<ViewModelBase>().ToList());
         }
     }
 }

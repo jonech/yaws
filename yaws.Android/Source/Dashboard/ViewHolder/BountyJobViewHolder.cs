@@ -30,7 +30,7 @@ namespace yaws.Android.Source.Dashboard.ViewHolder
             RewardsChipGroup = itemView.FindViewById<ChipGroup>(Resource.Id.chip_group_bounty_job_rewards);
         }
 
-        public override void Bind(ViewModelBase item)
+        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
         {
             if (item is BountyJobViewModel model)
             {

@@ -30,9 +30,9 @@ namespace yaws.Android.Source.Dashboard.ViewHolder
             TypeTextView = itemView.FindViewById<TextView>(Resource.Id.text_arbi_type);
         }
 
-        public override void Bind(ViewModelBase item)
+        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
         {
-            base.Bind(item);
+            base.Bind(item, adapter);
 
             if (item is ArbitrationViewModel model)
             {

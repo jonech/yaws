@@ -65,6 +65,7 @@
     <Compile Include="Source\Dashboard\DashboardActivity.cs" />
     <Compile Include="Source\Dashboard\DashboardPagerAdapter.cs" />
     <Compile Include="Source\Dashboard\StatsFragment.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\ActivatableStatViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\ArbitrationViewHolder.cs" />
     <Compile Include="Source\Dashboard\StatsRecyclerAdapter.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\BountyJobViewHolder.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Source\Dashboard\ViewHolder\CetusCycleViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\EarthCycleViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\ExpirableStatViewHolder.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\FissureViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\SentientOutpostViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\StatViewHolder.cs" />
     <Compile Include="MainActivity.cs" />
@@ -227,7 +229,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\item_simple_chip.xml">
+    <AndroidResource Include="Resources\layout\item_fissure.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

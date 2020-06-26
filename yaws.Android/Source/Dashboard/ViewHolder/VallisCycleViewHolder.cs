@@ -26,9 +26,9 @@ namespace yaws.Android.Source.Dashboard.ViewHolder
             StatusTextView = itemView.FindViewById<TextView>(Resource.Id.text_vallis_cycle_status);
         }
 
-        public override void Bind(ViewModelBase item)
+        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
         {
-            base.Bind(item);
+            base.Bind(item, adapter);
 
             if (item is VallisCycleViewModel model)
             {

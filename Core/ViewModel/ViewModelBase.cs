@@ -20,6 +20,7 @@ namespace Core.ViewModel
         FactionMission,
         VallisBounty,
         VallisCycle,
+        Invasion,
         BountyJob
     }
 

@@ -37,9 +37,9 @@ namespace yaws.Android.Source.Dashboard.ViewHolder
             BountyJobsRecycler.AddItemDecoration(divider);
         }
 
-        public override void Bind(ViewModelBase item)
+        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
         {
-            base.Bind(item);
+            base.Bind(item, adapter);
 
             if (item is BountyViewModel model)
             {

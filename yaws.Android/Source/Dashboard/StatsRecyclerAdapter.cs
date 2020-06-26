@@ -33,7 +33,7 @@ namespace yaws.Android.Source.Dashboard
             if (holder is StatViewHolder)
             {
                 var viewHolder = holder as StatViewHolder;
-                viewHolder.Bind(ItemSource[position]);
+                viewHolder.Bind(ItemSource[position], this);
             }
 
         }
@@ -56,6 +56,8 @@ namespace yaws.Android.Source.Dashboard
                     return new VallisCycleViewHolder(view);
                 case Resource.Layout.item_sentient_outpost:
                     return new SentientOutpostViewHolder(view);
+                case Resource.Layout.item_fissure:
+                    return new FissureViewHolder(view);
 
                 case Resource.Layout.item_bounty:
                     return new BountyViewHolder(view);
@@ -81,6 +83,8 @@ namespace yaws.Android.Source.Dashboard
                     return Resource.Layout.item_earth_cycle;
                 case StatType.SentientOutpost:
                     return Resource.Layout.item_sentient_outpost;
+                case StatType.Fissure:
+                    return Resource.Layout.item_fissure;
 
                 case StatType.CetusBounty:
                 case StatType.VallisBounty:
@@ -100,10 +104,6 @@ namespace yaws.Android.Source.Dashboard
             base.OnDetachedFromRecyclerView(recyclerView);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-        }
 
         public override void OnViewDetachedFromWindow(Java.Lang.Object holder)
         {
@@ -124,6 +124,20 @@ namespace yaws.Android.Source.Dashboard
             ItemSource.AddRange(items);
 
             NotifyDataSetChanged();
+        }
+
+        public void AddTimeSubscription(IDisposable disposable)
+        {
+            if (timeSubscriptions == null)
+                timeSubscriptions = new CompositeDisposable();
+
+            timeSubscriptions.Add(disposable);
+        }
+
+        public void DisposeSubscriptions()
+        {
+            if (timeSubscriptions != null)
+                timeSubscriptions.Dispose();
         }
     }
 }

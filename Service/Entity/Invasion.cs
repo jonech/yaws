@@ -44,7 +44,7 @@ namespace Service.Entity
         public int RequiredRuns { get; set; }
 
         [JsonProperty("completion")]
-        public double completion { get; set; }
+        public double Completion { get; set; }
 
         [JsonProperty("completed")]
         public bool Completed { get; set; }

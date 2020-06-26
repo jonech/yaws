@@ -17,7 +17,9 @@ namespace Core.ViewModel
 
         public BountyViewModel CetusBounty { get; set; }
         public BountyViewModel VallisBounty { get; set; }
-        public List<FactionMissionViewModel> FactionMissions { get; set; }
+        //public List<FactionMissionViewModel> FactionMissions { get; set; }
+
+        public List<FissureViewModel> Fissures { get; set; }
 
         public WorldStateViewModel(WorldState worldState)
         {
@@ -36,7 +38,7 @@ namespace Core.ViewModel
             if (worldState.VallisCycle != null)
                 VallisCycle = new VallisCycleViewModel(worldState.VallisCycle);
 
-            FactionMissions = new List<FactionMissionViewModel>();
+            //FactionMissions = new List<FactionMissionViewModel>();
             if (worldState.SyndicateMissions != null)
             {
                 foreach (var mission in worldState.SyndicateMissions)
@@ -46,10 +48,14 @@ namespace Core.ViewModel
 
                     else if (mission.Syndicate == Syndicate.SolarisUnited)
                         VallisBounty = new BountyViewModel(mission);
-
-                    else if (Syndicate.Factions.Contains(mission.Syndicate))
-                        FactionMissions.Add(new FactionMissionViewModel(mission));
+                    //else if (Syndicate.Factions.Contains(mission.Syndicate))
+                    //    FactionMissions.Add(new FactionMissionViewModel(mission));
                 }
+            }
+
+            if (worldState.Fissures != null)
+            {
+                Fissures = worldState.Fissures.Select(x => new FissureViewModel(x)).OrderBy(x => x.TierNum).ToList();
             }
         }
     }

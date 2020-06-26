@@ -19,6 +19,6 @@ namespace yaws.Android.Source.Dashboard.ViewHolder
         {
         }
 
-        public abstract void Bind(ViewModelBase item);
+        public abstract void Bind(ViewModelBase item, StatsRecyclerAdapter adapter);
     }
 }

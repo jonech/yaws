@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Linq;
+using System.Text;
 
 using Android.App;
 using Android.Content;
@@ -8,51 +11,49 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-
 using Core.ViewModel;
-
 using yaws.Android.Source.Util;
 
 namespace yaws.Android.Source.Dashboard.ViewHolder
 {
-    public class ExpirableStatViewHolder : StatViewHolder
+    public class ActivatableStatViewHolder : StatViewHolder
     {
-        public TextView TimeLeftTextView { get; protected set; }
+        public TextView TimeActivatedTextView { get; protected set; }
         protected IDisposable Disposable;
 
-        public ExpirableStatViewHolder(View itemView) : base(itemView)
+        public ActivatableStatViewHolder(View itemView) : base(itemView)
         {
         }
 
         public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
         {
-            if (item is ExpirableViewModel model)
+            if (item is ActivatableViewModel model)
             {
                 if (TitleTextView != null)
                 {
                     TitleTextView.Text = model.Name;
                 }
 
-                if (TimeLeftTextView != null)
+                if (TimeActivatedTextView != null)
                 {
                     ClearDisposable();
 
-                    TimeLeftTextView.Text = model.CurrentTimeLeft.ToFormattedString();
+                    TimeActivatedTextView.Text = model.CurrentTimeSinceActivated.ToFormattedString();
 
-                    Disposable = model.TimeLeftObservable
-                        .TakeUntil(time => time < TimeSpan.Zero || TimeLeftTextView == null)
+                    Disposable = model.TimeSinceActivateObservable
+                        .TakeUntil(time => TimeActivatedTextView == null)
                         .RunOnUI()
-                        .Subscribe(timeLeft =>
+                        .Subscribe(time =>
                         {
 #if DEBUG
-                            Log.Info($"{GetType().Name}", $"{model.Name} -> {timeLeft.ToFormattedString()}");
+                            Log.Info($"{GetType().Name}", $"{model.Name} -> {time.ToFormattedString()}");
 #endif
-                            TimeLeftTextView.Text = timeLeft.ToFormattedString();
+                            TimeActivatedTextView.Text = time.ToFormattedString();
                         },
                         () =>
                         {
-                            if (TimeLeftTextView != null)
-                                TimeLeftTextView.Text = "EXPIRED";
+                            if (TimeActivatedTextView != null)
+                                TimeActivatedTextView.Text = "EXPIRED";
                         });
 
                     adapter.AddTimeSubscription(Disposable);
