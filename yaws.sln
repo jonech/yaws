@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{5734DE58-8007-4CE6-9E7B-951D7EE7614A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yaws.Core", "yaws.Core\yaws.Core.csproj", "{5734DE58-8007-4CE6-9E7B-951D7EE7614A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{BB0D557B-4A2B-403C-A757-8787C8AC2A2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yaws.Android", "yaws.Android\yaws.Android.csproj", "{C10B7CC2-7946-48F9-8AAA-9FAF51E5B3CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yaws.Droid", "yaws.Droid\yaws.Droid.csproj", "{C10B7CC2-7946-48F9-8AAA-9FAF51E5B3CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
