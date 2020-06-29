@@ -74,6 +74,7 @@
     <Compile Include="Source\Dashboard\ViewHolder\EarthCycleViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\ExpirableStatViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\FissureViewHolder.cs" />
+    <Compile Include="Source\Dashboard\ViewHolder\InvasionViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\SentientOutpostViewHolder.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\StatViewHolder.cs" />
     <Compile Include="MainActivity.cs" />
@@ -85,7 +86,7 @@
     <Compile Include="Source\Setting\SettingFragment.cs" />
     <Compile Include="Source\Util\TimeSpanExtension.cs" />
     <Compile Include="Source\Util\UIThreadScheduler.cs" />
-    <Compile Include="Source\WorldStateService.cs" />
+    <Compile Include="Source\AppStateService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -230,6 +231,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\item_fissure.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_invasion.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

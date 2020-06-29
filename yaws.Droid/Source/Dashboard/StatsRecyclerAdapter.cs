@@ -58,6 +58,8 @@ namespace yaws.Droid.Source.Dashboard
                     return new SentientOutpostViewHolder(view);
                 case Resource.Layout.item_fissure:
                     return new FissureViewHolder(view);
+                case Resource.Layout.item_invasion:
+                    return new InvasionViewHolder(view);
 
                 case Resource.Layout.item_bounty:
                     return new BountyViewHolder(view);
@@ -85,6 +87,8 @@ namespace yaws.Droid.Source.Dashboard
                     return Resource.Layout.item_sentient_outpost;
                 case StatType.Fissure:
                     return Resource.Layout.item_fissure;
+                case StatType.Invasion:
+                    return Resource.Layout.item_invasion;
 
                 case StatType.CetusBounty:
                 case StatType.VallisBounty:

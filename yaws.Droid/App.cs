@@ -41,7 +41,7 @@ namespace yaws.Droid
             builder.RegisterType<WorldStateRepository>()
                    .AsSelf();
 
-            builder.RegisterType<WorldStateService>()
+            builder.RegisterType<AppStateService>()
                    .AsSelf()
                    .SingleInstance();
 

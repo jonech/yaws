@@ -20,7 +20,7 @@ namespace yaws.Core.ViewModel
         //public List<FactionMissionViewModel> FactionMissions { get; set; }
 
         public List<FissureViewModel> Fissures { get; set; }
-
+        public List<InvasionViewModel> Invasions { get; set; }
         public WorldStateViewModel(WorldState worldState)
         {
             if (worldState.CetusCycle != null)
@@ -56,6 +56,11 @@ namespace yaws.Core.ViewModel
             if (worldState.Fissures != null)
             {
                 Fissures = worldState.Fissures.Select(x => new FissureViewModel(x)).OrderBy(x => x.TierNum).ToList();
+            }
+
+            if (worldState.Invasions != null)
+            {
+                Invasions = worldState.Invasions.Where(x => !x.Completed).Select(x => new InvasionViewModel(x)).ToList();
             }
         }
     }

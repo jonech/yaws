@@ -48,7 +48,7 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
 
         private Chip GetChip(string item)
         {
-            var chip = new Chip(ItemView.Context, null, Resource.Attribute.chipStyle);
+            var chip = new Chip(ItemView.Context, null, Resource.Attribute.ChipStyle);
             chip.Text = item;
 
             return chip;

@@ -13,15 +13,23 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Autofac;
 
 namespace yaws.Droid.Source.Dashboard
 {
     public class DashboardPagerAdapter : FragmentPagerAdapter, ViewPager.IOnPageChangeListener
     {
         List<StatsFragment> fragments;
+        AppStateService worldStateService;
+
         public DashboardPagerAdapter(List<StatsFragment> fragments, FragmentManager fm) : base(fm)
         {
             this.fragments = fragments;
+
+            using (var scope = App.Container.BeginLifetimeScope())
+            {
+                worldStateService = scope.Resolve<AppStateService>();
+            }
         }
 
         public override int Count => fragments.Count;
@@ -57,7 +65,9 @@ namespace yaws.Droid.Source.Dashboard
 
         public void OnPageSelected(int position)
         {
-            //throw new NotImplementedException();
+            var fragment = fragments[position];
+            if (fragment != null)
+                worldStateService.CurrentDashboardFragment = fragment.Title;
         }
     }
 }

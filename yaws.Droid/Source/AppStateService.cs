@@ -18,7 +18,7 @@ using yaws.Droid.Source.Util;
 
 namespace yaws.Droid.Source
 {
-    public class WorldStateService
+    public class AppStateService
     {
         private WorldStateRepository repository;
 
@@ -28,11 +28,22 @@ namespace yaws.Droid.Source
         private BehaviorSubject<bool> refreshingSubject;
         public IObservable<bool> RefreshingObservable => refreshingSubject.AsObservable();
 
-        public WorldStateService(WorldStateRepository repository)
+
+        private BehaviorSubject<string> dashboardState;
+        public IObservable<string> DashboardStateObservable => dashboardState.AsObservable();
+        public string CurrentDashboardFragment
+        {
+            get => dashboardState.Value;
+            set => dashboardState.OnNext(value);
+        }
+
+        public AppStateService(WorldStateRepository repository)
         {
             this.repository = repository;
             worldStateSubject = new BehaviorSubject<WorldStateViewModel>(null);
             refreshingSubject = new BehaviorSubject<bool>(false);
+
+            dashboardState = new BehaviorSubject<string>(string.Empty);
         }
 
 

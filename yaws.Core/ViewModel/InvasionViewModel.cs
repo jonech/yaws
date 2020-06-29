@@ -17,7 +17,7 @@ namespace yaws.Core.ViewModel
         public string DefendingFaction { get; set; }
         public InvasionRewardViewModel DefenderReward { get; set; }
         public bool VSInfestation { get; set; }
-        public double Completion { get; set; }
+        public float Completion { get; set; }
 
         public InvasionViewModel(Invasion model) : base(model)
         {

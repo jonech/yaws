@@ -19,10 +19,10 @@ using Autofac;
 namespace yaws.Droid.Source.Dashboard
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
-    public class DashboardActivity : AppCompatActivity
+    public class DashboardActivity : AppCompatActivity, ViewPager.IOnPageChangeListener
     {
         Toolbar toolbar;
-        WorldStateService worldStateService;
+        AppStateService worldStateService;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,7 +31,7 @@ namespace yaws.Droid.Source.Dashboard
 
             using (var scope = App.Container.BeginLifetimeScope())
             {
-                worldStateService= scope.Resolve<WorldStateService>();
+                worldStateService= scope.Resolve<AppStateService>();
             }
 
             toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_dashboard);
@@ -45,11 +45,13 @@ namespace yaws.Droid.Source.Dashboard
                     new CommonStatsFragment(),
                     new CetusStatsFragment(),
                     new VallisStatsFragment(),
-                    new FissureStatsFragment()
+                    new FissureStatsFragment(),
+                    new InvasionStatsFragment()
                 },
                 SupportFragmentManager);
             dashboardPager.Adapter = pagerAdapter;
             dashboardPager.AddOnPageChangeListener(pagerAdapter);
+            dashboardPager.OffscreenPageLimit = 4;
 
             var tab = FindViewById<Widget.TabLayout>(Resource.Id.tab_main_dashboard);
             tab.SetupWithViewPager(dashboardPager);
@@ -86,6 +88,21 @@ namespace yaws.Droid.Source.Dashboard
         {
             Intent intent = new Intent(this, typeof(SettingActivity));
             StartActivity(intent);
+        }
+
+
+        public void OnPageScrollStateChanged(int state)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void OnPageSelected(int position)
+        {
         }
     }
 }

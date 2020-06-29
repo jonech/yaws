@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5pt"
-    style="?attr/cardStyle">
+    style="?attr/StatCardStyle">
     <RelativeLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,33 +12,34 @@
         <TextView
             android:id="@+id/text_fissure_tier"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
         <TextView
             android:id="@+id/text_fissure_mission"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@id/text_fissure_tier"/>
+            android:layout_toRightOf="@id/text_fissure_tier"
+            android:layout_marginHorizontal="10dp"/>
         <TextView
             android:id="@+id/text_fissure_enemy"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/text_fissure_mission"
-            android:layout_toLeftOf="@id/text_fissure_time"/>
+            android:layout_marginHorizontal="10dp"/>
         <TextView
             android:id="@+id/text_fissure_node"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
             android:layout_toRightOf="@id/text_fissure_tier"
+            android:layout_marginHorizontal="10dp"
             android:layout_below="@id/text_fissure_mission"/>
         <TextView
             android:id="@+id/text_fissure_time"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"/>
     </RelativeLayout>

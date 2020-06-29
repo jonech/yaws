@@ -31,7 +31,7 @@ namespace yaws.Droid.Source.Dashboard
         protected StatsRecyclerAdapter StatsRecyclerAdapter { get; set; }
 
         SwipeRefreshLayout refreshLayout;
-        WorldStateService worldStateService;
+        AppStateService worldStateService;
         IDisposable worldStateSubscription;
         IDisposable refreshSubscription;
 
@@ -41,7 +41,7 @@ namespace yaws.Droid.Source.Dashboard
 
             using (var scope = App.Container.BeginLifetimeScope())
             {
-                worldStateService = scope.Resolve<WorldStateService>();
+                worldStateService = scope.Resolve<AppStateService>();
             }
         }
 
@@ -96,12 +96,12 @@ namespace yaws.Droid.Source.Dashboard
         private void subscribeToWorldState()
         {
             worldStateSubscription = worldStateService.WorldStateObservable
-                .Where(worldState => worldState != null)
                 .Retry()
-                .RunOnUI()
+                .DoOnBackgroundThenHandleOnUI()
                 .Subscribe((worldState) =>
                 {
-                    OnWorldStateDataChanged(worldState);
+                    if (worldState != null)
+                        OnWorldStateDataChanged(worldState);
                 },
                 err =>
                 {
@@ -112,8 +112,7 @@ namespace yaws.Droid.Source.Dashboard
         private void subscribeToRefresh()
         {
             refreshSubscription = worldStateService.RefreshingObservable
-                .Delay(TimeSpan.FromSeconds(1))
-                .RunOnUI()
+                .DoOnBackgroundThenHandleOnUI()
                 .Subscribe(refresh => refreshLayout.Refreshing = refresh);
         }
 
@@ -199,7 +198,7 @@ namespace yaws.Droid.Source.Dashboard
 
         protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
         {
-            StatsRecyclerAdapter.SetItems(worldState.Fissures.Cast<ViewModelBase>().ToList());
+            StatsRecyclerAdapter.SetItems(worldState.Invasions.Cast<ViewModelBase>().ToList());
         }
     }
 }
