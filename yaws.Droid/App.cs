@@ -45,6 +45,9 @@ namespace yaws.Droid
                    .AsSelf()
                    .SingleInstance();
 
+            builder.RegisterType<AppSettings>()
+                   .AsSelf();
+
             builder.RegisterType<AppHttpClientHandler>()
                    .AsSelf();
 

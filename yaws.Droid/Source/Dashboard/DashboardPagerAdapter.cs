@@ -65,9 +65,6 @@ namespace yaws.Droid.Source.Dashboard
 
         public void OnPageSelected(int position)
         {
-            var fragment = fragments[position];
-            if (fragment != null)
-                worldStateService.CurrentDashboardFragment = fragment.Title;
         }
     }
 }

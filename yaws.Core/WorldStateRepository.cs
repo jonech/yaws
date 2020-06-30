@@ -21,9 +21,9 @@ namespace yaws.Core
             this.dataSource = dataSource;
         }
 
-        public async Task<WorldStateViewModel> GetWorldState()
+        public async Task<WorldStateViewModel> GetWorldState(string platform)
         {
-            var worldState = await dataSource.FetchWorldState();
+            var worldState = await dataSource.FetchWorldState(platform);
 
             if (worldState != null)
                 return new WorldStateViewModel(worldState);

@@ -13,6 +13,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using yaws.Core;
+using yaws.Core.Constant;
 using yaws.Core.ViewModel;
 using yaws.Droid.Source.Util;
 
@@ -29,21 +30,14 @@ namespace yaws.Droid.Source
         public IObservable<bool> RefreshingObservable => refreshingSubject.AsObservable();
 
 
-        private BehaviorSubject<string> dashboardState;
-        public IObservable<string> DashboardStateObservable => dashboardState.AsObservable();
-        public string CurrentDashboardFragment
-        {
-            get => dashboardState.Value;
-            set => dashboardState.OnNext(value);
-        }
+        public string Platform { get; set; }
 
         public AppStateService(WorldStateRepository repository)
         {
             this.repository = repository;
             worldStateSubject = new BehaviorSubject<WorldStateViewModel>(null);
             refreshingSubject = new BehaviorSubject<bool>(false);
-
-            dashboardState = new BehaviorSubject<string>(string.Empty);
+            Platform = WFPlatform.PC;
         }
 
 
@@ -66,7 +60,7 @@ namespace yaws.Droid.Source
             //        worldStateSubject.OnError(err);
             //    });
 
-            var dis = repository.GetWorldState()
+            var dis = repository.GetWorldState(Platform)
                 .ToObservable()
                 .Subscribe((worldState) =>
                 {

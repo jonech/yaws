@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Support.V7.Widget;
+using Xamarin.Essentials;
+
 using yaws.Droid.Source.Setting;
 using Android.Support.V4.View;
 using Widget = Android.Support.Design.Widget;
@@ -21,8 +23,8 @@ namespace yaws.Droid.Source.Dashboard
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class DashboardActivity : AppCompatActivity, ViewPager.IOnPageChangeListener
     {
-        Toolbar toolbar;
-        AppStateService worldStateService;
+        protected AppStateService WorldStateService;
+        protected AppSettings AppSettings;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,10 +33,11 @@ namespace yaws.Droid.Source.Dashboard
 
             using (var scope = App.Container.BeginLifetimeScope())
             {
-                worldStateService= scope.Resolve<AppStateService>();
+                WorldStateService= scope.Resolve<AppStateService>();
+                AppSettings = scope.Resolve<AppSettings>();
             }
 
-            toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_dashboard);
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_dashboard);
             SetSupportActionBar(toolbar);
 
 
@@ -61,7 +64,8 @@ namespace yaws.Droid.Source.Dashboard
         {
             base.OnStart();
 
-            worldStateService.FetchWorldState();
+            WorldStateService.Platform = AppSettings.Platform;
+            WorldStateService.FetchWorldState();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

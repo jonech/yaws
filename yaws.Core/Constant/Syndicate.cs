@@ -5,11 +5,8 @@ using System.Text;
 namespace yaws.Core.Constant
 {
     /// <summary>
-    /// Syndicates in Warframe.
+    /// Constant values for Syndicate.
     /// </summary>
-    /// <remarks>
-    /// Refer to https://warframe.fandom.com/wiki/Syndicate.
-    /// </remarks>
     public class Syndicate
     {
         /// <summary>

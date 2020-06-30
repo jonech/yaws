@@ -8,7 +8,7 @@ namespace yaws.Core.Constant
     /// Factions in Warframe.
     /// </summary>
     /// <remarks>
-    /// Refer to https://warframe.fandom.com/wiki/Factions.
+    /// Maps to some value from WarframeStat API
     /// </remarks>
     public class Faction
     {

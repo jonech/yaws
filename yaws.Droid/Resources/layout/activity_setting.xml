@@ -9,7 +9,6 @@
         android:id="@+id/toolbar_setting"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="@dimen/design_appbar_elevation"
         android:textAlignment="center"
         android:layout_alignParentTop="true"
         app:theme="?attr/ToolbarTheme"/>
@@ -33,7 +32,8 @@
                     android:id="@+id/text_setting_platform"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_platform"/>
+                    android:text="@string/setting_platform"
+                    android:textSize="@dimen/setting_text_size"/>
 
                 <RadioGroup
                     android:id="@+id/radio_group_setting_platform"
@@ -41,21 +41,29 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_setting_platform">
                     <RadioButton
+                        android:id="@+id/radio_button_setting_platform_pc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/platform_pc"/>
+                        android:text="@string/platform_pc"
+                        style="?attr/RadioButtonStyle"/>
                     <RadioButton
+                        android:id="@+id/radio_button_setting_platform_xb1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/platform_xb1"/>
+                        android:text="@string/platform_xb1"
+                        style="?attr/RadioButtonStyle"/>
                     <RadioButton
+                        android:id="@+id/radio_button_setting_platform_ps4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/platform_ps4"/>
+                        android:text="@string/platform_ps4"
+                        style="?attr/RadioButtonStyle"/>
                     <RadioButton
+                        android:id="@+id/radio_button_setting_platform_switch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/platform_switch"/>
+                        android:text="@string/platform_switch"
+                        style="?attr/RadioButtonStyle"/>
                 </RadioGroup>
 
             </RelativeLayout>
