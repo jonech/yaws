@@ -51,9 +51,23 @@ namespace yaws.Droid.Source
         {
             refreshingSubject.OnNext(true);
 
+            //var dis = repository.GetWorldState()
+            //    .ToObservable()
+            //    .Subscribe((worldState) =>
+            //    {
+            //        refreshingSubject.OnNext(false);
+
+            //        if (worldState != null)
+            //            worldStateSubject.OnNext(worldState);
+            //    },
+            //    err =>
+            //    {
+            //        refreshingSubject.OnNext(false);
+            //        worldStateSubject.OnError(err);
+            //    });
+
             var dis = repository.GetWorldState()
                 .ToObservable()
-                //.DoOnBackgroundThenHandleOnUI()
                 .Subscribe((worldState) =>
                 {
                     if (worldState != null)

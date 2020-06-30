@@ -8,13 +8,30 @@ using System.Timers;
 
 namespace yaws.Core.ViewModel
 {
+    /// <summary>
+    /// ViewModel that can be expired.
+    /// </summary>
     public abstract class ExpirableViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Expiry. WarframeStat's field
+        /// </summary>
         public DateTime Expiry { get; set; }
 
+        /// <summary>
+        /// Activation. WarframeStat's field
+        /// </summary>
         public DateTime Activation { get; set; }
 
+        /// <summary>
+        /// Observable that ticks every second.
+        /// Get the most updated CurrentTimeLeft.
+        /// </summary>
         public IObservable<TimeSpan> TimeLeftObservable { get; private set; }
+
+        /// <summary>
+        /// How much time left until the stat is expired.
+        /// </summary>
         public TimeSpan CurrentTimeLeft => Expiry - DateTime.UtcNow;
 
         public ExpirableViewModel(IExpirable model) : base()

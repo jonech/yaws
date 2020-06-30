@@ -97,6 +97,7 @@ namespace yaws.Droid.Source.Dashboard
         {
             worldStateSubscription = worldStateService.WorldStateObservable
                 .Retry()
+                .Delay(TimeSpan.FromSeconds(0.2)) // hack: let refresh animation finish to appear less 'jerky'
                 .DoOnBackgroundThenHandleOnUI()
                 .Subscribe((worldState) =>
                 {

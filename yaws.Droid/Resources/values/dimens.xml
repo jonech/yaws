@@ -5,4 +5,5 @@
 
     <dimen name="card_radius">0dp</dimen>
 
+    <dimen name="card_setting_margin">10dp</dimen>
 </resources>

@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Support.Design.Chip;
 using Android.Views;
 using Android.Widget;
+using Android.Graphics;
+using yaws.Core.Constant;
 using yaws.Core.ViewModel;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
@@ -50,34 +52,34 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
                 DefenderTextView.Text = viewModel.DefendingFaction;
 
                 if (viewModel.VSInfestation)
-                {
-                    AttackerProgressTextView.SetBackgroundColor(Android.Graphics.Color.Red);
                     AttackerRewardChip.Visibility = ViewStates.Invisible;
-                }
-                else if (viewModel.AttackingFaction == "Grineer")
-                {
-                    AttackerProgressTextView.SetBackgroundColor(Android.Graphics.Color.Green);
-                }
                 else
-                {
-                    AttackerProgressTextView.SetBackgroundColor(Android.Graphics.Color.Blue);
-                }
-
-                if (viewModel.DefendingFaction == "Grineer")
-                {
-                    DefenderProgressTextView.SetBackgroundColor(Android.Graphics.Color.Green);
-                }
-                else
-                {
-                    DefenderProgressTextView.SetBackgroundColor(Android.Graphics.Color.Blue);
-                }
+                    AttackerRewardChip.Visibility = ViewStates.Visible;
 
                 AttackerRewardChip.Text = viewModel.AttackerReward.ItemString;
                 DefenderRewardChip.Text = viewModel.DefenderReward.ItemString;
 
+                AttackerProgressTextView.SetBackgroundColor(GetFactionColor(viewModel.AttackingFaction));
+                DefenderProgressTextView.SetBackgroundColor(GetFactionColor(viewModel.DefendingFaction));
                 AttackerProgressTextView.LayoutParameters = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MatchParent, viewModel.Completion/100);
                 DefenderProgressTextView.LayoutParameters = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MatchParent, 1 - (viewModel.Completion/100));
             }
+        }
+
+        private Color GetFactionColor(string faction)
+        {
+            switch (faction)
+            {
+                case Faction.Grineer:
+                    return Color.IndianRed;
+                case Faction.Corpus:
+                    return Color.CornflowerBlue;
+                case Faction.Infested:
+                    return Color.SeaGreen;
+                default:
+                    break;
+            }
+            return Color.WhiteSmoke;
         }
     }
 }

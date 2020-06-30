@@ -4,4 +4,11 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_setting">Settings</string>
     <string name="refresh">Refresh</string>
+
+    <string name="setting_platform">Platform</string>
+    <string name="platform_pc">PC</string>
+    <string name="platform_xb1">Xbox</string>
+    <string name="platform_ps4">PS4</string>
+    <string name="platform_switch">Switch</string>
+
 </resources>
