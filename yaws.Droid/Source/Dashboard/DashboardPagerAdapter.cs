@@ -14,27 +14,21 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Autofac;
+using yaws.Droid.Source.Dashboard.Fragments;
 
 namespace yaws.Droid.Source.Dashboard
 {
     public class DashboardPagerAdapter : FragmentPagerAdapter, ViewPager.IOnPageChangeListener
     {
         List<StatsFragment> fragments;
-        AppStateService worldStateService;
 
         public DashboardPagerAdapter(List<StatsFragment> fragments, FragmentManager fm) : base(fm)
         {
             this.fragments = fragments;
-
-            using (var scope = App.Container.BeginLifetimeScope())
-            {
-                worldStateService = scope.Resolve<AppStateService>();
-            }
         }
 
         public override int Count => fragments.Count;
 
-        private int previousPosition;
 
         public override ICharSequence GetPageTitleFormatted(int position)
         {

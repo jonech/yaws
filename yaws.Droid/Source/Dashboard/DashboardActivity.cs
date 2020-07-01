@@ -16,6 +16,7 @@ using yaws.Droid.Source.Setting;
 using Android.Support.V4.View;
 using Widget = Android.Support.Design.Widget;
 using yaws.Core;
+using yaws.Droid.Source.Dashboard.Fragments;
 using Autofac;
 
 namespace yaws.Droid.Source.Dashboard

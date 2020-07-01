@@ -21,7 +21,7 @@ using yaws.Core.ViewModel;
 using yaws.Droid.Source.Util;
 
 
-namespace yaws.Droid.Source.Dashboard
+namespace yaws.Droid.Source.Dashboard.Fragments
 {
     public abstract class StatsFragment : Fragment, SwipeRefreshLayout.IOnRefreshListener
     {
@@ -137,69 +137,5 @@ namespace yaws.Droid.Source.Dashboard
 
 
         protected abstract void OnWorldStateDataChanged(WorldStateViewModel worldState);
-    }
-
-
-    public class CommonStatsFragment : StatsFragment
-    {
-        public override string Title => "Common";
-
-        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
-        {
-            StatsRecyclerAdapter.SetItems(new List<ViewModelBase>
-            {
-                worldState.EarthCycle,
-                worldState.Arbitration,
-                worldState.SentientOutpost
-            });
-        }
-    }
-
-    public class CetusStatsFragment : StatsFragment
-    {
-        public override string Title => "Cetus";
-
-        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
-        {
-            StatsRecyclerAdapter.SetItems(new List<ViewModelBase>
-            {
-                worldState.CetusCycle,
-                worldState.CetusBounty
-            });
-        }
-    }
-
-    public class VallisStatsFragment : StatsFragment
-    {
-        public override string Title => "Vallis";
-
-        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
-        {
-            StatsRecyclerAdapter.SetItems(new List<ViewModelBase>
-            {
-                worldState.VallisCycle,
-                worldState.VallisBounty
-            });
-        }
-    }
-
-    public class FissureStatsFragment : StatsFragment
-    {
-        public override string Title => "Fissure";
-
-        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
-        {
-            StatsRecyclerAdapter.SetItems(worldState.Fissures.Cast<ViewModelBase>().ToList());
-        }
-    }
-
-    public class InvasionStatsFragment : StatsFragment
-    {
-        public override string Title => "Invasion";
-
-        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
-        {
-            StatsRecyclerAdapter.SetItems(worldState.Invasions.Cast<ViewModelBase>().ToList());
-        }
     }
 }
