@@ -38,7 +38,7 @@ namespace Service.Entity
         public string Tier { get; set; }
 
         [JsonProperty("TierNum")]
-        public string TierNum { get; set; }
+        public int TierNum { get; set; }
 
         [JsonProperty("eta")]
         public string ETA { get; set; }

@@ -17,8 +17,6 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
     {
         protected TextView StatusTextView;
 
-        private EarthCycleViewModel viewModel;
-
         public EarthCycleViewHolder(View itemView) : base(itemView)
         {
             TitleTextView = itemView.FindViewById<TextView>(Resource.Id.text_earth_cycle_title);
@@ -30,9 +28,8 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
         {
             base.Bind(item, adapter);
 
-            if (item is EarthCycleViewModel model)
+            if (item is EarthCycleViewModel viewModel)
             {
-                viewModel = model;
                 StatusTextView.Text = viewModel.State;
             }
 

@@ -19,8 +19,6 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
         protected RecyclerView BountyJobsRecycler;
         protected StatsRecyclerAdapter BountyJobsAdapter;
 
-        private BountyViewModel viewModel;
-
 
         public BountyViewHolder(View itemView) : base(itemView)
         {
@@ -43,8 +41,6 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
 
             if (item is BountyViewModel model)
             {
-                viewModel = model;
-
                 BountyJobsAdapter.SetItems(model.Jobs.Cast<ViewModelBase>().ToList());
             }
         }

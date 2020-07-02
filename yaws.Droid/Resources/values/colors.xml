@@ -16,4 +16,8 @@
     <color name="item_selected">#64FF6C</color>
     <color name="white">#ffffff</color>
 
+    <!-- text color for expiry time -->
+    <color name="time_more_than_10min">#64FF6C</color>
+    <color name="time_less_than_10min">#D4F123</color>
+    <color name="time_less_than_5min">#F71976</color>
 </resources>

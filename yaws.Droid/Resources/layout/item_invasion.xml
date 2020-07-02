@@ -25,6 +25,7 @@
             android:id="@+id/text_invasion_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/time_more_than_10min"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"/>
 

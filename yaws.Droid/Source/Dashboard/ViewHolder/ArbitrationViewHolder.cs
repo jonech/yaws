@@ -19,8 +19,6 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
         protected TextView EnemyTextView;
         protected TextView TypeTextView;
 
-        private ArbitrationViewModel viewModel;
-
         public ArbitrationViewHolder(View itemView) : base(itemView)
         {
             TitleTextView = itemView.FindViewById<TextView>(Resource.Id.text_arbi_title);
@@ -34,10 +32,8 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
         {
             base.Bind(item, adapter);
 
-            if (item is ArbitrationViewModel model)
+            if (item is ArbitrationViewModel viewModel)
             {
-                viewModel = model;
-
                 NodeTextView.Text = viewModel.Node;
                 EnemyTextView.Text = viewModel.Enemy;
                 TypeTextView.Text = viewModel.Type;

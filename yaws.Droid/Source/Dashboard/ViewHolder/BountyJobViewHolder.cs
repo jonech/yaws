@@ -21,7 +21,6 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
         protected TextView StandingsTextView;
         protected ChipGroup RewardsChipGroup;
 
-        //protected View ItemView;
         public BountyJobViewHolder(View itemView) : base(itemView)
         {
             TitleTextView = itemView.FindViewById<TextView>(Resource.Id.text_bounty_job_title);
@@ -35,7 +34,7 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
             if (item is BountyJobViewModel model)
             {
                 TitleTextView.Text = model.Type;
-                EnemyLevelsTextView.Text = $"{model.MinEnemyLevel} - {model.MaxEnemyLevel}";
+                EnemyLevelsTextView.Text = $"Level {model.MinEnemyLevel} - {model.MaxEnemyLevel}";
                 StandingsTextView.Text = model.TotalStanding.ToString();
 
                 RewardsChipGroup.RemoveAllViews();

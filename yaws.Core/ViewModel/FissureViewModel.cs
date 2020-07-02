@@ -16,7 +16,7 @@ namespace yaws.Core.ViewModel
         public string MissionType { get; set; }
         public string Enemy { get; set; }
         public string Tier { get; set; }
-        public string TierNum { get; set; }
+        public int TierNum { get; set; }
 
         public FissureViewModel(Fissure model) : base(model)
         {

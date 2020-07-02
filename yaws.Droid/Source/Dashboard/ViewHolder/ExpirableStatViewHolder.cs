@@ -3,8 +3,11 @@ using System.Reactive.Linq;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.Content;
+using Android.Support.V4.Content.Res;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -37,7 +40,7 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
                 {
                     ClearDisposable();
 
-                    TimeLeftTextView.Text = model.CurrentTimeLeft.ToFormattedString();
+                    UpdateTimeLeftText(TimeLeftTextView, model.CurrentTimeLeft);
 
                     Disposable = model.TimeLeftObservable
                         .TakeUntil(time => time < TimeSpan.Zero || TimeLeftTextView == null)
@@ -47,17 +50,37 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
 #if DEBUG
                             Log.Info($"{GetType().Name}", $"{model.Name} -> {timeLeft.ToFormattedString()}");
 #endif
-                            TimeLeftTextView.Text = timeLeft.ToFormattedString();
+                            UpdateTimeLeftText(TimeLeftTextView, model.CurrentTimeLeft);
                         },
                         () =>
                         {
-                            if (TimeLeftTextView != null)
-                                TimeLeftTextView.Text = "EXPIRED";
+                            ClearDisposable();
                         });
 
                     adapter.AddTimeSubscription(Disposable);
                 }
             }
+        }
+
+        private void UpdateTimeLeftText(TextView textView, TimeSpan timeLeft)
+        {
+            textView.Text = timeLeft.ToFormattedString();
+
+            var colorStateList = ContextCompat.GetColorStateList(ItemView.Context, GetTimeLeftTextColor(timeLeft));
+            textView.SetTextColor(colorStateList);
+        }
+
+
+        protected virtual int GetTimeLeftTextColor(TimeSpan timeLeft)
+        {
+            if (timeLeft == null || timeLeft < TimeSpan.Zero)
+                return Resource.Color.time_less_than_5min;
+            else if (timeLeft >= TimeSpan.FromMinutes(10))
+                return Resource.Color.time_more_than_10min;
+            else if (timeLeft >= TimeSpan.FromMinutes(5))
+                return Resource.Color.time_less_than_10min;
+            else
+                return Resource.Color.time_less_than_5min;
         }
 
         private void ClearDisposable()

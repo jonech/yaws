@@ -17,8 +17,6 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
     {
         protected readonly TextView StatusTextView;
 
-        private CetusCycleViewModel viewModel;
-
         public CetusCycleViewHolder(View itemView) : base(itemView)
         {
             TitleTextView = itemView.FindViewById<TextView>(Resource.Id.text_cetus_title);
@@ -32,8 +30,7 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
 
             if (item is CetusCycleViewModel model)
             {
-                viewModel = model;
-                StatusTextView.Text = viewModel.IsDay ? "Day" : "Night";
+                StatusTextView.Text = model.State;
             }
         }
 

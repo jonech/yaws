@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/action_setting"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/refresh"
+        android:icon="@drawable/ic_sentient"
+        android:title="@string/title_setting"
         app:showAsAction="always" />
 </menu>

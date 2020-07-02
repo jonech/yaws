@@ -7,7 +7,8 @@
     <attr format="reference" name="TopTabStyle"/>
     <attr format="reference" name="ChipStyle"/>
     <attr format="reference" name="RadioButtonStyle"/>
-
+    <attr format="reference" name="IconImageStyle"/>
+    
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -25,7 +26,8 @@
         <item name="TopTabStyle">@style/TopTabStyle.Dark</item>
         <item name="ChipStyle">@style/ChipStyle.Dark</item>
         <item name="RadioButtonStyle">@style/RadioButtonStyle.Dark</item>
-        
+        <item name="IconImageStyle">@style/IconImageStyle.Dark</item>
+
         <!-- required textAppearance style for Material Components-->
         <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
@@ -92,5 +94,9 @@
     <style name="RadioButtonStyle.Dark" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:textColor">@color/white</item>
         <item name="buttonTint">@color/radio_button_tint</item>
+    </style>
+
+    <style name="IconImageStyle.Dark" parent="AppTheme">
+        <item name="android:tint">@color/white</item>
     </style>
 </resources>
