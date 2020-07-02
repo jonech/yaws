@@ -26,13 +26,13 @@ namespace Service.Entity
         public string AttackingFaction { get; set; }
 
         [JsonProperty("attackerReward")]
-        public InvasionReward AttackerReward { get; set; }
+        public Reward AttackerReward { get; set; }
 
         [JsonProperty("defendingFaction")]
         public string DefendingFaction { get; set; }
 
         [JsonProperty("defenderReward")]
-        public InvasionReward DefenderReward { get; set; }
+        public Reward DefenderReward { get; set; }
 
         [JsonProperty("vsInfestation")]
         public bool VSInfestation { get; set; }
@@ -54,41 +54,5 @@ namespace Service.Entity
 
         [JsonProperty("rewardTypes")]
         public List<string> RewardTypes { get; set; }
-    }
-
-    public class InvasionReward
-    {
-        [JsonProperty("items")]
-        public List<string> Items { get; set; }
-
-        [JsonProperty("countedItems")]
-        public List<RewardItem> CountedItems { get; set; }
-
-        [JsonProperty("credits")]
-        public int Credits { get; set; }
-
-        [JsonProperty("asString")]
-        public string AsString { get; set; }
-
-        [JsonProperty("itemString")]
-        public string ItemString { get; set; }
-
-        [JsonProperty("thumbnail")]
-        public string Thumbnail { get; set; }
-
-        [JsonProperty("color")]
-        public int Color { get; set; }
-    }
-
-    public class RewardItem
-    {
-        [JsonProperty("count")]
-        public int Count { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("key")]
-        public string Key { get; set; }
     }
 }
