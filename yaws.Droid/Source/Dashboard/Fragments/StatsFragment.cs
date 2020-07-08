@@ -19,7 +19,7 @@ using Autofac;
 using yaws.Core;
 using yaws.Core.ViewModel;
 using yaws.Droid.Source.Util;
-
+using ReactiveUI;
 
 namespace yaws.Droid.Source.Dashboard.Fragments
 {
@@ -69,10 +69,10 @@ namespace yaws.Droid.Source.Dashboard.Fragments
             base.OnStart();
 
             if (worldStateSubscription == null)
-                subscribeToWorldState();
+                SubscribeToWorldState();
 
             if (refreshSubscription == null)
-                subscribeToRefresh();
+                SubscribeToRefresh();
         }
 
         public override void OnDestroy()
@@ -93,27 +93,22 @@ namespace yaws.Droid.Source.Dashboard.Fragments
         }
 
 
-        private void subscribeToWorldState()
+        private void SubscribeToWorldState()
         {
             worldStateSubscription = worldStateService.WorldStateObservable
-                .Retry()
                 .Delay(TimeSpan.FromSeconds(0.2)) // hack: let refresh animation finish to appear less 'jerky'
-                .DoOnBackgroundThenHandleOnUI()
+                .RunOnUI()
                 .Subscribe((worldState) =>
                 {
                     if (worldState != null)
                         OnWorldStateDataChanged(worldState);
-                },
-                err =>
-                {
-                    Toast.MakeText(this.Context, err.ToString(), ToastLength.Short).Show();
                 });
         }
 
-        private void subscribeToRefresh()
+        private void SubscribeToRefresh()
         {
             refreshSubscription = worldStateService.RefreshingObservable
-                .DoOnBackgroundThenHandleOnUI()
+                .RunOnUI()
                 .Subscribe(refresh => refreshLayout.Refreshing = refresh);
         }
 

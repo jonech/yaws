@@ -10,7 +10,6 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Support.V7.Widget;
-using Xamarin.Essentials;
 
 using yaws.Droid.Source.Setting;
 using Android.Support.V4.View;
@@ -18,23 +17,30 @@ using Widget = Android.Support.Design.Widget;
 using yaws.Core;
 using yaws.Droid.Source.Dashboard.Fragments;
 using Autofac;
+using System.Reactive.Threading.Tasks;
+using yaws.Droid.Source.Util;
+using System.Reactive.Linq;
 
 namespace yaws.Droid.Source.Dashboard
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
-    public class DashboardActivity : AppCompatActivity, ViewPager.IOnPageChangeListener
+    public class DashboardActivity : AppCompatActivity
     {
-        protected AppStateService WorldStateService;
-        protected AppSettings AppSettings;
+        protected AppStateService AppStateService { get; set; }
+        protected AppSettings AppSettings { get; set; }
+
+        private DashboardPagerAdapter dashboardPagerAdapter;
+        private IDisposable errorSubscription;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_dashboard);
 
             using (var scope = App.Container.BeginLifetimeScope())
             {
-                WorldStateService= scope.Resolve<AppStateService>();
+                AppStateService= scope.Resolve<AppStateService>();
                 AppSettings = scope.Resolve<AppSettings>();
             }
 
@@ -42,8 +48,8 @@ namespace yaws.Droid.Source.Dashboard
             SetSupportActionBar(toolbar);
 
 
-            var dashboardPager = FindViewById<ViewPager>(Resource.Id.pager_main_dashboard);
-            var pagerAdapter = new DashboardPagerAdapter(
+            var viewPager = FindViewById<ViewPager>(Resource.Id.pager_main_dashboard);
+            dashboardPagerAdapter = new DashboardPagerAdapter(
                 new List<StatsFragment>()
                 {
                     new CommonStatsFragment(),
@@ -53,20 +59,35 @@ namespace yaws.Droid.Source.Dashboard
                     new InvasionStatsFragment()
                 },
                 SupportFragmentManager);
-            dashboardPager.Adapter = pagerAdapter;
-            dashboardPager.AddOnPageChangeListener(pagerAdapter);
-            dashboardPager.OffscreenPageLimit = 4;
+            viewPager.Adapter = dashboardPagerAdapter;
+            viewPager.OffscreenPageLimit = 4;
 
             var tab = FindViewById<Widget.TabLayout>(Resource.Id.tab_main_dashboard);
-            tab.SetupWithViewPager(dashboardPager);
+            tab.SetupWithViewPager(viewPager);
         }
 
         protected override void OnStart()
         {
             base.OnStart();
 
-            WorldStateService.Platform = AppSettings.Platform;
-            WorldStateService.FetchWorldState();
+            errorSubscription = AppStateService.ErrorObservable
+                .Where(error => !string.IsNullOrEmpty(error))
+                .RunOnUI()
+                .Subscribe(error =>
+                {
+                    Android.Widget.Toast.MakeText(this, error.ToString(), Android.Widget.ToastLength.Short).Show();
+                });
+
+            AppStateService.Platform = AppSettings.Platform;
+            AppStateService.FetchWorldState();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            if (errorSubscription != null)
+                errorSubscription.Dispose();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -81,6 +102,7 @@ namespace yaws.Droid.Source.Dashboard
             switch (item.ItemId)
             {
                 case Resource.Id.action_refresh:
+                    Refresh();
                     break;
                 case Resource.Id.action_setting:
                     NavigateToSetting();
@@ -95,19 +117,9 @@ namespace yaws.Droid.Source.Dashboard
             StartActivity(intent);
         }
 
-
-        public void OnPageScrollStateChanged(int state)
+        private void Refresh()
         {
-            //throw new NotImplementedException();
-        }
-
-        public void OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-        {
-            //throw new NotImplementedException();
-        }
-
-        public void OnPageSelected(int position)
-        {
+            AppStateService.FetchWorldState();
         }
     }
 }

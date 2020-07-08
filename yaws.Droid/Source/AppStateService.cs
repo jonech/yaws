@@ -29,6 +29,8 @@ namespace yaws.Droid.Source
         private BehaviorSubject<bool> refreshingSubject;
         public IObservable<bool> RefreshingObservable => refreshingSubject.AsObservable();
 
+        private BehaviorSubject<string> errorSubject;
+        public IObservable<string> ErrorObservable => errorSubject.AsObservable();
 
         public string Platform { get; set; }
 
@@ -37,6 +39,7 @@ namespace yaws.Droid.Source
             this.repository = repository;
             worldStateSubject = new BehaviorSubject<WorldStateViewModel>(null);
             refreshingSubject = new BehaviorSubject<bool>(false);
+            errorSubject = new BehaviorSubject<string>(string.Empty);
             Platform = WFPlatform.PC;
         }
 
@@ -69,7 +72,8 @@ namespace yaws.Droid.Source
                 },
                 err =>
                 {
-                    worldStateSubject.OnError(err);
+                    errorSubject.OnNext(err.Message);
+                    refreshingSubject.OnNext(false);
                 },
                 () =>
                 {

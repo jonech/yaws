@@ -20,7 +20,9 @@ namespace yaws.Droid.Source.Dashboard
 {
     public class DashboardPagerAdapter : FragmentPagerAdapter, ViewPager.IOnPageChangeListener
     {
-        List<StatsFragment> fragments;
+        public StatsFragment CurrentFragment { get; private set; }
+
+        private readonly List<StatsFragment> fragments;
 
         public DashboardPagerAdapter(List<StatsFragment> fragments, FragmentManager fm) : base(fm)
         {
@@ -46,6 +48,13 @@ namespace yaws.Droid.Source.Dashboard
             throw new ArgumentOutOfRangeException($"Attempt to retrieve fragment at position {position}");
         }
 
+        public override void SetPrimaryItem(ViewGroup container, int position, Java.Lang.Object @object)
+        {
+            if (fragments[position] != null)
+                CurrentFragment = fragments[position];
+
+            base.SetPrimaryItem(container, position, @object);
+        }
 
         public void OnPageScrollStateChanged(int state)
         {
