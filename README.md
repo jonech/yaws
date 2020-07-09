@@ -1,5 +1,5 @@
-# Yet Another Warframe Status
-Yet Another Warframe Status (YAWS) is a mobile app that shows Warframe status. Built with Xamarin.Android, and uses [WarframeStat.us API](https://docs.warframestat.us/) to get all of the in-game data.
+# Yellow Ash Warframe Stat
+Yellow Ash Warframe Stat (YAWS) is a mobile app that shows Warframe status. Built with Xamarin.Android, and uses [WarframeStat.us API](https://docs.warframestat.us/) to get all of the in-game data.
 
 ## Features
 - Cetus Status (Cetus Cycle and Bounties)
