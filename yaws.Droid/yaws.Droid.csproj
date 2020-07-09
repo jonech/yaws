@@ -86,7 +86,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Dashboard\ViewHolder\VallisCycleViewHolder.cs" />
     <Compile Include="Source\Setting\SettingActivity.cs" />
-    <Compile Include="Source\Setting\SettingFragment.cs" />
     <Compile Include="Source\Util\TimeSpanExtension.cs" />
     <Compile Include="Source\Util\UIThreadScheduler.cs" />
     <Compile Include="Source\AppStateService.cs" />
@@ -99,9 +98,6 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\activity_main.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\values\dimens.xml" />
     <AndroidResource Include="Resources\values\ic_launcher_background.xml" />
@@ -142,16 +138,6 @@
       <Project>{5734de58-8007-4ce6-9e7b-951d7ee7614a}</Project>
       <Name>yaws.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\fragment_dashboard.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\fragment_setting.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\color\bottom_nav_item_selector.xml">

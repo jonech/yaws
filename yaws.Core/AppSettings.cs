@@ -9,9 +9,6 @@ namespace yaws.Core
     /// <summary>
     /// Saving and retrieving local app settings using Xamarin.Essentials Preferences
     /// </summary>
-    /// <remarks>
-    /// Android: Xamarin.Essentials is initialised in SettingActivity.
-    /// </remarks>
     public class AppSettings
     {
         /// <summary>
