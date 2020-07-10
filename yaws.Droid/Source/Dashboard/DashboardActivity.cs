@@ -20,12 +20,14 @@ using Autofac;
 using System.Reactive.Threading.Tasks;
 using yaws.Droid.Source.Util;
 using System.Reactive.Linq;
+using Android.Gms.Common;
 
 namespace yaws.Droid.Source.Dashboard
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class DashboardActivity : AppCompatActivity
     {
+        public const string CHANNEL_ID = "yaws_notification_channel";
         protected AppStateService AppStateService { get; set; }
         protected AppSettings AppSettings { get; set; }
 
@@ -36,6 +38,8 @@ namespace yaws.Droid.Source.Dashboard
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            InitNotificationChannel();
+
             SetContentView(Resource.Layout.activity_dashboard);
 
             using (var scope = App.Container.BeginLifetimeScope())
@@ -120,6 +124,31 @@ namespace yaws.Droid.Source.Dashboard
         private void Refresh()
         {
             AppStateService.FetchWorldState();
+        }
+
+        private void InitNotificationChannel()
+        {
+            int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
+            if (resultCode != ConnectionResult.Success)
+                return;
+
+            if (Build.VERSION.SdkInt < BuildVersionCodes.O)
+            {
+                // Notification channels are new in API 26 (and not a part of the
+                // support library). There is no need to create a notification
+                // channel on older versions of Android.
+                return;
+            }
+            var channel = new NotificationChannel(CHANNEL_ID,
+                                          "FCM Notifications",
+                                          NotificationImportance.Default)
+            {
+
+                Description = "Firebase Cloud Messages appear in this channel"
+            };
+
+            var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+            notificationManager.CreateNotificationChannel(channel);
         }
     }
 }
