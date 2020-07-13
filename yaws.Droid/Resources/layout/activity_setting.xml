@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,56 +18,84 @@
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar_setting">
 
-        <!-- platform -->
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="?attr/StatCardStyle">
-            <RelativeLayout
+            android:orientation="vertical">
+        
+            <TextView
+                android:id="@+id/text_setting_platform_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/card_setting_margin">
+                android:text="Game Platform"
+                android:textSize="@dimen/setting_text_size"/>
 
-                <TextView
-                    android:id="@+id/text_setting_platform"
+            <!-- platform -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="?attr/StatCardStyle">
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/setting_platform"
-                    android:textSize="@dimen/setting_text_size"/>
+                    android:layout_margin="@dimen/card_setting_margin">
 
-                <RadioGroup
-                    android:id="@+id/radio_group_setting_platform"
+                    <TextView
+                        android:id="@+id/text_setting_platform"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_platform"
+                        android:textSize="@dimen/setting_text_size"/>
+                    <RadioGroup
+                        android:id="@+id/radio_group_setting_platform"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/text_setting_platform">
+                        <RadioButton
+                            android:id="@+id/radio_button_setting_platform_pc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/platform_pc"
+                            style="?attr/RadioButtonStyle"/>
+                        <RadioButton
+                            android:id="@+id/radio_button_setting_platform_xb1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/platform_xb1"
+                            style="?attr/RadioButtonStyle"/>
+                        <RadioButton
+                            android:id="@+id/radio_button_setting_platform_ps4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/platform_ps4"
+                            style="?attr/RadioButtonStyle"/>
+                        <RadioButton
+                            android:id="@+id/radio_button_setting_platform_switch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/platform_switch"
+                            style="?attr/RadioButtonStyle"/>
+                    </RadioGroup>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_setting_cetus_cycle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/text_setting_platform">
-                    <RadioButton
-                        android:id="@+id/radio_button_setting_platform_pc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/platform_pc"
-                        style="?attr/RadioButtonStyle"/>
-                    <RadioButton
-                        android:id="@+id/radio_button_setting_platform_xb1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/platform_xb1"
-                        style="?attr/RadioButtonStyle"/>
-                    <RadioButton
-                        android:id="@+id/radio_button_setting_platform_ps4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/platform_ps4"
-                        style="?attr/RadioButtonStyle"/>
-                    <RadioButton
-                        android:id="@+id/radio_button_setting_platform_switch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/platform_switch"
-                        style="?attr/RadioButtonStyle"/>
-                </RadioGroup>
-
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
+                    android:text="Cetus Cycle"/>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
 
     </ScrollView>
 </RelativeLayout>

@@ -22,19 +22,19 @@ namespace yaws.Droid.Source.Dashboard
     {
         public StatsFragment CurrentFragment { get; private set; }
 
-        private readonly List<StatsFragment> fragments;
+        private readonly List<StatsFragment> _fragments;
 
         public DashboardPagerAdapter(List<StatsFragment> fragments, FragmentManager fm) : base(fm)
         {
-            this.fragments = fragments;
+            this._fragments = fragments;
         }
 
-        public override int Count => fragments.Count;
+        public override int Count => _fragments.Count;
 
 
         public override ICharSequence GetPageTitleFormatted(int position)
         {
-            var fragment = fragments[position];
+            var fragment = _fragments[position];
 
             ICharSequence charSeq = new Java.Lang.String(fragment.Title);
             return charSeq;
@@ -43,15 +43,15 @@ namespace yaws.Droid.Source.Dashboard
         public override Fragment GetItem(int position)
         {
             if (position >= 0 && position < Count)
-                return fragments[position];
+                return _fragments[position];
 
             throw new ArgumentOutOfRangeException($"Attempt to retrieve fragment at position {position}");
         }
 
         public override void SetPrimaryItem(ViewGroup container, int position, Java.Lang.Object @object)
         {
-            if (fragments[position] != null)
-                CurrentFragment = fragments[position];
+            if (_fragments[position] != null)
+                CurrentFragment = _fragments[position];
 
             base.SetPrimaryItem(container, position, @object);
         }
