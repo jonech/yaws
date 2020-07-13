@@ -21,32 +21,33 @@ namespace yaws.Droid.Source
 {
     public class AppStateService
     {
-        private WorldStateRepository repository;
+        private readonly WorldStateRepository _repository;
+        private readonly AppSettings _appSettings;
 
-        private BehaviorSubject<WorldStateViewModel> worldStateSubject;
-        public IObservable<WorldStateViewModel> WorldStateObservable => worldStateSubject.AsObservable();
+        private readonly BehaviorSubject<WorldStateViewModel> _worldStateSubject;
+        public IObservable<WorldStateViewModel> WorldStateObservable => _worldStateSubject.AsObservable();
+        public WorldStateViewModel CurrentWorldState => _worldStateSubject.Value;
 
-        private BehaviorSubject<bool> refreshingSubject;
-        public IObservable<bool> RefreshingObservable => refreshingSubject.AsObservable();
+        private readonly BehaviorSubject<bool> _refreshingSubject;
+        public IObservable<bool> RefreshingObservable => _refreshingSubject.AsObservable();
 
-        private BehaviorSubject<string> errorSubject;
-        public IObservable<string> ErrorObservable => errorSubject.AsObservable();
+        private readonly BehaviorSubject<string> _errorSubject;
+        public IObservable<string> ErrorObservable => _errorSubject.AsObservable();
 
-        public string Platform { get; set; }
-
-        public AppStateService(WorldStateRepository repository)
+        public AppStateService(WorldStateRepository repository, AppSettings appSettings)
         {
-            this.repository = repository;
-            worldStateSubject = new BehaviorSubject<WorldStateViewModel>(null);
-            refreshingSubject = new BehaviorSubject<bool>(false);
-            errorSubject = new BehaviorSubject<string>(string.Empty);
-            Platform = WFPlatform.PC;
+            _repository = repository;
+            _appSettings = appSettings;
+
+            _worldStateSubject = new BehaviorSubject<WorldStateViewModel>(null);
+            _refreshingSubject = new BehaviorSubject<bool>(false);
+            _errorSubject = new BehaviorSubject<string>(string.Empty);
         }
 
 
         public void FetchWorldState()
         {
-            refreshingSubject.OnNext(true);
+            _refreshingSubject.OnNext(true);
 
             //var dis = repository.GetWorldState()
             //    .ToObservable()
@@ -62,22 +63,22 @@ namespace yaws.Droid.Source
             //        refreshingSubject.OnNext(false);
             //        worldStateSubject.OnError(err);
             //    });
-
-            var dis = repository.GetWorldState(Platform)
+            var plaform = _appSettings.Platform;
+            var dis = _repository.GetWorldState(plaform)
                 .ToObservable()
                 .Subscribe((worldState) =>
                 {
                     if (worldState != null)
-                        worldStateSubject.OnNext(worldState);
+                        _worldStateSubject.OnNext(worldState);
                 },
                 err =>
                 {
-                    errorSubject.OnNext(err.Message);
-                    refreshingSubject.OnNext(false);
+                    _errorSubject.OnNext(err.Message);
+                    _refreshingSubject.OnNext(false);
                 },
                 () =>
                 {
-                    refreshingSubject.OnNext(false);
+                    _refreshingSubject.OnNext(false);
                 });
         }
     }

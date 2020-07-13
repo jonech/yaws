@@ -18,7 +18,7 @@ namespace yaws.Droid.Source.Dashboard
 {
     public class StatsRecyclerAdapter : RecyclerView.Adapter
     {
-        private CompositeDisposable timeSubscriptions;
+        private CompositeDisposable _timeSubscriptions;
         public List<ViewModelBase> ItemSource { get; private set; }
 
         public StatsRecyclerAdapter()
@@ -132,16 +132,16 @@ namespace yaws.Droid.Source.Dashboard
 
         public void AddTimeSubscription(IDisposable disposable)
         {
-            if (timeSubscriptions == null)
-                timeSubscriptions = new CompositeDisposable();
+            if (_timeSubscriptions == null)
+                _timeSubscriptions = new CompositeDisposable();
 
-            timeSubscriptions.Add(disposable);
+            _timeSubscriptions.Add(disposable);
         }
 
         public void DisposeSubscriptions()
         {
-            if (timeSubscriptions != null)
-                timeSubscriptions.Dispose();
+            if (_timeSubscriptions != null)
+                _timeSubscriptions.Dispose();
         }
     }
 }
