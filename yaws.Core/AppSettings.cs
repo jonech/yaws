@@ -14,7 +14,7 @@ namespace yaws.Core
         /// <summary>
         /// Key for Platform
         /// </summary>
-        private const string PlatformKey = "PlatformKey";
+        private const string _platformKey = "PlatformKey";
 
         /// <summary>
         /// Get/Set Platform
@@ -23,11 +23,24 @@ namespace yaws.Core
         {
             get
             {
-                return Preferences.Get(PlatformKey, WFPlatform.PC);
+                return Preferences.Get(_platformKey, WFPlatform.PC);
             }
             set
             {
-                Preferences.Set(PlatformKey, value);
+                Preferences.Set(_platformKey, value);
+            }
+        }
+
+        private const string _cetusCycleNotificationKey = "CetusCycleNotificationKey";
+        public bool CetusCycleNotification
+        {
+            get
+            {
+                return Preferences.Get(_cetusCycleNotificationKey, false);
+            }
+            set
+            {
+                Preferences.Set(_cetusCycleNotificationKey, value);
             }
         }
     }

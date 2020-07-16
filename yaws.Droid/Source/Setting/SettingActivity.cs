@@ -14,6 +14,9 @@ using Android.Widget;
 using yaws.Core.Constant;
 using yaws.Core;
 using Autofac;
+using Android.Support.V7.Widget;
+using Firebase.Messaging;
+using yaws.Droid.Source.Util;
 
 namespace yaws.Droid.Source.Setting
 {
@@ -47,6 +50,8 @@ namespace yaws.Droid.Source.Setting
             PlatformRadioGroup = FindViewById<RadioGroup>(Resource.Id.radio_group_setting_platform);
             PlatformRadioGroup.Check(GetPlatformSettingId(AppSettings.Platform));
             PlatformRadioGroup.SetOnCheckedChangeListener(this);
+
+            InitCetusNotification();
         }
 
         public override bool OnSupportNavigateUp()
@@ -69,7 +74,31 @@ namespace yaws.Droid.Source.Setting
 
         public void OnCheckedChanged(RadioGroup group, int checkedId)
         {
-            AppSettings.Platform = GetWFPlatformEnum(checkedId);
+            var prevPlatform = AppSettings.Platform;
+            var newPlatform = GetWFPlatformEnum(checkedId);
+            AppSettings.Platform = newPlatform;
+            ResubscribeNotificationPlatform(prevPlatform, newPlatform);
+        }
+
+        private void InitCetusNotification()
+        {
+            var cetusSwitch = FindViewById<SwitchCompat>(Resource.Id.switch_setting_cetus_cycle);
+            cetusSwitch.Checked = AppSettings.CetusCycleNotification;
+            cetusSwitch.CheckedChange += CetusCycleSwitchCheckedChanged;
+        }
+
+        private void CetusCycleSwitchCheckedChanged(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (e.IsChecked)
+            {
+                FirebaseMessaging.Instance.SubscribeToTopic(AppSettings.Platform, WFStat.CetusCycle);
+            }
+            else
+            {
+                FirebaseMessaging.Instance.UnsubscribeFromTopic(AppSettings.Platform, WFStat.CetusCycle);
+            }
+
+            AppSettings.CetusCycleNotification = e.IsChecked;
         }
 
         private string GetWFPlatformEnum(int platformId)
@@ -94,6 +123,15 @@ namespace yaws.Droid.Source.Setting
                 WFPlatform.Switch => Resource.Id.radio_button_setting_platform_switch,
                 _ => Resource.Id.radio_button_setting_platform_pc,
             };
+        }
+
+        private void ResubscribeNotificationPlatform(string previousPlatform, string newPlatform)
+        {
+            if (AppSettings.CetusCycleNotification)
+            {
+                FirebaseMessaging.Instance.UnsubscribeFromTopic(previousPlatform, WFStat.CetusCycle);
+                FirebaseMessaging.Instance.SubscribeToTopic(newPlatform, WFStat.CetusCycle);
+            }
         }
     }
 }

@@ -26,18 +26,19 @@ namespace yaws.Droid.Source
         public override void OnMessageReceived(RemoteMessage message)
         {
             Log.Debug(TAG, "From: " + message.From);
+            Log.Debug(TAG, "To: " + message.To);
             if (message.GetNotification() != null)
             {
                 //These is how most messages will be received
                 Log.Debug(TAG, "Notification Message Body: " + message.GetNotification().Body);
-                SendNotification(message.GetNotification().Body);
+               // SendNotification(message.GetNotification().Body);
             }
             else
             {
                 //Only used for debugging payloads sent from the Azure portal
-                SendNotification(message.Data.Values.First());
-
+                //SendNotification(message.Data.Values.First());
             }
+            base.OnMessageReceived(message);
         }
 
         void SendNotification(string messageBody)

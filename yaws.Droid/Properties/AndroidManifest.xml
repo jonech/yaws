@@ -5,11 +5,15 @@
           package="io.github.jonech.yaws.droid">
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
     <application android:allowBackup="true" android:icon="@mipmap/ic_trashcone" android:label="@string/app_name" android:roundIcon="@mipmap/ic_trashcone_round" android:supportsRtl="true" android:theme="@style/AppTheme">
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+                   android:resource="@drawable/ic_emoji_24dp" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color"
+                   android:resource="@color/notification_color" />
         <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver"
-                    android:exported="false" />
+                  android:exported="false" />
         <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
-                    android:exported="true"
-                    android:permission="com.google.android.c2dm.permission.SEND">
+                  android:exported="true"
+                  android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />

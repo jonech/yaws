@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <!--<color name="colorPrimary">#2c3e50</color>
     <color name="colorPrimaryDark">#1B3147</color>
     <color name="colorAccent">#3498db</color>-->
 
-    <color name="colorPrimary">#2F3A4F</color>
-    <color name="colorPrimaryDark">#232C3D</color>
-    <color name="colorAccent">#3498db</color>
+    <color name="color_primary">#2F3A4F</color>
+    <color name="color_primary_dark">#232C3D</color>
+    <color name="color_accent">#64FF6C</color>
 
     <color name="card_background_dark">#2F3A4F</color>
     <color name="activity_background_dark">#232C3D</color>
@@ -15,6 +15,8 @@
 
     <color name="item_selected">#64FF6C</color>
     <color name="white">#ffffff</color>
+
+    <color name="notification_color">#525F78</color>
 
     <!-- text color for expiry time -->
     <color name="time_more_than_10min">#64FF6C</color>
