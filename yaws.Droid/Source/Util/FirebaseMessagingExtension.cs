@@ -10,19 +10,20 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Firebase.Messaging;
+using yaws.Core.Constant;
 
 namespace yaws.Droid.Source.Util
 {
     public static class FirebaseMessagingExtension
     {
-        public static Android.Gms.Tasks.Task SubscribeToTopic(this FirebaseMessaging fb, string platform, string stat)
+        public static Android.Gms.Tasks.Task SubscribeToTopic(this FirebaseMessaging fb, string platform, YawsNotification.Topic topic)
         {
-            return fb.SubscribeToTopic($"{platform}_{stat}");
+            return fb.SubscribeToTopic($"{platform}_{nameof(topic)}");
         }
 
-        public static Android.Gms.Tasks.Task UnsubscribeFromTopic(this FirebaseMessaging fb, string platform, string stat)
+        public static Android.Gms.Tasks.Task UnsubscribeFromTopic(this FirebaseMessaging fb, string platform, YawsNotification.Topic topic)
         {
-            return fb.UnsubscribeFromTopic($"{platform}_{stat}");
+            return fb.UnsubscribeFromTopic($"{platform}_{nameof(topic)}");
         }
     }
 }

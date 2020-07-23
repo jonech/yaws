@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xamarin.Essentials;
 using yaws.Core.Constant;
@@ -31,17 +32,28 @@ namespace yaws.Core
             }
         }
 
-        private const string _cetusCycleNotificationKey = "CetusCycleNotificationKey";
-        public bool CetusCycleNotification
+
+        public bool GetSwitchNotificationSetting(YawsNotification.Topic notificationTopic)
         {
-            get
+            if (YawsNotification.AvailableTopics.Contains(notificationTopic))
+                return Preferences.Get(nameof(notificationTopic), false);
+
+#if DEBUG
+            throw new ArgumentException($"{notificationTopic} is not a valid Notification Topic setting");
+#endif
+        }
+
+        public void SetSwitchNotificationSetting(YawsNotification.Topic notificationTopic, bool value)
+        {
+            if (YawsNotification.AvailableTopics.Contains(notificationTopic))
             {
-                return Preferences.Get(_cetusCycleNotificationKey, false);
+                Preferences.Set(nameof(notificationTopic), value);
+                return;
             }
-            set
-            {
-                Preferences.Set(_cetusCycleNotificationKey, value);
-            }
+
+#if DEBUG
+            throw new ArgumentException($"{notificationTopic} is not a valid Notification Topic setting");
+#endif
         }
     }
 }

@@ -11,4 +11,19 @@
     <string name="platform_ps4">PS4</string>
     <string name="platform_switch">Switch</string>
 
+    <string name="notification">Notification</string>
+    <string name="arbitration">Arbitration</string>
+    <string name="sentient_outpost">Sentient Outpost</string>
+    <string name="cetus_cycle">Cetus Cycle</string>
+    <string name="vallis_cycle">Orb Vallis Cycle</string>
+    <string name="earth_cycle">Earth Cycle</string>
+    <string name="invasion">Invasion</string>
+    <string name="cetus_bounty">Ostron Bounty</string>
+    <string name="vallis_bounty">Vox Sollaris Bounty</string>
+    <string name="fissure_lith">Fissure: Lith</string>
+    <string name="fissure_meso">Fissure: Meso</string>
+    <string name="fissure_neo">Fissure: Neo</string>
+    <string name="fissure_axi">Fissure: Axi</string>
+    <string name="fissure_requiem">Fissure: Requiem</string>
+
 </resources>

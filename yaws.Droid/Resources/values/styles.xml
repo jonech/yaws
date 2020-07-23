@@ -1,12 +1,16 @@
 <resources>
 
     <attr format="reference" name="StatCardStyle"/>
+    <attr format="reference" name="SettingCardStyle"/>
+
     <attr format="reference" name="bottomNavigationStyle"/>
     <attr format="reference" name="toolbarStyle"/>
     <attr format="reference" name="ToolbarTheme"/>
+    <attr format="reference" name="ToolbarAltTheme"/>
     <attr format="reference" name="TopTabStyle"/>
     <attr format="reference" name="ChipStyle"/>
     <attr format="reference" name="RadioButtonStyle"/>
+    <attr format="reference" name="SwitchStyle"/>
     <attr format="reference" name="IconImageStyle"/>
     
     <!-- Base application theme. -->
@@ -20,11 +24,17 @@
         <item name="android:textColor">@color/white</item>
 
         <item name="StatCardStyle">@style/CardStyle.Dark</item>
+        <item name="SettingCardStyle">@style/SettingCardStyle.Dark</item>
+
         <item name="bottomNavigationStyle">@style/BottomNavigationStyle.Dark</item>
         <item name="toolbarStyle">@style/ToolbarStyle.Dark</item>
         <item name="ToolbarTheme">@style/ToolbarTheme.Dark</item>
+        <item name="ToolbarAltTheme">@style/ToolbarAltTheme.Dark</item>
+
         <item name="TopTabStyle">@style/TopTabStyle.Dark</item>
         <item name="ChipStyle">@style/ChipStyle.Dark</item>
+        <item name="SwitchStyle">@style/SwitchStyle.Dark</item>
+
         <item name="RadioButtonStyle">@style/RadioButtonStyle.Dark</item>
         <item name="IconImageStyle">@style/IconImageStyle.Dark</item>
 
@@ -49,6 +59,9 @@
     </style>
     <style name="CardStyle.Dark" parent="CardStyle">
         <item name="cardBackgroundColor">@color/card_background_dark</item>
+    </style>
+    <style name="SettingCardStyle.Dark" parent="CardStyle.Dark">
+        <item name="cardElevation">0dp</item>
     </style>
 
     <style name="TopTabStyle.Dark" parent="Widget.Design.TabLayout">
@@ -80,6 +93,9 @@
         <item name="colorControlNormal">@color/white</item>
         <item name="iconTint">@color/item_selected</item>
     </style>
+    <style name="ToolbarAltTheme.Dark" parent="ToolbarTheme.Dark">
+        <item name="android:background">@color/color_primary_dark</item>
+    </style>
 
     <style name="ChipStyle.Dark" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">#73525F78</item>
@@ -94,6 +110,10 @@
     <style name="RadioButtonStyle.Dark" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="android:textColor">@color/white</item>
         <item name="buttonTint">@color/radio_button_tint</item>
+    </style>
+
+    <style name="SwitchStyle.Dark" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="IconImageStyle.Dark" parent="AppTheme">

@@ -17,11 +17,12 @@ using Autofac;
 using Android.Support.V7.Widget;
 using Firebase.Messaging;
 using yaws.Droid.Source.Util;
+using System.Runtime.Remoting.Messaging;
 
 namespace yaws.Droid.Source.Setting
 {
     [Activity(Label = "Setting")]
-    public class SettingActivity : AppCompatActivity, RadioGroup.IOnCheckedChangeListener
+    public class SettingActivity : AppCompatActivity
     {
         protected RadioGroup PlatformRadioGroup;
         protected AppSettings AppSettings;
@@ -47,11 +48,9 @@ namespace yaws.Droid.Source.Setting
                 SupportActionBar.SetDisplayShowHomeEnabled(true);
             }
 
-            PlatformRadioGroup = FindViewById<RadioGroup>(Resource.Id.radio_group_setting_platform);
-            PlatformRadioGroup.Check(GetPlatformSettingId(AppSettings.Platform));
-            PlatformRadioGroup.SetOnCheckedChangeListener(this);
+            InitPlatformSetting();
 
-            InitCetusNotification();
+            InitNotificationSetting();
         }
 
         public override bool OnSupportNavigateUp()
@@ -72,33 +71,20 @@ namespace yaws.Droid.Source.Setting
             return base.OnOptionsItemSelected(item);
         }
 
-        public void OnCheckedChanged(RadioGroup group, int checkedId)
+
+        private void InitPlatformSetting()
+        {
+            var platformRadioGroup = FindViewById<RadioGroup>(Resource.Id.radio_group_setting_platform);
+            platformRadioGroup.Check(GetPlatformSettingId(AppSettings.Platform));
+            platformRadioGroup.CheckedChange += PlatfromRadioGroupCheckedChanged;
+        }
+
+        private void PlatfromRadioGroupCheckedChanged(object sender, RadioGroup.CheckedChangeEventArgs e)
         {
             var prevPlatform = AppSettings.Platform;
-            var newPlatform = GetWFPlatformEnum(checkedId);
+            var newPlatform = GetWFPlatformEnum(e.CheckedId);
             AppSettings.Platform = newPlatform;
             ResubscribeNotificationPlatform(prevPlatform, newPlatform);
-        }
-
-        private void InitCetusNotification()
-        {
-            var cetusSwitch = FindViewById<SwitchCompat>(Resource.Id.switch_setting_cetus_cycle);
-            cetusSwitch.Checked = AppSettings.CetusCycleNotification;
-            cetusSwitch.CheckedChange += CetusCycleSwitchCheckedChanged;
-        }
-
-        private void CetusCycleSwitchCheckedChanged(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            if (e.IsChecked)
-            {
-                FirebaseMessaging.Instance.SubscribeToTopic(AppSettings.Platform, WFStat.CetusCycle);
-            }
-            else
-            {
-                FirebaseMessaging.Instance.UnsubscribeFromTopic(AppSettings.Platform, WFStat.CetusCycle);
-            }
-
-            AppSettings.CetusCycleNotification = e.IsChecked;
         }
 
         private string GetWFPlatformEnum(int platformId)
@@ -127,11 +113,63 @@ namespace yaws.Droid.Source.Setting
 
         private void ResubscribeNotificationPlatform(string previousPlatform, string newPlatform)
         {
-            if (AppSettings.CetusCycleNotification)
+            foreach (var topic in YawsNotification.AvailableTopics)
             {
-                FirebaseMessaging.Instance.UnsubscribeFromTopic(previousPlatform, WFStat.CetusCycle);
-                FirebaseMessaging.Instance.SubscribeToTopic(newPlatform, WFStat.CetusCycle);
+                if (AppSettings.GetSwitchNotificationSetting(topic))
+                {
+                    FirebaseMessaging.Instance.UnsubscribeFromTopic(previousPlatform, topic);
+                    FirebaseMessaging.Instance.SubscribeToTopic(newPlatform, topic);
+                }
             }
+        }
+
+
+        private void InitNotificationSetting()
+        {
+            var notificationRecycler = FindViewById<RecyclerView>(Resource.Id.recyler_notification_settings);
+
+            var notificationSettings = new List<NotificationSetting>();
+            foreach (var topic in YawsNotification.AvailableTopics)
+            {
+                var setting = new NotificationSetting
+                {
+                    Name = GetNotificationSettingName(topic),
+                    Topic = topic,
+                    IsChecked = AppSettings.GetSwitchNotificationSetting(topic)
+                };
+                notificationSettings.Add(setting);
+            }
+
+            var adapter = new NotificationRecyclerAdapter(notificationSettings, AppSettings);
+            notificationRecycler.SetAdapter(adapter);
+
+            var layoutManager = new LinearLayoutManager(ApplicationContext);
+            notificationRecycler.SetLayoutManager(layoutManager);
+
+            var divider = new DividerItemDecoration(ApplicationContext, layoutManager.Orientation);
+            notificationRecycler.AddItemDecoration(divider);
+        }
+
+        private string GetNotificationSettingName(YawsNotification.Topic topic)
+        {
+            return topic switch
+            {
+                YawsNotification.Topic.Arbitration => Resources.GetString(Resource.String.arbitration),
+                YawsNotification.Topic.SentientOutpost => Resources.GetString(Resource.String.sentient_outpost),
+                YawsNotification.Topic.EarthCycle => Resources.GetString(Resource.String.earth_cycle),
+                YawsNotification.Topic.CetusBounty => Resources.GetString(Resource.String.cetus_bounty),
+                YawsNotification.Topic.CetusCycle => Resources.GetString(Resource.String.cetus_cycle),
+                YawsNotification.Topic.VallisBounty => Resources.GetString(Resource.String.vallis_bounty),
+                YawsNotification.Topic.VallisCycle => Resources.GetString(Resource.String.vallis_cycle),
+                YawsNotification.Topic.Invasion => Resources.GetString(Resource.String.invasion),
+                YawsNotification.Topic.FissureLith => Resources.GetString(Resource.String.fissure_lith),
+                YawsNotification.Topic.FissureMeso => Resources.GetString(Resource.String.fissure_meso),
+                YawsNotification.Topic.FissureNeo => Resources.GetString(Resource.String.fissure_neo),
+                YawsNotification.Topic.FissureAxi => Resources.GetString(Resource.String.fissure_axi),
+                YawsNotification.Topic.FissureRequiem => Resources.GetString(Resource.String.fissure_requiem),
+
+                _ => string.Empty
+            };
         }
     }
 }
