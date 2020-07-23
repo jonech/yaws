@@ -30,8 +30,8 @@ namespace yaws.Droid.Source.Dashboard
         public const string CHANNEL_ID = "yaws_notification_channel";
         protected AppStateService AppStateService { get; set; }
 
-        private DashboardPagerAdapter _dashboardPagerAdapter;
-        private IDisposable _errorSubscription;
+        private DashboardPagerAdapter dashboardPagerAdapter;
+        private IDisposable errorSubscription;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -51,7 +51,7 @@ namespace yaws.Droid.Source.Dashboard
 
 
             var viewPager = FindViewById<ViewPager>(Resource.Id.pager_main_dashboard);
-            _dashboardPagerAdapter = new DashboardPagerAdapter(
+            dashboardPagerAdapter = new DashboardPagerAdapter(
                 new List<StatsFragment>()
                 {
                     new CommonStatsFragment(),
@@ -61,7 +61,7 @@ namespace yaws.Droid.Source.Dashboard
                     new InvasionStatsFragment()
                 },
                 SupportFragmentManager);
-            viewPager.Adapter = _dashboardPagerAdapter;
+            viewPager.Adapter = dashboardPagerAdapter;
             viewPager.OffscreenPageLimit = 4;
 
             var tab = FindViewById<Widget.TabLayout>(Resource.Id.tab_main_dashboard);
@@ -72,7 +72,7 @@ namespace yaws.Droid.Source.Dashboard
         {
             base.OnStart();
 
-            _errorSubscription = AppStateService.ErrorObservable
+            errorSubscription = AppStateService.ErrorObservable
                 .Where(error => !string.IsNullOrEmpty(error))
                 .RunOnUI()
                 .Subscribe(error =>
@@ -87,8 +87,8 @@ namespace yaws.Droid.Source.Dashboard
         {
             base.OnDestroy();
 
-            if (_errorSubscription != null)
-                _errorSubscription.Dispose();
+            if (errorSubscription != null)
+                errorSubscription.Dispose();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
