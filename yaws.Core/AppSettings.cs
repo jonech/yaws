@@ -35,8 +35,9 @@ namespace yaws.Core
 
         public bool GetSwitchNotificationSetting(YawsNotification.Topic notificationTopic)
         {
+            var settingKey = notificationTopic.ToString();
             if (YawsNotification.AvailableTopics.Contains(notificationTopic))
-                return Preferences.Get(nameof(notificationTopic), false);
+                return Preferences.Get(settingKey, false);
 
 #if DEBUG
             throw new ArgumentException($"{notificationTopic} is not a valid Notification Topic setting");
@@ -45,9 +46,10 @@ namespace yaws.Core
 
         public void SetSwitchNotificationSetting(YawsNotification.Topic notificationTopic, bool value)
         {
+            var settingKey = notificationTopic.ToString();
             if (YawsNotification.AvailableTopics.Contains(notificationTopic))
             {
-                Preferences.Set(nameof(notificationTopic), value);
+                Preferences.Set(settingKey, value);
                 return;
             }
 

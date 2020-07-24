@@ -18,12 +18,14 @@ namespace yaws.Droid.Source.Util
     {
         public static Android.Gms.Tasks.Task SubscribeToTopic(this FirebaseMessaging fb, string platform, YawsNotification.Topic topic)
         {
-            return fb.SubscribeToTopic($"{platform}_{nameof(topic)}");
+            var fbTopic = $"{platform}_{topic}";
+            return fb.SubscribeToTopic(fbTopic);
         }
 
         public static Android.Gms.Tasks.Task UnsubscribeFromTopic(this FirebaseMessaging fb, string platform, YawsNotification.Topic topic)
         {
-            return fb.UnsubscribeFromTopic($"{platform}_{nameof(topic)}");
+            var fbTopic = $"{platform}_{topic}";
+            return fb.UnsubscribeFromTopic(fbTopic);
         }
     }
 }
