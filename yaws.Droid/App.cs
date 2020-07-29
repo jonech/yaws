@@ -51,9 +51,7 @@ namespace yaws.Droid
             builder.RegisterType<AppHttpClientHandler>()
                    .AsSelf();
 
-            builder.Register(c =>
-                             new APIFactory(
-                                 c.Resolve<AppHttpClientHandler>()).Create())
+            builder.Register(c => new APIFactory().Create())
                    .AsSelf();
 
             Container = builder.Build();

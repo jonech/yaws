@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace yaws.Core.Constant
+namespace yaws.Common
 {
     /// <summary>
     /// Constant for Notification Topic

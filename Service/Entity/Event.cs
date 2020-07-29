@@ -7,6 +7,9 @@ namespace Service.Entity
 {
     public class Event : IExpirable
     {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
         [JsonProperty("expiry")]
         public DateTime Expiry { get; set; }
 

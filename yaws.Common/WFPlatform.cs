@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace yaws.Core.Constant
+namespace yaws.Common
 {
     /// <summary>
     /// Platform enum for WarframeStat API

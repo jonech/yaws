@@ -146,6 +146,10 @@
       <Project>{bb0d557b-4a2b-403c-a757-8787c8ac2a2d}</Project>
       <Name>Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\yaws.Common\yaws.Common.csproj">
+      <Project>{380ea3fb-fd00-4fc8-be26-3ec7039e1c5e}</Project>
+      <Name>yaws.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\yaws.Core\yaws.Core.csproj">
       <Project>{5734de58-8007-4ce6-9e7b-951d7ee7614a}</Project>
       <Name>yaws.Core</Name>

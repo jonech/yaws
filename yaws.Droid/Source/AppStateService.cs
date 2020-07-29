@@ -6,16 +6,8 @@ using System.Reactive.Subjects;
 using System.Reactive.Threading.Tasks;
 using System.Text;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using yaws.Core;
-using yaws.Core.Constant;
 using yaws.Core.ViewModel;
-using yaws.Droid.Source.Util;
 
 namespace yaws.Droid.Source
 {

@@ -11,7 +11,7 @@ using Android.Support.Design.Chip;
 using Android.Views;
 using Android.Widget;
 using Android.Graphics;
-using yaws.Core.Constant;
+using yaws.Common;
 using yaws.Core.ViewModel;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder

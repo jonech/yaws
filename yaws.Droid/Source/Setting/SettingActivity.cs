@@ -11,7 +11,7 @@ using Android.Support.V7.App;
 using Android.Support.V4.Content;
 using Android.Views;
 using Android.Widget;
-using yaws.Core.Constant;
+using yaws.Common;
 using yaws.Core;
 using Autofac;
 using Android.Support.V7.Widget;

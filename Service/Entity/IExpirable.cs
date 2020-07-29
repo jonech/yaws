@@ -6,6 +6,6 @@ namespace Service.Entity
 {
     public interface IExpirable : IActivatable
     {
-        DateTime Expiry { get; set; }
+        DateTime Expiry { get; }
     }
 }

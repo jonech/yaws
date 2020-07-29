@@ -7,8 +7,8 @@ namespace Service.Entity
 {
     public class Arbitration : IExpirable
     {
-        [JsonProperty("id")]
-        public string Id { get; set; }
+        [JsonIgnore]
+        public string Id { get => $"{nameof(Arbitration)}{Expiry.Ticks}"; }
 
         [JsonProperty("expiry")]
         public DateTime Expiry { get; set; }

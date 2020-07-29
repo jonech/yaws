@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Service.Entity
 {
-    public interface IActivatable : IStat
+    public interface IStat
     {
-        DateTime Activation { get; }
+        string Id { get; }
     }
 }

@@ -10,12 +10,12 @@ namespace Service.API
     {
         private const string WARFRAMESTAT_BASE_URL = "https://api.warframestat.us";
 
-        private readonly AppHttpClientHandler clientHandler;
+        //private readonly AppHttpClientHandler clientHandler;
 
-        public APIFactory(AppHttpClientHandler clientHandler)
-        {
-            this.clientHandler = clientHandler;
-        }
+        //public APIFactory(AppHttpClientHandler clientHandler)
+        //{
+        //    this.clientHandler = clientHandler;
+        //}
 
         public IWareframeStatAPI Create()
         {

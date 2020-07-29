@@ -24,5 +24,9 @@ namespace Service.Entity
 
         [JsonProperty("timeLeft")]
         public string TimeLeft { get; set; }
+
+        [JsonProperty("shortString")]
+        public string ShortString { get; set; }
+
     }
 }

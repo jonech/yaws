@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Service\Service.csproj" />
+    <ProjectReference Include="..\yaws.Common\yaws.Common.csproj" />
   </ItemGroup>
 
 </Project>

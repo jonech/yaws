@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using yaws.Core.Constant;
 using yaws.Core.ViewModel;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
