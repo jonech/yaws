@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yaws.Core", "yaws.Core\yaws.Core.csproj", "{5734DE58-8007-4CE6-9E7B-951D7EE7614A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{BB0D557B-4A2B-403C-A757-8787C8AC2A2D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yaws.Droid", "yaws.Droid\yaws.Droid.csproj", "{C10B7CC2-7946-48F9-8AAA-9FAF51E5B3CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yaws.Notification", "yaws.Notification\yaws.Notification.csproj", "{6FD6F8FD-0545-4485-8E3A-9FB7B10C6AEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yaws.Common", "yaws.Common\yaws.Common.csproj", "{380EA3FB-FD00-4FC8-BE26-3EC7039E1C5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yaws.Common", "yaws.Common\yaws.Common.csproj", "{380EA3FB-FD00-4FC8-BE26-3EC7039E1C5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarframeStatService", "WarframeStatService\WarframeStatService.csproj", "{CECF4177-4D8C-4797-9ACF-A477A0F95EDA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zaw", "Zaw\Zaw.csproj", "{E18B30AF-3DC8-4137-971C-4B1B395497DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,24 +23,24 @@ Global
 		{5734DE58-8007-4CE6-9E7B-951D7EE7614A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5734DE58-8007-4CE6-9E7B-951D7EE7614A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5734DE58-8007-4CE6-9E7B-951D7EE7614A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BB0D557B-4A2B-403C-A757-8787C8AC2A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB0D557B-4A2B-403C-A757-8787C8AC2A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB0D557B-4A2B-403C-A757-8787C8AC2A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB0D557B-4A2B-403C-A757-8787C8AC2A2D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C10B7CC2-7946-48F9-8AAA-9FAF51E5B3CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C10B7CC2-7946-48F9-8AAA-9FAF51E5B3CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C10B7CC2-7946-48F9-8AAA-9FAF51E5B3CC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{C10B7CC2-7946-48F9-8AAA-9FAF51E5B3CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C10B7CC2-7946-48F9-8AAA-9FAF51E5B3CC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C10B7CC2-7946-48F9-8AAA-9FAF51E5B3CC}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{6FD6F8FD-0545-4485-8E3A-9FB7B10C6AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6FD6F8FD-0545-4485-8E3A-9FB7B10C6AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6FD6F8FD-0545-4485-8E3A-9FB7B10C6AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FD6F8FD-0545-4485-8E3A-9FB7B10C6AEE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{380EA3FB-FD00-4FC8-BE26-3EC7039E1C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{380EA3FB-FD00-4FC8-BE26-3EC7039E1C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{380EA3FB-FD00-4FC8-BE26-3EC7039E1C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{380EA3FB-FD00-4FC8-BE26-3EC7039E1C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CECF4177-4D8C-4797-9ACF-A477A0F95EDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CECF4177-4D8C-4797-9ACF-A477A0F95EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CECF4177-4D8C-4797-9ACF-A477A0F95EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CECF4177-4D8C-4797-9ACF-A477A0F95EDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18B30AF-3DC8-4137-971C-4B1B395497DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18B30AF-3DC8-4137-971C-4B1B395497DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18B30AF-3DC8-4137-971C-4B1B395497DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18B30AF-3DC8-4137-971C-4B1B395497DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

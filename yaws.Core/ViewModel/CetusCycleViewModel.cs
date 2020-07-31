@@ -1,4 +1,4 @@
-﻿using Service.Entity;
+﻿using WarframeStatService.Entity;
 using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
@@ -25,7 +25,6 @@ namespace yaws.Core.ViewModel
             Id = cetusCycle.Id;
             IsDay = cetusCycle.IsDay;
             State = cetusCycle.State;
-            TimeLeft = cetusCycle.TimeLeft;
         }
     }
 }

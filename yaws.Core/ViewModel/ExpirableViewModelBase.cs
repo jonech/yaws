@@ -1,10 +1,11 @@
-﻿using Service.Entity;
+﻿using WarframeStatService.Entity;
 using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 using System.Timers;
+using WarframeStatService.Entity.Base;
 
 namespace yaws.Core.ViewModel
 {
@@ -34,7 +35,7 @@ namespace yaws.Core.ViewModel
         /// </summary>
         public TimeSpan CurrentTimeLeft => Expiry - DateTime.UtcNow;
 
-        public ExpirableViewModel(IExpirable model) : base()
+        public ExpirableViewModel(Expirable model) : base()
         {
             Activation = model.Activation;
             Expiry = model.Expiry;

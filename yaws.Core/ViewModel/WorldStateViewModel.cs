@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Service.Entity;
+
+using WarframeStatService.Entity;
 using yaws.Common;
 
 namespace yaws.Core.ViewModel

@@ -1,4 +1,4 @@
-﻿using Service.Entity;
+﻿using WarframeStatService.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +19,6 @@ namespace yaws.Core.ViewModel
             Id = model.Id;
             IsDay = model.IsDay;
             State = model.State;
-            TimeLeft = model.TimeLeft;
         }
 
     }

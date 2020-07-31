@@ -142,9 +142,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Service\Service.csproj">
-      <Project>{bb0d557b-4a2b-403c-a757-8787c8ac2a2d}</Project>
-      <Name>Service</Name>
+    <ProjectReference Include="..\WarframeStatService\WarframeStatService.csproj">
+      <Project>{cecf4177-4d8c-4797-9acf-a477a0f95eda}</Project>
+      <Name>WarframeStatService</Name>
     </ProjectReference>
     <ProjectReference Include="..\yaws.Common\yaws.Common.csproj">
       <Project>{380ea3fb-fd00-4fc8-be26-3ec7039e1c5e}</Project>

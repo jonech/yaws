@@ -1,10 +1,11 @@
-﻿using Service.Entity;
+﻿using WarframeStatService.Entity;
 using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 using System.Timers;
+using WarframeStatService.Entity.Interface;
 
 namespace yaws.Core.ViewModel
 {

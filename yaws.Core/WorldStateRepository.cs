@@ -1,29 +1,29 @@
-﻿using Service.DataSource;
-using Service.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Text;
 using System.Threading.Tasks;
+
 using yaws.Core.ViewModel;
-using System.Reactive.Subjects;
+using WarframeStatService.Entity;
+using WarframeStatService.API;
 
 namespace yaws.Core
 {
     public class WorldStateRepository
     {
-        readonly WorldStateDataSource dataSource;
+        readonly IWarframeStatAPI api;
 
 
-        public WorldStateRepository(WorldStateDataSource dataSource)
+        public WorldStateRepository(IWarframeStatAPI api)
         {
-            this.dataSource = dataSource;
+            this.api = api;
         }
 
         public async Task<WorldStateViewModel> GetWorldState(string platform)
         {
-            var worldState = await dataSource.FetchWorldState(platform);
+            var worldState = await api.FetchWorldState(platform);
 
             if (worldState != null)
                 return new WorldStateViewModel(worldState);

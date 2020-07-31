@@ -10,8 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Autofac;
-using Service.DataSource;
-using Service.API;
+
+using WarframeStatService.API;
 using yaws.Core;
 using yaws.Droid.Source;
 
@@ -35,9 +35,6 @@ namespace yaws.Droid
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<WorldStateDataSource>()
-                   .AsSelf();
-
             builder.RegisterType<WorldStateRepository>()
                    .AsSelf();
 
@@ -51,7 +48,7 @@ namespace yaws.Droid
             builder.RegisterType<AppHttpClientHandler>()
                    .AsSelf();
 
-            builder.Register(c => new APIFactory().Create())
+            builder.Register(c => new WarframeStatAPIFactory().Create())
                    .AsSelf();
 
             Container = builder.Build();

@@ -1,4 +1,4 @@
-﻿using Service.Entity;
+﻿using WarframeStatService.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
