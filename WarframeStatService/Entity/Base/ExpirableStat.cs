@@ -1,12 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using Newtonsoft.Json;
+using WarframeStatService.Constant;
 using WarframeStatService.Entity.Interface;
 
 namespace WarframeStatService.Entity.Base
 {
-    public abstract class Expirable : IActivatable, IExpirable, IStat
+    public abstract class ExpirableStat : IActivatable, IExpirable, IStat
     {
         [JsonProperty("expiry")]
         public DateTime Expiry { get; set; }
@@ -26,5 +25,8 @@ namespace WarframeStatService.Entity.Base
 
         [JsonIgnore]
         public TimeSpan TimeElapsed { get => (Activation != null) ? DateTime.UtcNow - Activation : TimeSpan.Zero; }
+
+        [JsonIgnore]
+        public abstract WFStatType StatType { get; }
     }
 }

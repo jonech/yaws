@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WarframeStatService.Constant;
 using WarframeStatService.Entity.Interface;
 
 namespace WarframeStatService.Entity
@@ -10,6 +11,10 @@ namespace WarframeStatService.Entity
     {
         [JsonProperty("id")]
         public string Id { get; set; }
+
+        [JsonIgnore]
+        public WFStatType StatType => WFStatType.Job;
+
 
         [JsonProperty("rewardPool")]
         public List<string> RewardPool { get; set; }

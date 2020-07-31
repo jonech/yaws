@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using yaws.Core.ViewModel;
+using WarframeStatService.Entity;
+using WarframeStatService.Entity.Interface;
 
 namespace yaws.Droid.Source.Dashboard.Fragments
 {
@@ -17,9 +9,9 @@ namespace yaws.Droid.Source.Dashboard.Fragments
     {
         public override string Title => "Cetus";
 
-        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
+        protected override void OnWorldStateDataChanged(WorldState worldState)
         {
-            StatsRecyclerAdapter.SetItems(new List<ViewModelBase>
+            StatsRecyclerAdapter.SetItems(new List<IStat>
             {
                 worldState.CetusCycle,
                 worldState.CetusBounty

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
+﻿using Android.Views;
 using Android.Widget;
-using yaws.Core.ViewModel;
+using WarframeStatService.Entity;
+using WarframeStatService.Entity.Interface;
+
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
 {
@@ -19,8 +12,6 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
         protected TextView FactionTextView;
         protected TextView TypeTextView;
 
-        private SentientOutpostViewModel viewModel;
-
         public SentientOutpostViewHolder(View itemView) : base(itemView)
         {
             TitleTextView = itemView.FindViewById<TextView>(Resource.Id.text_sentient_title);
@@ -28,19 +19,22 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
             NodeTextView = itemView.FindViewById<TextView>(Resource.Id.text_sentient_node);
             FactionTextView = itemView.FindViewById<TextView>(Resource.Id.text_sentient_faction);
             TypeTextView = itemView.FindViewById<TextView>(Resource.Id.text_sentient_type);
+
+            TitleTextView.Text = "Sentient Anomaly";
         }
 
-        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
+        public override void Bind(IStat item, StatsRecyclerAdapter adapter)
         {
             base.Bind(item, adapter);
 
-            if (item is SentientOutpostViewModel model)
+            if (item is SentientOutpost model)
             {
-                viewModel = model;
-
-                NodeTextView.Text = viewModel.Node;
-                FactionTextView.Text = viewModel.Faction;
-                TypeTextView.Text = viewModel.Type;
+                if (model.Mission != null)
+                {
+                    NodeTextView.Text = model.Mission.Node;
+                    FactionTextView.Text = model.Mission.Faction;
+                    TypeTextView.Text = model.Mission.Type;
+                }
             }
         }
     }

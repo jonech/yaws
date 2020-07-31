@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using WarframeStatService.Constant;
 using WarframeStatService.Entity.Base;
 using WarframeStatService.Entity.Interface;
 
 namespace WarframeStatService.Entity
 {
-    public class SentientOutpost : Expirable
+    public class SentientOutpost : ExpirableStat
     {
-        //[JsonProperty("id")]
-        //public override string Id { get; set; }
+        public override WFStatType StatType => WFStatType.SentientOutpost;
 
         [JsonProperty("mission")]
         public SentientOutpostMission Mission { get; set; }

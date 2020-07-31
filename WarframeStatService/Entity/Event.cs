@@ -2,15 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WarframeStatService.Constant;
 using WarframeStatService.Entity.Base;
 using WarframeStatService.Entity.Interface;
 
 namespace WarframeStatService.Entity
 {
-    public class Event : Expirable
+    public class Event : ExpirableStat
     {
-        //[JsonProperty("id")]
-        //public override string Id { get; set; }
+        public override WFStatType StatType => WFStatType.Event;
 
         [JsonProperty("maximumScore")]
         public int MaximumScore { get; set; }

@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Text;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
+﻿using Android.Views;
 using Android.Widget;
-using yaws.Core.ViewModel;
+using WarframeStatService.Entity;
+using WarframeStatService.Entity.Interface;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
 {
@@ -26,13 +18,15 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
             NodeTextView = itemView.FindViewById<TextView>(Resource.Id.text_arbi_node);
             EnemyTextView = itemView.FindViewById<TextView>(Resource.Id.text_arbi_enemy);
             TypeTextView = itemView.FindViewById<TextView>(Resource.Id.text_arbi_type);
+
+            TitleTextView.Text = "Arbitration";
         }
 
-        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
+        public override void Bind(IStat item, StatsRecyclerAdapter adapter)
         {
             base.Bind(item, adapter);
 
-            if (item is ArbitrationViewModel viewModel)
+            if (item is Arbitration viewModel)
             {
                 NodeTextView.Text = viewModel.Node;
                 EnemyTextView.Text = viewModel.Enemy;

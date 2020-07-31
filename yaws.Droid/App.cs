@@ -35,9 +35,6 @@ namespace yaws.Droid
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<WorldStateRepository>()
-                   .AsSelf();
-
             builder.RegisterType<AppStateService>()
                    .AsSelf()
                    .SingleInstance();

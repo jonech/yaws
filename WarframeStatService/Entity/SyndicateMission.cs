@@ -2,15 +2,28 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using Constant = WarframeStatService.Constant;
 using WarframeStatService.Entity.Base;
 using WarframeStatService.Entity.Interface;
+using System.Linq;
 
 namespace WarframeStatService.Entity
 {
-    public class SyndicateMission : Expirable
+    public class SyndicateMission : ExpirableStat
     {
-        //[JsonProperty("id")]
-        //public string Id { get; set; }
+        public override Constant.WFStatType StatType
+        {
+            get
+            {
+                if (this.Syndicate == Constant.Syndicate.Ostrons)
+                    return Constant.WFStatType.CetusBounty;
+                else if (this.Syndicate == Constant.Syndicate.SolarisUnited)
+                    return Constant.WFStatType.VallisBounty;
+
+                return Constant.WFStatType.FactionMission;
+            }
+        }
+
 
         [JsonProperty("startString")]
         public string StartString { get; set; }

@@ -16,10 +16,8 @@ using Android.Support.V4.Widget;
 
 using Autofac;
 
-using yaws.Core;
-using yaws.Core.ViewModel;
 using yaws.Droid.Source.Util;
-using ReactiveUI;
+using WarframeStatService.Entity;
 
 namespace yaws.Droid.Source.Dashboard.Fragments
 {
@@ -131,6 +129,6 @@ namespace yaws.Droid.Source.Dashboard.Fragments
         }
 
 
-        protected abstract void OnWorldStateDataChanged(WorldStateViewModel worldState);
+        protected abstract void OnWorldStateDataChanged(WorldState worldState);
     }
 }

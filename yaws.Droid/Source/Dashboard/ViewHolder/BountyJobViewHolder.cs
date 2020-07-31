@@ -11,7 +11,8 @@ using Android.Support.Design.Chip;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using yaws.Core.ViewModel;
+using WarframeStatService.Entity;
+using WarframeStatService.Entity.Interface;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
 {
@@ -29,9 +30,9 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
             RewardsChipGroup = itemView.FindViewById<ChipGroup>(Resource.Id.chip_group_bounty_job_rewards);
         }
 
-        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
+        public override void Bind(IStat item, StatsRecyclerAdapter adapter)
         {
-            if (item is BountyJobViewModel model)
+            if (item is Job model)
             {
                 TitleTextView.Text = model.Type;
                 EnemyLevelsTextView.Text = $"Level {model.MinEnemyLevel} - {model.MaxEnemyLevel}";

@@ -2,15 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WarframeStatService.Constant;
 using WarframeStatService.Entity.Base;
 using WarframeStatService.Entity.Interface;
 
 namespace WarframeStatService.Entity
 {
-    public class Nightwave : Expirable
+    public class Nightwave : ExpirableStat
     {
-        //[JsonProperty("id")]
-        //public override string Id { get; set; }
+        public override WFStatType StatType => WFStatType.Nightwave;
 
         [JsonProperty("startString")]
         public string StartString { get; set; }
@@ -31,10 +31,9 @@ namespace WarframeStatService.Entity
         public List<NightwaveChallenge> ActiveChallenges { get; set; }
     }
 
-    public class NightwaveChallenge : Expirable, IStat
+    public class NightwaveChallenge : ExpirableStat
     {
-        [JsonProperty("id")]
-        public string Id { get; set; }
+        public override WFStatType StatType => WFStatType.NightwaveChallenge;
 
         [JsonProperty("active")]
         public bool Active { get; set; }

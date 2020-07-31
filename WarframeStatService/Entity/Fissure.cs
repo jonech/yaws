@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using WarframeStatService.Constant;
 using WarframeStatService.Entity.Base;
 using WarframeStatService.Entity.Interface;
 
 namespace WarframeStatService.Entity
 {
-    public class Fissure : Expirable
+    public class Fissure : ExpirableStat
     {
-        //[JsonProperty("id")]
-        //public override string Id { get; set; }
+        public override WFStatType StatType => WFStatType.Fissure;
 
         [JsonProperty("startString")]
         public string StartString { get; set; }

@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Reactive.Linq;
 
-using Android.App;
-using Android.Content;
-using Android.Graphics;
-using Android.OS;
-using Android.Runtime;
 using Android.Support.V4.Content;
 using Android.Support.V4.Content.Res;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-
-using yaws.Core.ViewModel;
+using WarframeStatService.Entity.Base;
+using WarframeStatService.Entity.Interface;
 
 using yaws.Droid.Source.Util;
+using yaws.Common.Extension;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
 {
@@ -27,30 +23,32 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
         {
         }
 
-        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
+        public override void Bind(IStat item, StatsRecyclerAdapter adapter)
         {
-            if (item is ExpirableViewModel model)
+            if (item is ExpirableStat model)
             {
-                if (TitleTextView != null)
-                {
-                    TitleTextView.Text = model.Name;
-                }
+                //if (TitleTextView != null)
+                //{
+                //    TitleTextView.Text = model.Name;
+                //}
 
                 if (TimeLeftTextView != null)
                 {
                     ClearDisposable();
 
-                    UpdateTimeLeftText(TimeLeftTextView, model.CurrentTimeLeft);
+                    UpdateTimeLeftText(TimeLeftTextView, model.TimeLeft);
 
-                    Disposable = model.TimeLeftObservable
+                    Disposable = Observable
+                        .Interval(TimeSpan.FromSeconds(1))
+                        .Select(p => model.TimeLeft)
                         .TakeUntil(time => time < TimeSpan.Zero || TimeLeftTextView == null)
                         .RunOnUI()
                         .Subscribe(timeLeft =>
                         {
 #if DEBUG
-                            Log.Info($"{GetType().Name}", $"{model.Name} -> {timeLeft.ToFormattedString()}");
+                            Log.Info($"{GetType().Name}", $"{model.StatType} -> {timeLeft.ToFormattedString()}");
 #endif
-                            UpdateTimeLeftText(TimeLeftTextView, model.CurrentTimeLeft);
+                            UpdateTimeLeftText(TimeLeftTextView, model.TimeLeft);
                         },
                         () =>
                         {

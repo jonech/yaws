@@ -46,7 +46,7 @@ namespace WarframeStatService.Entity
             get
             {
                 if (SyndicateMissions != null)
-                    return SyndicateMissions.FirstOrDefault(m => m.Syndicate == Syndicate.Ostrons);
+                    return SyndicateMissions.FirstOrDefault(m => m.StatType == WFStatType.CetusBounty);
 
                 return null;
             }
@@ -58,7 +58,7 @@ namespace WarframeStatService.Entity
             get
             {
                 if (SyndicateMissions != null)
-                    return SyndicateMissions.FirstOrDefault(m => m.Syndicate == Syndicate.SolarisUnited);
+                    return SyndicateMissions.FirstOrDefault(m => m.StatType == WFStatType.VallisBounty);
 
                 return null;
             }

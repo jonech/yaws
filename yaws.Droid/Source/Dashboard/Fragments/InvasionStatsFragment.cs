@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using yaws.Core.ViewModel;
+using WarframeStatService.Entity;
+using WarframeStatService.Entity.Interface;
 
 namespace yaws.Droid.Source.Dashboard.Fragments
 {
@@ -17,9 +11,9 @@ namespace yaws.Droid.Source.Dashboard.Fragments
     {
         public override string Title => "Invasion";
 
-        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
+        protected override void OnWorldStateDataChanged(WorldState worldState)
         {
-            StatsRecyclerAdapter.SetItems(worldState.Invasions.Cast<ViewModelBase>().ToList());
+            StatsRecyclerAdapter.SetItems(worldState.Invasions.Cast<IStat>().ToList());
         }
     }
 }

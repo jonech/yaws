@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using yaws.Core.ViewModel;
+﻿using System.Linq;
+using WarframeStatService.Entity;
+using WarframeStatService.Entity.Interface;
 
 namespace yaws.Droid.Source.Dashboard.Fragments
 {
@@ -17,9 +8,9 @@ namespace yaws.Droid.Source.Dashboard.Fragments
     {
         public override string Title => "Fissure";
 
-        protected override void OnWorldStateDataChanged(WorldStateViewModel worldState)
+        protected override void OnWorldStateDataChanged(WorldState worldState)
         {
-            StatsRecyclerAdapter.SetItems(worldState.Fissures.Cast<ViewModelBase>().ToList());
+            StatsRecyclerAdapter.SetItems(worldState.Fissures.Cast<IStat>().ToList());
         }
     }
 }

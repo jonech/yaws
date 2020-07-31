@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using WarframeStatService.Constant;
 using WarframeStatService.Entity.Base;
 using WarframeStatService.Entity.Interface;
 
 namespace WarframeStatService.Entity
 {
-    public class Arbitration : Expirable
+    public class Arbitration : ExpirableStat
     {
         [JsonIgnore]
         public override string Id { get => $"{nameof(Arbitration)}{Expiry.Ticks}"; }
+        public override WFStatType StatType => WFStatType.Arbitration;
 
 
         [JsonProperty("enemy")]
@@ -27,5 +29,6 @@ namespace WarframeStatService.Entity
 
         [JsonProperty("node")]
         public string Node { get; set; }
+
     }
 }

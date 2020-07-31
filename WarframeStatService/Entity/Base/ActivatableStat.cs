@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
+using WarframeStatService.Constant;
 using WarframeStatService.Entity.Interface;
 
 namespace WarframeStatService.Entity.Base
 {
-    public abstract class Activatable : IActivatable, IStat
+    public abstract class ActivatableStat : IActivatable, IStat
     {
         [JsonProperty("id")]
         public virtual string Id { get; }
@@ -14,5 +15,8 @@ namespace WarframeStatService.Entity.Base
 
         [JsonIgnore]
         public TimeSpan TimeElapsed { get => (Activation != null) ? DateTime.UtcNow - Activation : TimeSpan.Zero; }
+
+        [JsonIgnore]
+        public abstract WFStatType StatType { get; }
     }
 }

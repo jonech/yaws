@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
+﻿using Android.Views;
 using Android.Widget;
-using yaws.Core.ViewModel;
+using WarframeStatService.Entity;
+using WarframeStatService.Entity.Interface;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
 {
@@ -22,13 +14,15 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
             TitleTextView = itemView.FindViewById<TextView>(Resource.Id.text_earth_cycle_title);
             TimeLeftTextView = itemView.FindViewById<TextView>(Resource.Id.text_earth_cycle_time);
             StatusTextView = itemView.FindViewById<TextView>(Resource.Id.text_earth_cycle_status);
+
+            TitleTextView.Text = "Earth Cycle";
         }
 
-        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
+        public override void Bind(IStat item, StatsRecyclerAdapter adapter)
         {
             base.Bind(item, adapter);
 
-            if (item is EarthCycleViewModel viewModel)
+            if (item is EarthCycle viewModel)
             {
                 StatusTextView.Text = viewModel.State;
             }

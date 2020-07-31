@@ -5,20 +5,20 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Reactive.Threading.Tasks;
 using System.Text;
-
+using WarframeStatService.API;
+using WarframeStatService.Entity;
 using yaws.Core;
-using yaws.Core.ViewModel;
 
 namespace yaws.Droid.Source
 {
     public class AppStateService
     {
-        private readonly WorldStateRepository repository;
         private readonly AppSettings appSettings;
+        private readonly IWarframeStatAPI api;
 
-        private readonly BehaviorSubject<WorldStateViewModel> worldStateSubject;
-        public IObservable<WorldStateViewModel> WorldStateObservable => worldStateSubject.AsObservable();
-        public WorldStateViewModel CurrentWorldState => worldStateSubject.Value;
+        private readonly BehaviorSubject<WorldState> worldStateSubject;
+        public IObservable<WorldState> WorldStateObservable => worldStateSubject.AsObservable();
+        public WorldState CurrentWorldState => worldStateSubject.Value;
 
         private readonly BehaviorSubject<bool> refreshingSubject;
         public IObservable<bool> RefreshingObservable => refreshingSubject.AsObservable();
@@ -26,12 +26,12 @@ namespace yaws.Droid.Source
         private readonly BehaviorSubject<string> errorSubject;
         public IObservable<string> ErrorObservable => errorSubject.AsObservable();
 
-        public AppStateService(WorldStateRepository repository, AppSettings appSettings)
+        public AppStateService(IWarframeStatAPI api, AppSettings appSettings)
         {
-            this.repository = repository;
             this.appSettings = appSettings;
+            this.api = api;
 
-            worldStateSubject = new BehaviorSubject<WorldStateViewModel>(null);
+            worldStateSubject = new BehaviorSubject<WorldState>(null);
             refreshingSubject = new BehaviorSubject<bool>(false);
             errorSubject = new BehaviorSubject<string>(string.Empty);
         }
@@ -41,22 +41,8 @@ namespace yaws.Droid.Source
         {
             refreshingSubject.OnNext(true);
 
-            //var dis = repository.GetWorldState()
-            //    .ToObservable()
-            //    .Subscribe((worldState) =>
-            //    {
-            //        refreshingSubject.OnNext(false);
-
-            //        if (worldState != null)
-            //            worldStateSubject.OnNext(worldState);
-            //    },
-            //    err =>
-            //    {
-            //        refreshingSubject.OnNext(false);
-            //        worldStateSubject.OnError(err);
-            //    });
             var plaform = appSettings.Platform;
-            var dis = repository.GetWorldState(plaform)
+            var dis = api.FetchWorldState(plaform)
                 .ToObservable()
                 .Subscribe((worldState) =>
                 {

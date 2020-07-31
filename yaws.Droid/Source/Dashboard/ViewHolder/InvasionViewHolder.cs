@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Support.Design.Chip;
+﻿using Android.Support.Design.Chip;
 using Android.Views;
 using Android.Widget;
 using Android.Graphics;
-using yaws.Common;
-using yaws.Core.ViewModel;
+
+using WarframeStatService.Entity.Interface;
+using WarframeStatService.Entity;
+using WarframeStatService.Constant;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
 {
@@ -40,11 +33,11 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
             DefenderRewardChip = itemView.FindViewById<Chip>(Resource.Id.chip_invasion_defender_reward);
         }
 
-        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
+        public override void Bind(IStat item, StatsRecyclerAdapter adapter)
         {
             base.Bind(item, adapter);
 
-            if (item is InvasionViewModel viewModel)
+            if (item is Invasion viewModel)
             {
                 NodeTextView.Text = viewModel.Node;
                 DescriptionTextView.Text = viewModel.Description;

@@ -28,8 +28,8 @@ namespace yaws.Droid.Source.Dashboard
     public class DashboardActivity : AppCompatActivity
     {
         public const string CHANNEL_ID = "yaws_notification_channel";
-        protected AppStateService AppStateService { get; set; }
 
+        private AppStateService appStateService;
         private DashboardPagerAdapter dashboardPagerAdapter;
         private IDisposable errorSubscription;
 
@@ -43,7 +43,7 @@ namespace yaws.Droid.Source.Dashboard
 
             using (var scope = App.Container.BeginLifetimeScope())
             {
-                AppStateService= scope.Resolve<AppStateService>();
+                appStateService= scope.Resolve<AppStateService>();
             }
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar_dashboard);
@@ -72,7 +72,7 @@ namespace yaws.Droid.Source.Dashboard
         {
             base.OnStart();
 
-            errorSubscription = AppStateService.ErrorObservable
+            errorSubscription = appStateService.ErrorObservable
                 .Where(error => !string.IsNullOrEmpty(error))
                 .RunOnUI()
                 .Subscribe(error =>
@@ -80,7 +80,7 @@ namespace yaws.Droid.Source.Dashboard
                     Android.Widget.Toast.MakeText(this, error.ToString(), Android.Widget.ToastLength.Short).Show();
                 });
 
-            AppStateService.FetchWorldState();
+            appStateService.FetchWorldState();
         }
 
         protected override void OnDestroy()
@@ -120,7 +120,7 @@ namespace yaws.Droid.Source.Dashboard
 
         private void Refresh()
         {
-            AppStateService.FetchWorldState();
+            appStateService.FetchWorldState();
         }
 
         private void InitNotificationChannel()

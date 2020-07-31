@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
+﻿using Android.Views;
 using Android.Widget;
-using yaws.Core.ViewModel;
+using WarframeStatService.Entity;
+using WarframeStatService.Entity.Interface;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
 {
@@ -31,11 +23,11 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
             TierImageView = itemView.FindViewById<ImageView>(Resource.Id.image_fissure_tier);
         }
 
-        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
+        public override void Bind(IStat item, StatsRecyclerAdapter adapter)
         {
             base.Bind(item, adapter);
 
-            if (item is FissureViewModel viewModel)
+            if (item is Fissure viewModel)
             {
                 TierTextView.Text = viewModel.Tier;
                 NodeTextView.Text = viewModel.Node;

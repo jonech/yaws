@@ -6,7 +6,7 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 
-using yaws.Core.ViewModel;
+using WarframeStatService.Entity.Interface;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
 {
@@ -19,6 +19,6 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
         {
         }
 
-        public abstract void Bind(ViewModelBase item, StatsRecyclerAdapter adapter);
+        public abstract void Bind(IStat item, StatsRecyclerAdapter adapter);
     }
 }

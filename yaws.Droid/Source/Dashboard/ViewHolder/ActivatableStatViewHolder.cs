@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using yaws.Core.ViewModel;
+using WarframeStatService.Entity.Base;
+using WarframeStatService.Entity.Interface;
 using yaws.Droid.Source.Util;
+using yaws.Common.Extension;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
 {
@@ -25,28 +22,29 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
         {
         }
 
-        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
+        public override void Bind(IStat item, StatsRecyclerAdapter adapter)
         {
-            if (item is ActivatableViewModel model)
+            if (item is ActivatableStat model)
             {
-                if (TitleTextView != null)
-                {
-                    TitleTextView.Text = model.Name;
-                }
+                //if (TitleTextView != null)
+                //{
+                //    TitleTextView.Text = model.Name;
+                //}
 
                 if (TimeActivatedTextView != null)
                 {
                     ClearDisposable();
 
-                    TimeActivatedTextView.Text = model.CurrentTimeSinceActivated.ToFormattedString();
+                    TimeActivatedTextView.Text = model.TimeElapsed.ToFormattedString();
 
-                    Disposable = model.TimeSinceActivateObservable
+                    Disposable = Observable.Interval(TimeSpan.FromSeconds(1))
+                        .Select(p => model.TimeElapsed)
                         .TakeUntil(time => TimeActivatedTextView == null)
                         .RunOnUI()
                         .Subscribe(time =>
                         {
 #if DEBUG
-                            Log.Info($"{GetType().Name}", $"{model.Name} -> {time.ToFormattedString()}");
+                            Log.Info($"{GetType().Name}", $"{model.StatType} -> {time.ToFormattedString()}");
 #endif
                             TimeActivatedTextView.Text = time.ToFormattedString();
                         },

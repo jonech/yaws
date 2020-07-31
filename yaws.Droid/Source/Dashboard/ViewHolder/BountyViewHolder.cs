@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using yaws.Core.ViewModel;
+using WarframeStatService.Entity;
+using WarframeStatService.Entity.Interface;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
 {
@@ -35,13 +29,14 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
             BountyJobsRecycler.AddItemDecoration(divider);
         }
 
-        public override void Bind(ViewModelBase item, StatsRecyclerAdapter adapter)
+        public override void Bind(IStat item, StatsRecyclerAdapter adapter)
         {
             base.Bind(item, adapter);
 
-            if (item is BountyViewModel model)
+            if (item is SyndicateMission model)
             {
-                BountyJobsAdapter.SetItems(model.Jobs.Cast<ViewModelBase>().ToList());
+                TitleTextView.Text = "Bounty";
+                BountyJobsAdapter.SetItems(model.Jobs.Cast<IStat>().ToList());
             }
         }
     }

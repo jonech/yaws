@@ -11,13 +11,15 @@ using Android.Support.V7.App;
 using Android.Support.V4.Content;
 using Android.Views;
 using Android.Widget;
+using Android.Support.V7.Widget;
+
+using Autofac;
+using Firebase.Messaging;
+
+using WarframeStatService.Constant;
 using yaws.Common;
 using yaws.Core;
-using Autofac;
-using Android.Support.V7.Widget;
-using Firebase.Messaging;
 using yaws.Droid.Source.Util;
-using System.Runtime.Remoting.Messaging;
 
 namespace yaws.Droid.Source.Setting
 {

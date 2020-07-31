@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
+using WarframeStatService.Constant;
 using WarframeStatService.Entity.Base;
-using WarframeStatService.Entity.Interface;
 
 namespace WarframeStatService.Entity
 {
-    public class EarthCycle : Expirable
+    public class EarthCycle : ExpirableStat
     {
-        //[JsonProperty("id")]
-        //public override string Id { get; set; }
+        public override WFStatType StatType => WFStatType.EarthCycle;
+
 
         [JsonProperty("isDay")]
         public bool IsDay { get; set; }

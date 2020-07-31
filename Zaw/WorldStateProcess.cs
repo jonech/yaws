@@ -46,7 +46,7 @@ namespace Zaw
         }
 
 
-        private bool ProcessSingleExpirable(NotificationState state, Expirable expirableStat, string statType)
+        private bool ProcessSingleExpirable(NotificationState state, ExpirableStat expirableStat, string statType)
         {
             if (expirableStat == null)
             {

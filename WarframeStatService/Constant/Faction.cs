@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace yaws.Common
+﻿
+namespace WarframeStatService.Constant
 {
     /// <summary>
     /// Factions in Warframe.

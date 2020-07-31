@@ -11,19 +11,21 @@ using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using yaws.Core.ViewModel;
+//using yaws.Core.ViewModel;
 using yaws.Droid.Source.Dashboard.ViewHolder;
+using WarframeStatService.Entity.Interface;
+using WarframeStatService.Constant;
 
 namespace yaws.Droid.Source.Dashboard
 {
     public class StatsRecyclerAdapter : RecyclerView.Adapter
     {
         private CompositeDisposable timeSubscriptions;
-        public List<ViewModelBase> ItemSource { get; private set; }
+        public List<IStat> ItemSource { get; private set; }
 
         public StatsRecyclerAdapter()
         {
-            ItemSource = new List<ViewModelBase>();
+            ItemSource = new List<IStat>();
         }
 
         public override int ItemCount => ItemSource.Count;
@@ -75,26 +77,26 @@ namespace yaws.Droid.Source.Dashboard
             var type = ItemSource[position].StatType;
             switch (type)
             {
-                case StatType.CetusCycle:
+                case WFStatType.CetusCycle:
                     return Resource.Layout.item_cetus_cycle;
-                case StatType.Arbitration:
+                case WFStatType.Arbitration:
                     return Resource.Layout.item_arbitration;
-                case StatType.VallisCycle:
+                case WFStatType.VallisCycle:
                     return Resource.Layout.item_vallis_cycle;
-                case StatType.EarthCycle:
+                case WFStatType.EarthCycle:
                     return Resource.Layout.item_earth_cycle;
-                case StatType.SentientOutpost:
+                case WFStatType.SentientOutpost:
                     return Resource.Layout.item_sentient_outpost;
-                case StatType.Fissure:
+                case WFStatType.Fissure:
                     return Resource.Layout.item_fissure;
-                case StatType.Invasion:
+                case WFStatType.Invasion:
                     return Resource.Layout.item_invasion;
 
-                case StatType.CetusBounty:
-                case StatType.VallisBounty:
+                case WFStatType.CetusBounty:
+                case WFStatType.VallisBounty:
                     return Resource.Layout.item_bounty;
 
-                case StatType.BountyJob:
+                case WFStatType.Job:
                     return Resource.Layout.item_bounty_job;
                 default:
                     return 0;
@@ -114,7 +116,7 @@ namespace yaws.Droid.Source.Dashboard
             base.OnViewDetachedFromWindow(holder);
         }
 
-        public void AddItems(List<ViewModelBase> items)
+        public void AddItems(List<IStat> items)
         {
             var insertedPos = ItemCount;
 
@@ -122,7 +124,7 @@ namespace yaws.Droid.Source.Dashboard
             NotifyItemInserted(insertedPos);
         }
 
-        public void SetItems(List<ViewModelBase> items)
+        public void SetItems(List<IStat> items)
         {
             ItemSource.Clear();
             ItemSource.AddRange(items);
