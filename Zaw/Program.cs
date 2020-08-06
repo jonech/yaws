@@ -7,13 +7,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using WarframeStatService.Entity;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace Zaw
 {
     class Program
     {
         public static Config Config { get; set; }
+        public static DbService DbService { get; set; }
 
         static Config GetConfigSettings(string filePath)
         {
@@ -29,7 +32,7 @@ namespace Zaw
             return JsonConvert.DeserializeObject<Config>(appSettingsContent);
         }
 
-        static async System.Threading.Tasks.Task Main(string[] args)
+        static async Task Main(string[] args)
         {
             var start = DateTime.Now;
 
@@ -39,6 +42,46 @@ namespace Zaw
             }
             Config = GetConfigSettings(args[0]);
 
+            Init();
+
+            var worldState = await FetchWorldState();
+            if (worldState == null)
+            {
+                Log.Warning("No WorldState detected. Exiting Process.");
+                Environment.Exit(0);
+            }
+
+            var notificationStates = DbService.FetchAllNotificationStates();
+            if (notificationStates == null)
+            {
+                Log.Error("Failed to retrieve NotificationStates. Exiting Process.");
+                Environment.Exit(0);
+            }
+
+
+            var process = new WorldStateProcess(Log.Logger);
+            process.RunProcess(notificationStates.ToList(), worldState);
+
+            if (process.NewNotificationStates.Any())
+                DbService.InsertNotificationState(process.NewNotificationStates.ToArray());
+
+            if (process.ExpiredNotificationStates.Any())
+                DbService.DeleteNotificationState(process.ExpiredNotificationStates.ToArray());
+
+            // send FCM
+            if (process.NotificationMessages.Any())
+            {
+                Log.Information($"Sending {process.NotificationMessages.Count} FCM messages");
+                var responses = await FirebaseMessaging.DefaultInstance.SendAllAsync(process.NotificationMessages);
+                Log.Information($"FCM Send Completed - [{responses.SuccessCount}], Send Failed - [{responses.FailureCount}]");
+            }
+
+            var end = DateTime.Now - start;
+            Log.Information($"Process complete. Total execution time: {end.TotalSeconds}s");
+        }
+
+        static void Init()
+        {
             Log.Logger = new LoggerConfiguration()
                                 .MinimumLevel.Debug()
                                 .WriteTo.Console()
@@ -51,45 +94,25 @@ namespace Zaw
                 Credential = Google.Apis.Auth.OAuth2.GoogleCredential.FromFile(Config.FirebaseServiceAccountPath),
             });
 
-            var api = new WarframeStatAPIFactory().Create();
-            var worldState = await api.FetchWorldState(Config.WFPlatform);
-            if (worldState == null)
+            DbService = new DbService(Config.DbConnection, Log.Logger);
+            DbService.CreateNotificationStateTable();
+
+            Log.Debug("Initialisation complete");
+        }
+
+        async static Task<WorldState> FetchWorldState()
+        {
+            try
             {
-                Log.Warning("No WorldState detected. Exiting Process.");
-                Environment.Exit(0);
+                var api = new WarframeStatAPIFactory().Create();
+                var worldState = await api.FetchWorldState(Config.WFPlatform);
+                return worldState;
             }
-
-            var dbService = new DbService(Config.DbConnection, Log.Logger);
-            dbService.CreateNotificationStateTable();
-            var notificationStates = dbService.FetchAllNotificationStates();
-            if (notificationStates == null)
+            catch (Exception e)
             {
-                Log.Error("Failed to retrieve NotificationStates. Exiting Process.");
-                Environment.Exit(0);
+                Log.Error(e.ToString());
+                return null;
             }
-
-
-            var process = new WorldStateProcess(Log.Logger);
-            process.RunProcess(notificationStates.ToList(), worldState);
-
-            if (process.NewNotificationStates.Any())
-                dbService.InsertNotificationState(process.NewNotificationStates.ToArray());
-
-            if (process.ExpiredNotificationStates.Any())
-                dbService.InsertNotificationState(process.ExpiredNotificationStates.ToArray());
-
-            // send FCM
-            if (process.NotificationMessages.Any())
-            {
-                Log.Information($"Sending {process.NotificationMessages.Count} FCM messages");
-                var responses = await FirebaseMessaging.DefaultInstance.SendAllAsync(process.NotificationMessages);
-                Log.Information($"FCM Send Completed - [{responses.SuccessCount}], Send Failed - [{responses.FailureCount}]");
-            }
-
-            var end = DateTime.Now - start;
-            Log.Information($"Process complete. Total execution time: {end.TotalSeconds}s");
-
-            Console.ReadLine();
         }
 
     }

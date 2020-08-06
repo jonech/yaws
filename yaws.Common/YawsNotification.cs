@@ -24,7 +24,10 @@ namespace yaws.Common
             FissureMeso,
             FissureNeo,
             FissureAxi,
-            FissureRequiem
+            FissureRequiem,
+
+            Info,
+            Error
         }
 
         //public static readonly string[] AvailableTopics =

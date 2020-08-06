@@ -4,6 +4,11 @@ namespace yaws.Common.Extension
 {
     public static class TimeSpanExtension
     {
+        /// <summary>
+        /// Format TimeSpan to '[h]h [m]m [s]s'
+        /// </summary>
+        /// <param name="timeSpan"></param>
+        /// <returns></returns>
         public static string ToFormattedString(this TimeSpan timeSpan)
         {
             if (timeSpan == null || timeSpan < TimeSpan.Zero)
