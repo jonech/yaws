@@ -44,7 +44,7 @@ namespace yaws.Droid.Source.Setting
 
         public interface IValueChangedListener
         {
-            public void OnNotificationSettingChanged(NotificationSetting model);
+            void OnNotificationSettingChanged(NotificationSetting model);
         }
     }
 }

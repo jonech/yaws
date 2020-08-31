@@ -41,8 +41,8 @@ namespace Zaw
             var arbitrationState = notificationStates.FirstOrDefault(p => p.WfStatType == nameof(WFStatType.Arbitration));
             ProcessArbitration(arbitrationState, worldState.Arbitration);
 
-            var sentientOutpostState = notificationStates.FirstOrDefault(p => p.WfStatType == nameof(WFStatType.SentientOutpost));
-            ProcessSentientOutpost(sentientOutpostState, worldState.SentientOutpost);
+            //var sentientOutpostState = notificationStates.FirstOrDefault(p => p.WfStatType == nameof(WFStatType.SentientOutpost));
+            //ProcessSentientOutpost(sentientOutpostState, worldState.SentientOutpost);
 
             var fissureStates = notificationStates.Where(p => p.WfStatType == nameof(WFStatType.Fissure)).ToList();
             ProcessFissures(fissureStates, worldState.Fissures);
@@ -116,7 +116,7 @@ namespace Zaw
             if (sendFCM)
             {
                 var ttl = arbi.TimeLeft;
-                var message = FCM.CreateMessage("Arbitration", $"{arbi.Enemy} - {arbi.Type}", YawsNotification.Topic.Arbitration, nameof(Arbitration), ttl);
+                var message = FCM.CreateMessage($"Arbitration: {arbi.Enemy} {arbi.Type}", $"Expired in {ttl.ToFormattedString()}", YawsNotification.Topic.Arbitration, nameof(Arbitration), ttl);
                 NotificationMessages.Add(message);
             }
         }
@@ -159,21 +159,17 @@ namespace Zaw
                 ExpiredNotificationStates.AddRange(expiredFissures);
             }
 
-            if (newFissures.Any())
-            {
-                logger.Information($"New Fissures will be added");
-                NewNotificationStates.AddRange(newFissures.Select(f => 
-                    new NotificationState 
-                    { 
-                        WfStatId = f.Id,
-                        WfStatType = nameof(WFStatType.Fissure) 
-                    }));
-            }
-
             foreach (var fissure in newFissures)
             {
+                logger.Information($"New Fissures {fissure.Tier} {fissure.MissionType}");
+                NewNotificationStates.Add(new NotificationState
+                {
+                    WfStatId = fissure.Id,
+                    WfStatType = nameof(WFStatType.Fissure)
+                });
+
                 var ttl = fissure.TimeLeft;
-                var topic = YawsNotification.Topic.FissureLith;
+                var topic = YawsNotification.Topic.Info;
                 if (fissure.TierNum == 1)
                     topic = YawsNotification.Topic.FissureLith;
                 else if (fissure.TierNum == 2)

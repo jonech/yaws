@@ -1,8 +1,7 @@
-﻿using Refit;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
+using Refit;
 
 namespace WarframeStatService.API
 {

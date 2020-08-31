@@ -30,39 +30,20 @@ namespace yaws.Common
             Error
         }
 
-        //public static readonly string[] AvailableTopics =
-        //{
-        //    nameof(Topic.EarthCycle),
-        //    nameof(Topic.Arbitration),
-        //    nameof(Topic.SentientOutpost),
-        //    nameof(Topic.CetusCycle),
-        //    nameof(Topic.CetusBounty),
-        //    nameof(Topic.VallisCycle),
-        //    nameof(Topic.VallisBounty),
-        //    nameof(Topic.Invasion),
-        //    nameof(Topic.FissureLith),
-        //    nameof(Topic.FissureMeso),
-        //    nameof(Topic.FissureNeo),
-        //    nameof(Topic.FissureAxi),
-        //    nameof(Topic.FissureRequiem)
-        //};
-
         public static readonly Topic[] AvailableTopics =
         {
-            Topic.EarthCycle,
             Topic.Arbitration,
-            Topic.SentientOutpost,
+            Topic.EarthCycle,
             Topic.CetusCycle,
-            Topic.CetusBounty,
             Topic.VallisCycle,
-            Topic.VallisBounty,
-            Topic.Invasion,
             Topic.FissureLith,
             Topic.FissureMeso,
             Topic.FissureNeo,
             Topic.FissureAxi,
             Topic.FissureRequiem
         };
+
+        public const string ChannelId = "yaws_notification_channel";
     }
 
 

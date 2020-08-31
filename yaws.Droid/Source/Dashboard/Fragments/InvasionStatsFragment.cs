@@ -13,7 +13,7 @@ namespace yaws.Droid.Source.Dashboard.Fragments
 
         protected override void OnWorldStateDataChanged(WorldState worldState)
         {
-            StatsRecyclerAdapter.SetItems(worldState.Invasions.Cast<IStat>().ToList());
+            StatsRecyclerAdapter.SetItems(worldState.Invasions.Where(i => !i.Completed).Cast<IStat>().ToList());
         }
     }
 }

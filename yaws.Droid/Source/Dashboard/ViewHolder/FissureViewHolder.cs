@@ -40,15 +40,21 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
 
         private int GetTierImage(int tier)
         {
-            return tier switch
+            switch (tier)
             {
-                1 => Resource.Drawable.ic_lith,
-                2 => Resource.Drawable.ic_meso,
-                3 => Resource.Drawable.ic_neo,
-                4 => Resource.Drawable.ic_axi,
-                5 => Resource.Drawable.ic_requiem,
-                _ => Resource.Drawable.abc_ic_clear_material
-            };
+                case 1:
+                    return Resource.Drawable.ic_lith;
+                case 2:
+                    return Resource.Drawable.ic_meso;
+                case 3:
+                    return Resource.Drawable.ic_neo;
+                case 4:
+                    return Resource.Drawable.ic_axi;
+                case 5:
+                    return Resource.Drawable.ic_requiem;
+                default:
+                    return Resource.Drawable.abc_ic_clear_material;
+            }
         }
     }
 }

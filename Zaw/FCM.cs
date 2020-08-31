@@ -10,8 +10,14 @@ namespace Zaw
 {
     public class FCM
     {
-        public static Message CreateMessage(string title, string body, YawsNotification.Topic topic, string collapseKey = null, TimeSpan? ttl = null)
+        public static Message CreateMessage(string title, string body, YawsNotification.Topic topic, string tag = null, TimeSpan? ttl = null)
         {
+#if DEBUG
+            var fcmTopic = $"Debug-{Program.Config.WFPlatform}-{topic}";
+#else
+            var fcmTopic = $"{Program.Config.WFPlatform}-{topic}";
+#endif
+
             return new Message
             {
                 Android = new AndroidConfig
@@ -20,11 +26,12 @@ namespace Zaw
                     {
                         Title = title,
                         Body = body,
+                        ChannelId = YawsNotification.ChannelId,
+                        Tag = tag
                     },
                     TimeToLive = ttl ?? TimeSpan.FromMinutes(45),
-                    CollapseKey = collapseKey
                 },
-                Topic = $"{Program.Config.WFPlatform}-{topic}"
+                Topic = fcmTopic,
             };
         }
 

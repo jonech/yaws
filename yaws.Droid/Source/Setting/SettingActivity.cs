@@ -91,26 +91,36 @@ namespace yaws.Droid.Source.Setting
 
         private string GetWFPlatformEnum(int platformId)
         {
-            return platformId switch
+            switch (platformId)
             {
-                Resource.Id.radio_button_setting_platform_pc => WFPlatform.PC,
-                Resource.Id.radio_button_setting_platform_ps4 => WFPlatform.PS4,
-                Resource.Id.radio_button_setting_platform_xb1 => WFPlatform.Xbox,
-                Resource.Id.radio_button_setting_platform_switch => WFPlatform.Switch,
-                _ => WFPlatform.PC,
-            };
+                case Resource.Id.radio_button_setting_platform_pc:
+                    return WFPlatform.PC;
+                case Resource.Id.radio_button_setting_platform_ps4:
+                    return WFPlatform.PS4;
+                case Resource.Id.radio_button_setting_platform_xb1:
+                    return WFPlatform.Xbox;
+                case Resource.Id.radio_button_setting_platform_switch:
+                    return WFPlatform.Switch;
+                default:
+                    return WFPlatform.PC;
+            }
         }
 
         private int GetPlatformSettingId(string platform)
         {
-            return platform switch
+            switch (platform)
             {
-                WFPlatform.PC => Resource.Id.radio_button_setting_platform_pc,
-                WFPlatform.PS4 => Resource.Id.radio_button_setting_platform_ps4,
-                WFPlatform.Xbox => Resource.Id.radio_button_setting_platform_xb1,
-                WFPlatform.Switch => Resource.Id.radio_button_setting_platform_switch,
-                _ => Resource.Id.radio_button_setting_platform_pc,
-            };
+                case WFPlatform.PC:
+                    return Resource.Id.radio_button_setting_platform_pc;
+                case WFPlatform.PS4:
+                    return Resource.Id.radio_button_setting_platform_ps4;
+                case WFPlatform.Xbox:
+                    return Resource.Id.radio_button_setting_platform_xb1;
+                case WFPlatform.Switch:
+                    return Resource.Id.radio_button_setting_platform_switch;
+                default:
+                    return Resource.Id.radio_button_setting_platform_pc;
+            }
         }
 
         private void ResubscribeNotificationPlatform(string previousPlatform, string newPlatform)
@@ -154,24 +164,37 @@ namespace yaws.Droid.Source.Setting
 
         private string GetNotificationSettingName(YawsNotification.Topic topic)
         {
-            return topic switch
+            switch (topic)
             {
-                YawsNotification.Topic.Arbitration => Resources.GetString(Resource.String.arbitration),
-                YawsNotification.Topic.SentientOutpost => Resources.GetString(Resource.String.sentient_outpost),
-                YawsNotification.Topic.EarthCycle => Resources.GetString(Resource.String.earth_cycle),
-                YawsNotification.Topic.CetusBounty => Resources.GetString(Resource.String.cetus_bounty),
-                YawsNotification.Topic.CetusCycle => Resources.GetString(Resource.String.cetus_cycle),
-                YawsNotification.Topic.VallisBounty => Resources.GetString(Resource.String.vallis_bounty),
-                YawsNotification.Topic.VallisCycle => Resources.GetString(Resource.String.vallis_cycle),
-                YawsNotification.Topic.Invasion => Resources.GetString(Resource.String.invasion),
-                YawsNotification.Topic.FissureLith => Resources.GetString(Resource.String.fissure_lith),
-                YawsNotification.Topic.FissureMeso => Resources.GetString(Resource.String.fissure_meso),
-                YawsNotification.Topic.FissureNeo => Resources.GetString(Resource.String.fissure_neo),
-                YawsNotification.Topic.FissureAxi => Resources.GetString(Resource.String.fissure_axi),
-                YawsNotification.Topic.FissureRequiem => Resources.GetString(Resource.String.fissure_requiem),
-
-                _ => string.Empty
-            };
+                case YawsNotification.Topic.Arbitration:
+                    return Resources.GetString(Resource.String.arbitration);
+                case YawsNotification.Topic.SentientOutpost:
+                    return Resources.GetString(Resource.String.sentient_outpost);
+                case YawsNotification.Topic.EarthCycle:
+                    return Resources.GetString(Resource.String.earth_cycle);
+                case YawsNotification.Topic.CetusBounty:
+                    return Resources.GetString(Resource.String.cetus_bounty);
+                case YawsNotification.Topic.CetusCycle:
+                    return Resources.GetString(Resource.String.cetus_cycle);
+                case YawsNotification.Topic.VallisBounty:
+                    return Resources.GetString(Resource.String.vallis_bounty);
+                case YawsNotification.Topic.VallisCycle:
+                    return Resources.GetString(Resource.String.vallis_cycle);
+                case YawsNotification.Topic.Invasion:
+                    return Resources.GetString(Resource.String.invasion);
+                case YawsNotification.Topic.FissureLith:
+                    return Resources.GetString(Resource.String.fissure_lith);
+                case YawsNotification.Topic.FissureMeso:
+                    return Resources.GetString(Resource.String.fissure_meso);
+                case YawsNotification.Topic.FissureNeo:
+                    return Resources.GetString(Resource.String.fissure_neo);
+                case YawsNotification.Topic.FissureAxi:
+                    return Resources.GetString(Resource.String.fissure_axi);
+                case YawsNotification.Topic.FissureRequiem:
+                    return Resources.GetString(Resource.String.fissure_requiem);
+                default:
+                    return string.Empty;
+            }
         }
     }
 }

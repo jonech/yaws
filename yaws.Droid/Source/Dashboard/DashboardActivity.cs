@@ -21,6 +21,7 @@ using System.Reactive.Threading.Tasks;
 using yaws.Droid.Source.Util;
 using System.Reactive.Linq;
 using Android.Gms.Common;
+using yaws.Common;
 
 namespace yaws.Droid.Source.Dashboard
 {
@@ -136,12 +137,12 @@ namespace yaws.Droid.Source.Dashboard
                 // channel on older versions of Android.
                 return;
             }
-            var channel = new NotificationChannel(CHANNEL_ID,
-                                          "FCM Notifications",
+            var channel = new NotificationChannel(YawsNotification.ChannelId,
+                                          "World State Alert",
                                           NotificationImportance.Default)
             {
 
-                Description = "Firebase Cloud Messages appear in this channel"
+                Description = "Notify when changes occur to World State."
             };
 
             var notificationManager = (NotificationManager)GetSystemService(NotificationService);
