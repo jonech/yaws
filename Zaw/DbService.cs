@@ -7,20 +7,23 @@ using Serilog;
 
 namespace Zaw
 {
-    public class DbService
+    public class DbService : IDisposable
     {
         private readonly string tableName;
         private readonly string connectionString;
         private readonly ILogger logger;
+        private readonly SQLiteConnection connection;
 
         public DbService(string connectionString, ILogger logger)
         {
             this.connectionString = connectionString;
             this.tableName = $"{nameof(NotificationState)}s";
             this.logger = logger;
+
+            connection = new SQLiteConnection(connectionString);
+            connection.Open();
         }
 
-        public SQLiteConnection DefaultConnection => new SQLiteConnection(connectionString);
 
         public void CreateNotificationStateTable()
         {
@@ -30,52 +33,45 @@ namespace Zaw
                             {nameof(NotificationState.WfStatType)} TEXT NOT NULL
                           );";
 
-            using var conn = DefaultConnection;
-            conn.Open();
-            conn.Execute(query);
-            conn.Close();
+            connection.Execute(query);
         }
 
         public IEnumerable<NotificationState> FetchAllNotificationStates()
         {
-            using var conn = DefaultConnection;
-            conn.Open();
-
             var query = @$"SELECT * FROM {tableName};";
-            var res = conn.Query<NotificationState>(query);
-            conn.Close();
+            var res = connection.Query<NotificationState>(query);
 
             return res;
         }
 
         public int InsertNotificationState(params NotificationState[] notificationStates)
         {
-            using var conn = DefaultConnection;
-            conn.Open();
-
             var query = @$"INSERT INTO {tableName} 
                            ({nameof(NotificationState.WfStatId)}, {nameof(NotificationState.WfStatType)})
                            VALUES (@{nameof(NotificationState.WfStatId)}, @{nameof(NotificationState.WfStatType)});";
 
-            var res = conn.Execute(query, notificationStates);
-            logger.Debug($"Inserted {res} rows");
-            conn.Close();
+            var res = connection.Execute(query, notificationStates);
+            if (logger != null)
+                logger.Debug($"Inserted {res} rows");
 
             return res;
         }
 
         public int DeleteNotificationState(params NotificationState[] notificationStates)
         {
-            using var conn = DefaultConnection;
-            conn.Open();
-
             var query = @$"DELETE FROM {tableName} WHERE {nameof(NotificationState.Id)} = @{nameof(NotificationState.Id)};";
 
-            var res = conn.Execute(query, notificationStates);
-            logger.Debug($"Deleted {res} rows");
-            conn.Close();
+            var res = connection.Execute(query, notificationStates);
+            if (logger != null)
+                logger.Debug($"Deleted {res} rows");
 
             return res;
+        }
+
+        public void Dispose()
+        {
+            if (connection != null)
+                connection.Close();
         }
     }
 }

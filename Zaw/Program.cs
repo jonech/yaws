@@ -13,7 +13,7 @@ using System.Net;
 
 namespace Zaw
 {
-    class Program
+    public class Program
     {
         public static Config Config { get; set; }
         public static DbService DbService { get; set; }
@@ -59,7 +59,7 @@ namespace Zaw
             }
 
 
-            var process = new WorldStateProcess(Log.Logger);
+            var process = new WorldStateProcess(Config.WFPlatform);
             process.RunProcess(notificationStates.ToList(), worldState);
 
             if (process.NewNotificationStates.Any())

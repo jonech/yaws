@@ -10,12 +10,12 @@ namespace Zaw
 {
     public class FCM
     {
-        public static Message CreateMessage(string title, string body, YawsNotification.Topic topic, string tag = null, TimeSpan? ttl = null)
+        public static Message CreateMessage(string title, string body, string platform, YawsNotification.Topic topic, string tag = null, TimeSpan? ttl = null)
         {
 #if DEBUG
-            var fcmTopic = $"Debug-{Program.Config.WFPlatform}-{topic}";
+            var fcmTopic = $"Debug-{platform}-{topic}";
 #else
-            var fcmTopic = $"{Program.Config.WFPlatform}-{topic}";
+            var fcmTopic = $"{platform}-{topic}";
 #endif
 
             return new Message
@@ -35,9 +35,9 @@ namespace Zaw
             };
         }
 
-        public static Message CreateMessage(string title, string body, YawsNotification.Topic topic, TimeSpan? ttl = null)
+        public static Message CreateMessage(string title, string body, string platform, YawsNotification.Topic topic, TimeSpan? ttl = null)
         {
-            return CreateMessage(title, body, topic, null, ttl);
+            return CreateMessage(title, body, platform, topic, null, ttl);
         }
     }
 }
