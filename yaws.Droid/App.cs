@@ -17,7 +17,12 @@ using yaws.Droid.Source;
 
 namespace yaws.Droid
 {
-    [Application]
+#if DEBUG
+    [Application(Debuggable = true)]
+#else
+    // Disable debug on release
+    [Application(Debuggable = false)]
+#endif
     public class App : Application
     {
         public static IContainer Container { get; set; }

@@ -2,6 +2,7 @@
 using Android.Widget;
 using WarframeStatService.Entity;
 using WarframeStatService.Entity.Interface;
+using yaws.Common.Extension;
 
 namespace yaws.Droid.Source.Dashboard.ViewHolder
 {
@@ -24,7 +25,7 @@ namespace yaws.Droid.Source.Dashboard.ViewHolder
 
             if (item is CetusCycle model)
             {
-                StatusTextView.Text = model.State;
+                StatusTextView.Text = model.State.ToUpperFirst();
             }
         }
 

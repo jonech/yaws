@@ -3,7 +3,7 @@
           android:versionCode="1" 
           android:versionName="1.0" 
           package="io.github.jonech.yaws.droid">
-    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
+    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="29" />
     <application android:allowBackup="true" android:icon="@mipmap/ic_trashcone" android:label="@string/app_name" android:roundIcon="@mipmap/ic_trashcone_round" android:supportsRtl="true" android:theme="@style/AppTheme">
         <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
                    android:resource="@drawable/ic_emoji_24dp" />

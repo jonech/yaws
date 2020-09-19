@@ -42,6 +42,8 @@ namespace yaws.Core
 
 #if DEBUG
             throw new ArgumentException($"{notificationTopic} is not a valid Notification Topic setting");
+#else
+            return false;
 #endif
         }
 
@@ -56,6 +58,8 @@ namespace yaws.Core
 
 #if DEBUG
             throw new ArgumentException($"{notificationTopic} is not a valid Notification Topic setting");
+#else
+            return;
 #endif
         }
     }
